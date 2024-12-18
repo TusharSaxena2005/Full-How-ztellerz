@@ -23,10 +23,14 @@ const userSchema = new Schema(
             lowercase: true,
             trim: true,
         },
+        floorNo: {
+            type: Number,
+            required: true,
+            trim: true
+        },
         rollNo: {
             type: Number,
             required: true,
-            unique: true,
             trim: true
         },
         hostelName: {
@@ -49,7 +53,6 @@ const userSchema = new Schema(
         },
         profilePic: {
             type: String,
-            required: true
         },
         refreshToken: {
             type: String
@@ -57,5 +60,43 @@ const userSchema = new Schema(
     },
     { timestamps: true }
 )
+
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+})
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password)
+}
+
+userSchema.methods.generateAccessToken = function () {
+    return jwt.sign(
+        {
+            _id: this._id,
+            name: this.name,
+            rollNo: this.rollNo,
+            email: this.email,
+            phone: this.phone
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    )
+}
+
+userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign(
+        {
+            _id: this._id,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    )
+}
 
 export const User = mongoose.model("User", userSchema)
