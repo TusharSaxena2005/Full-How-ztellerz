@@ -201,11 +201,48 @@ const passwordChange = asyncHandler(async (req, res) => {
         )
 })
 
-const changeDetails = asyncHandler(async (req, res) => { })
+const getCurrentUser = asyncHandler(async (req, res) => {
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, req.user, "Current user details fetched successfully")
+        )
+})
 
-const getAllData = asyncHandler(async (req, res) => { })
+const changeDetails = asyncHandler(async (req, res) => {
+    const { mailId, phoneNo, floorNo, hostelName, roomNo } = req.body
+    if (!mailId && !phoneNo && !floorNo && !hostelName && !roomNo) {
+        throw new apiError(400, "All field are required")
+    }
 
-const getCurrentUser = asyncHandler(async (req, res) => { })
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                mailId,
+                phoneNo,
+                floorNo,
+                hostelName,
+                roomNo
+            }
+        },
+        {
+            new: true
+        }
+    ).select("-password -refreshToken")
+
+    if (!user) {
+        throw new apiError(404, "User not found")
+    }
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, user, "User details successfully updated")
+        )
+})
+
+
 
 
 export {
@@ -214,7 +251,6 @@ export {
     logoutUser,
     passwordChange,
     changeDetails,
-    getAllData,
     getCurrentUser,
     refreshAccessToken
 }
