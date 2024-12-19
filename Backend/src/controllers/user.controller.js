@@ -242,6 +242,58 @@ const changeDetails = asyncHandler(async (req, res) => {
         )
 })
 
+const changeProfilePic = asyncHandler(async (req, res) => {
+    const profilePic = req.file?.path
+
+    if (!profilePic) {
+        throw new apiError(400, "Image required")
+    }
+
+    const profilePicPath = await cloudnaryUpload(profilePic)
+
+    const picUrl = await User.findById(req.user._id)
+
+    let urlSeperator = []
+    let url = picUrl.profilePic
+    let urlWord = ''
+    for (let i = 0; i < url.length; i++) {
+        if (url[i] == '/') {
+            urlSeperator.push(urlWord)
+            urlWord = ''
+        }
+        else if (url[i] == '.') {
+            urlSeperator.push(urlWord)
+        }
+        else {
+            urlWord += url[i]
+        }
+    }
+
+    await cloudnaryDelete(urlSeperator[urlSeperator.length - 1])
+
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                profilePic: profilePicPath.url
+            }
+        },
+        {
+            new: true
+        }
+    ).select("-password -refreshToken")
+
+    if (!user) {
+        throw new apiError(404, "User not found")
+    }
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, user, "User profile pic successfully updated")
+        )
+})
+
 
 
 
@@ -252,5 +304,6 @@ export {
     passwordChange,
     changeDetails,
     getCurrentUser,
-    refreshAccessToken
+    refreshAccessToken,
+    changeProfilePic
 }
