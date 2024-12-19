@@ -13,14 +13,19 @@ const broadcastSchema = new Schema(
             required: true,
             trim: true,
         },
+        date: {
+            type: String,
+            trim: true,
+        },
         time: {
+            type: String,
             trim: true,
         },
         category: {
             type: String,
             required: true,
         },
-        owner:[
+        owner: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'

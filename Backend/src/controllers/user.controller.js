@@ -212,7 +212,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 const changeDetails = asyncHandler(async (req, res) => {
     const { mailId, phoneNo, floorNo, hostelName, roomNo } = req.body
     if (!mailId && !phoneNo && !floorNo && !hostelName && !roomNo) {
-        throw new apiError(400, "All field are required")
+        throw new apiError(400, "At least one field is required")
     }
 
     const user = await User.findByIdAndUpdate(

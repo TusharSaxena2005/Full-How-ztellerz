@@ -24,8 +24,10 @@ app.use(cookieParser())
 
 
 import { userRouter } from "./routes/user.route.js";
+import { broadcastRouter } from "./routes/broadCast.route.js";
 
 app.use("/api/v1/user", userRouter)
+app.use("/api/v1/broadcast", broadcastRouter)
 
 
 export { app }
