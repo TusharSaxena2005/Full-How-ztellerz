@@ -1,6 +1,5 @@
 import mongoose, { isValidObjectId } from "mongoose"
 import { Broadcast } from "../models/broadCast.models.js"
-import { User } from "../models/user.models.js"
 import { apiError } from "../utils/apiError.js"
 import { apiResponse } from "../utils/apiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
@@ -22,7 +21,7 @@ const publishBroadcast = asyncHandler(async (req, res) => {
         time,
         destination,
         category,
-        owner: req.user
+        owner: [req.user]
     })
 
     if (!broadcast) {
@@ -57,7 +56,7 @@ const deleteBroadcast = asyncHandler(async (req, res) => {
 })
 
 const getAllBroadcasts = asyncHandler(async (req, res) => {
-    const allBroadcast = await Broadcast.find()
+    const allBroadcast = await Broadcast.find().populate("owner","-password -refreshToken")
     return res
         .status(200)
         .json(
@@ -67,7 +66,7 @@ const getAllBroadcasts = asyncHandler(async (req, res) => {
 
 const getBroadcastsByCategory = asyncHandler(async (req, res) => {
     const { category } = req.params
-    const allBroadcast = await Broadcast.find({ category: category })
+    const allBroadcast = await Broadcast.find({ category: category }).populate("owner","-password -refreshToken")
     return res
         .status(200)
         .json(
@@ -80,7 +79,12 @@ const getBroadcastsByUserId = asyncHandler(async (req, res) => {
     if (!userId) {
         throw new apiError(400, "User id not exist")
     }
-    const allBroadcast = [await Broadcast.find({ owner: userId }),await User.findById(userId).select("-password -refreshToken")]
+    
+    const allBroadcast = await Broadcast.find({ owner: userId }).populate("owner","-password -refreshToken")
+
+    if (!allBroadcast) {
+        throw new apiError(404, "User not found")
+    }
 
     return res
         .status(200)
