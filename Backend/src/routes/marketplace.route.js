@@ -11,6 +11,6 @@ marketPlace.route("/delete-item/:itemId").get(deleteItem)
 marketPlace.route("/get-all-item").get(getAllItem)
 marketPlace.route("/filtered-item/:category").get(getItemByCategory)
 marketPlace.route("/filtered-byHostelName-item").get(getItemByHostelName)
-marketPlace.route("/add-item").get(getItemByUserId)
+marketPlace.route("/add-item/:userId").get(getItemByUserId)
 
 export { marketPlace }

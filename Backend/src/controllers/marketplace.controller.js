@@ -94,9 +94,68 @@ const getItemByCategory = asyncHandler(async (req, res) => {
         )
 })
 
-const getItemByHostelName = asyncHandler(async (req, res) => { })
+const getItemByHostelName = asyncHandler(async (req, res) => {
+    const { hostelName, floorNo } = req.body
 
-const getItemByUserId = asyncHandler(async (req, res) => { })
+    if (!hostelName && !floorNo) {
+        throw new apiError(400, "Please provide hostel name and floor number")
+    }
+
+    let matchCondition = {};
+    if (hostelName && floorNo) {
+        matchCondition = { 'owner.hostelName': hostelName, 'owner.floorNo': floorNo };
+    } else if (hostelName) {
+        matchCondition = { 'owner.hostelName': hostelName };
+    } else if (floorNo) {
+        matchCondition = { 'owner.floorNo': floorNo };
+    }
+
+    let allItem = await Marketplace.aggregate([
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'owner',
+                foreignField: '_id',
+                as: 'owner'
+            }
+        },
+        {
+            $unwind: '$owner'
+        },
+        {
+            $match: matchCondition
+        },
+        {
+            $project: {
+                'owner.password': 0,
+                'owner.refreshToken': 0
+            }
+        }
+    ]);
+
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, allItem, `${hostelName} items successfully fetched`)
+        )
+})
+
+const getItemByUserId = asyncHandler(async (req, res) => {
+    const { userId } = req.params
+    
+    if (!isValidObjectId(userId)) {
+        throw new apiError(400, "Invalid user Id")
+    }
+
+    const allItem = await Marketplace.find({ owner: userId }).populate("owner", "-password -refreshToken")
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, allItem, `${allItem[0].owner[0].name} items successfully fetched`)
+        )
+})
 
 export {
     addItem,
