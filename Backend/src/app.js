@@ -26,10 +26,12 @@ app.use(cookieParser())
 import { userRouter } from "./routes/user.route.js";
 import { broadcastRouter } from "./routes/broadCast.route.js";
 import { marketPlace } from "./routes/marketplace.route.js";
+import { interestedRouter } from "./routes/interested.route.js";
 
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/broadcast", broadcastRouter)
 app.use("/api/v1/marketplace", marketPlace)
+app.use("/api/v1/interested", interestedRouter)
 
 
 export { app }
