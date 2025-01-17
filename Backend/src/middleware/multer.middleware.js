@@ -11,13 +11,13 @@ const storage = multer.diskStorage({
 })
 
 const deleteFile = (filePath) => {
-    fs.unlink(filePath, (err) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`File deleted successfully`);
-        }
-    });
+    if (filePath != undefined) {
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error(err);
+            }
+        });
+    }
 };
 
 

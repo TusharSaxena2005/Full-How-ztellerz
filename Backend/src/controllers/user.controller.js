@@ -39,17 +39,21 @@ const registerUser = asyncHandler(async (req, res) => {
     })
 
     let profilePicPath;
-
     if (req.files && Array.isArray(req.files.profilePic)) {
         profilePicPath = await req.files.profilePic[0].path
     }
 
     if (existingUser) {
-        deleteFile(profilePicPath);
-        throw new apiError(400, "User already exists")
+        if (profilePicPath != "") {
+            deleteFile(profilePicPath);
+        }
+        throw new apiError(409, "User already exists")
     }
 
-    const profilePic = await cloudnaryUpload(profilePicPath);
+    let profilePic;
+    if (profilePicPath != "") {
+        profilePic = await cloudnaryUpload(profilePicPath);
+    }
 
     const user = await User.create({
         name,
