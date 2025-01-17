@@ -1,0 +1,12 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+}
+
+#outer-login-box {
+    /* border: 1px solid white; */
+    width: 500px;
+    height: 50dvh;
+}

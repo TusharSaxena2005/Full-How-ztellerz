@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    color: rgb(255, 255, 255);
+    font-family: 'Josefin Sans';
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+}
+
+#outer-signup-box {
+    /* border: 1px solid white; */
+    width: 600px;
+    height: 80dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#signup-box {
+    /* border: 1px solid white; */
+    height: 95%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#signup-box-logo {
+    height: 22%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signup-box-logo img {
+    width: 100%;
+    height: 100%;
+}
+
+#signup-form {
+    height: 71%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}
+
+.signup-form-inputs {
+    /* border: 1px solid white; */
+    width: 95%;
+    height: 13%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#profilePic {
+    border: none;
+    background-color: transparent;
+    width: 38%;
+    height: 50%;
+    border-radius: 0;
+    font-size: 0.9rem;
+}
+
+.signup-form-inputs input,
+#profilePic-outer-box {
+    height: 100%;
+    width: 44%;
+    padding: 0 0 0 10px;
+    color: rgb(210, 210, 210);
+    font-size: 1rem;
+    border: 2px solid gray;
+    border-radius: 20px;
+    background-color: #484747a6;
+}
+
+#profilePic-outer-box {
+    width: 42.3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+}
+
+#profilePic-outer-box label {
+    color: rgb(151, 151, 151);
+}
+
+.signup-form-inputs select {
+    height: 100%;
+    width: 46.5%;
+    padding: 0 0 0 10px;
+    color: rgb(132 131 131 / 90%);
+    font-weight: 400;
+    font-size: 1rem;
+    border: 2px solid gray;
+    border-radius: 18px;
+    background-color: #484747a6;
+}
+
+.signup-form-inputs input:focus,
+.signup-form-inputs select:focus {
+    outline: none;
+}
+
+#signup-btn {
+    width: 34%;
+    height: 6vh;
+    border-radius: 20px;
+    margin: 14px 0 5px 0;
+    font-weight: 400;
+    cursor: pointer;
+    border: 1px solid;
+    background-color: aliceblue;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+#signup-btn:hover {
+    background-color: rgba(255, 98, 0, 0.858);
+    transition: all 0.6s ease-in-out;
+}
+
+#checkIn-btn {
+    text-decoration: none;
+    color: gray;
+}
+
+#checkIn-btn:hover {
+    color: rgba(255, 137, 63, 0.858);
+    transition: all 0.4s ease-in-out;
+}
