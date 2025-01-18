@@ -5,11 +5,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const VerifyJWT = asyncHandler(async (req, res, next) => {
     try {
-        const token = req.cookies?.accessToken || req.header("Authorization").replace("Bearer", "")
+        const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer", "")
         if (!token) {
             throw new apiError(404, "Unauthorized request")
         }
-
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
 
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken")
