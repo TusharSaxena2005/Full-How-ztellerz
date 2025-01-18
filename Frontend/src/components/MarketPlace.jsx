@@ -1,10 +1,15 @@
 import React from 'react'
+import Navbar from './Navbar'
+
 
 const MarketPlace = () => {
   return (
-    <div>
-      <h1>Marketplace</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <h1>marketplace</h1>
+      </div>
+    </>
   )
 }
 

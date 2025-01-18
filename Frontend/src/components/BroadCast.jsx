@@ -1,10 +1,15 @@
 import React from 'react'
+import Navbar from './Navbar'
+
 
 const BroadCast = () => {
     return (
-        <div>
-            <h1>Broadcast</h1>
-        </div>
+        <>
+            <Navbar />
+            <div>
+                <h1>broadcast</h1>
+            </div>
+        </>
     )
 }
 
