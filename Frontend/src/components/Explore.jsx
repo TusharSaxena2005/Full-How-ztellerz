@@ -1,5 +1,6 @@
 import React from 'react'
 import './Explore.css'
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 
 const Explore = () => {
@@ -10,14 +11,14 @@ const Explore = () => {
         <div id='inner-explore'>
           <h1>Explore Us</h1>
           <div id='explore-option-btn'>
-            <button id="explore-btn1" className="explore-btn" onClick={() => window.location.href = '/marketplace'}>
+            <Link to='/marketplace' id="explore-btn1" className="explore-btn">
               <img src="icons/marketplace.svg" alt="marketplace" />
               <h2>Market Place</h2>
-            </button>
-            <button id="explore-btn2" className="explore-btn" onClick={() => window.location.href = '/broadcast'}>
+            </Link>
+            <Link to='/broadcast' id="explore-btn2" className="explore-btn">
               <img src="icons/broadcast.svg" alt="broadcast" />
               <h2>Broadcast</h2>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

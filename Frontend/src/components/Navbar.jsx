@@ -34,9 +34,7 @@ const Navbar = () => {
                 setClientName('');
                 window.location.href = '/';
             }
-        } catch (error) {
-            console.error('Error logging out:', error);
-        }
+        } catch (error) {}
     };
 
 

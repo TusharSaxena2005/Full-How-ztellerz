@@ -1,0 +1,263 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#outer-marketplace {
+    width: 100dvw;
+    height: 87dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner-marketplace {
+    width: 80%;
+    height: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.aside {
+    background-color: rgba(255, 255, 255, 0.085);
+    height: 98%;
+    border-radius: 27px;
+}
+
+#aside1 {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#aside2 {
+    background-color: transparent;
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inner-aside2-ele {
+    border-radius: 25px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.085);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner-aside2-ele1 {
+    height: 15%;
+}
+
+#inner-aside2-ele2 {
+    height: 81%;
+}
+
+#aside1-ele1-outer-options {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.aside1-ele1-options {
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+    width: 55%;
+    height: 11%;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.aside1-ele1-options:hover {
+    border: 2px solid;
+    background-color: rgba(255, 255, 255, 0.07);
+    transition: all 0.6s ease-in-out;
+}
+
+#aside1-ele1-option7 {
+    background-color: transparent;
+    font-size: 1.2rem;
+    width: 55%;
+    height: 11%;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 10px;
+    background-color: aliceblue;
+    color: rgb(0, 0, 0);
+    border: 2px solid white;
+}
+
+#aside1-ele1-option7:hover {
+    background-color: rgba(240, 248, 255, 0.485);
+}
+
+#inner-aside2-ele1-filter {
+    /* border: 1px solid; */
+    width: 92%;
+    height: 80%;
+}
+
+#inner-aside2-ele1-filter form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#inner-aside2-ele1-filter form select {
+    border: none;
+    background-color: black;
+    font-size: 1.05rem;
+    width: 28%;
+    height: 63%;
+    border-radius: 30px;
+    padding: 0 0 0 10px;
+}
+
+#inner-aside2-ele1-filter form select:focus {
+    outline: none;
+}
+
+#inner-aside2-ele1-filter form select option {
+    background-color: black;
+}
+
+#filterApply {
+    font-size: 1.05rem;
+    border: 1px solid;
+    background-color: black;
+    width: 14%;
+    height: 63%;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+#most-outer-add-item {
+    position: absolute;
+    top: 0;
+    width: 100dvw;
+    height: 100dvh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+#outer-add-item {
+    /* border: 1px solid white; */
+    box-shadow: 0 0 22px gray;
+    width: 28%;
+    border-radius: 18px;
+    height: 74%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: black;
+    gap: 5px;
+}
+
+#add-item-cross-btn {
+    width: 100%;
+    height: 7%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+#add-item-cross-btn button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+    width: 34px;
+    height: 100%;
+    border-top-right-radius: 18px;
+}
+
+#add-item-cross-btn button:hover{
+    background-color: red;
+}
+
+#add-item-cross-btn button img{
+    width: 65%;
+    height: 100%;
+}
+
+#outer-add-item form {
+    width: 80%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#outer-add-item form button {
+    background-color: transparent;
+    border: 1px solid white;
+    width: 43%;
+    height: 8%;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+#outer-add-item form button:hover {
+    background-color: rgba(255, 255, 255, 0.126);
+    transition: all 0.6s ease-in-out;
+}
+
+
+
+#outer-add-item form input,
+#outer-add-item form select,
+#add-item-image {
+    width: 95%;
+    padding: 0 0 0 12px;
+    font-size: 1rem;
+    border-radius: 17px;
+    height: 12%;
+    border: 2px solid gray;
+    background: rgba(46, 46, 46, 0.833);
+    color: rgb(207, 205, 205);
+    display:flex;
+    justify-content: start;
+    align-items: center;
+    gap: 25%;
+}
+
+#outer-add-item form #itemImage {
+    border: none;
+    border-radius:0;
+    background-color: transparent;
+    width: 32%;
+    height: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#outer-add-item form select {
+    width: 98%;
+}
+
+#outer-add-item form input::placeholder,
+#outer-add-item form select::placeholder {
+    color: rgb(207, 205, 205);
+}
