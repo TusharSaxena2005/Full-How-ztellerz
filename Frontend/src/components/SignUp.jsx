@@ -65,7 +65,7 @@ const SignUp = () => {
         }
 
         if (flag) {
-          window.location.href = '/explore';
+          window.location.href = '/home';
         }
       } catch (error) { }
     }
@@ -75,7 +75,7 @@ const SignUp = () => {
     <>
       <div id='outer-signup-box'>
         <div id='signup-box'>
-          <div id='signup-box-logo' onClick={() => window.location.href = '/'} >
+          <div id='signup-box-logo'>
             <img src="logo/logo.jpg" alt="" />
           </div>
           <form onSubmit={handleSubmit} id='signup-form' encType='multipart/form-data'>
@@ -124,7 +124,7 @@ const SignUp = () => {
             <button type='submit' id='signup-btn'>Sign up</button>
           </form>
         </div>
-        <Link to='/login' id='checkIn-btn'>Check in</Link>
+        <Link to='/' id='checkIn-btn'>Check in</Link>
       </div>
     </>
   )
