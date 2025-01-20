@@ -55,6 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
         profilePic = await cloudnaryUpload(profilePicPath);
     }
 
+    
     const user = await User.create({
         name,
         phoneNo,
@@ -68,6 +69,8 @@ const registerUser = asyncHandler(async (req, res) => {
         profilePic: profilePic.url || ""
     })
 
+    const { refreshToken, accessToken } = await generateAccessAndRefreshToken(user._id)
+    
     const userCreated = await User.findById(user._id).select(
         "-password -refreshToken"
     )
@@ -76,8 +79,16 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new apiError(500, "Something went wrong while registering the user")
     }
 
+    const options = {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+    }
+
     return res
         .status(201)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
         .json(
             new apiResponse(200, userCreated, "Account created successfully !!!")
         )
