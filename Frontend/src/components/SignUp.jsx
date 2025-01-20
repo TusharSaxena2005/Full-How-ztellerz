@@ -51,7 +51,8 @@ const SignUp = () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/user/register', {
           method: 'POST',
-          body: formData
+          body: formData,
+          credentials: 'include'
         });
 
         if (!response.ok) {

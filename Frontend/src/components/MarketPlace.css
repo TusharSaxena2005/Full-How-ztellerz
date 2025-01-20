@@ -191,11 +191,11 @@
     border-top-right-radius: 18px;
 }
 
-#add-item-cross-btn button:hover{
+#add-item-cross-btn button:hover {
     background-color: red;
 }
 
-#add-item-cross-btn button img{
+#add-item-cross-btn button img {
     width: 65%;
     height: 100%;
 }
@@ -236,7 +236,7 @@
     border: 2px solid gray;
     background: rgba(46, 46, 46, 0.833);
     color: rgb(207, 205, 205);
-    display:flex;
+    display: flex;
     justify-content: start;
     align-items: center;
     gap: 25%;
@@ -244,7 +244,7 @@
 
 #outer-add-item form #itemImage {
     border: none;
-    border-radius:0;
+    border-radius: 0;
     background-color: transparent;
     width: 32%;
     height: 45%;
@@ -260,4 +260,95 @@
 #outer-add-item form input::placeholder,
 #outer-add-item form select::placeholder {
     color: rgb(207, 205, 205);
+}
+
+#outer-add-item form select:focus{
+    outline: none;
+}
+
+#outer-add-item form select option {
+    background-color: black;
+}
+
+#item-outer-box {
+    /* border: 1px solid; */
+    width: 96%;
+    height: 93%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 20px;
+}
+
+.outer-foodItems {
+    /* border: 1px solid; */
+    width: 200px;
+    height: 320px;
+    background-color: black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.outer-foodItems p {
+    font-size: 1.1rem;
+}
+
+.product-image {
+    /* border: 1px solid; */
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    max-width: 90%;
+    height: 87%;
+}
+
+.outer-details-btn {
+    width: 91%;
+    height: 11%;
+    margin-bottom: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+}
+
+.detail-btn,
+.delete-item-btn {
+    height: 100%;
+    width: 80%;
+    background-color: #1a1919;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.detail-btn:hover {
+    background-color: #333;
+}
+
+.delete-item-btn {
+    border-radius: 6px;
+    border: none;
+    width: 17%;
+    display: flex;
+    justify-content: center;
+    background-color: #8a1616;
+    align-items: center;
+}
+
+.delete-item-btn img {
+    height: 55%;
+    max-width: 90%;
+}
+
+.delete-item-btn:hover {
+    background-color: #d01717;
 }

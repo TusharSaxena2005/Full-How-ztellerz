@@ -115,6 +115,10 @@ body {
     outline: none;
 }
 
+.signup-form-inputs select option {
+    background-color: black;
+}
+
 #signup-btn {
     width: 34%;
     height: 6vh;

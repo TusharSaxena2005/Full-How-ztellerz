@@ -1,9 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './MarketPlace.css'
 import Navbar from './Navbar'
 
 
 const MarketPlace = () => {
+
+  const [dataOfFetchItem, setDataOfFetchItem] = useState([]);
+  const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+
+  const fetchCurrentUser = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/user/current-user', {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setdataOfCurrentUser(data.data);
+      }
+    } catch (error) { }
+  };
 
   const handleAddItem = async (e) => {
     e.preventDefault();
@@ -16,10 +32,29 @@ const MarketPlace = () => {
       });
       if (response.ok) {
         document.getElementById('most-outer-add-item').style.display = 'none';
-        alert('Item added successfully');
+        fetchItems();
       }
     } catch (error) { }
   }
+
+  const fetchItems = async () => {
+    const response = await fetch('http://localhost:8000/api/v1/marketplace/get-all-item',
+      {
+        method: 'GET',
+        credentials: 'include'
+      });
+    if (response.ok) {
+      const data = await response.json();
+      setDataOfFetchItem(data.data);
+    }
+  }
+
+  useEffect(() => {
+    fetchItems();
+    fetchCurrentUser();
+  }, [])
+
+
 
   return (
     <>
@@ -135,7 +170,33 @@ const MarketPlace = () => {
                 </form>
               </div>
             </div>
-            <div id="inner-aside2-ele2" className="inner-aside2-ele"></div>
+            <div id="inner-aside2-ele2" className="inner-aside2-ele">
+              <div id="item-outer-box">
+                {
+                  dataOfFetchItem.map((item) => {
+                    return (
+                      <div key={item._id} className="outer-foodItems" data-name={item.itemName} data-price={item.itemPrice} data-category={item.itemCategory} data-image={item.itemImage} data-sname={item.owner[0].name} data-sphoneno={item.owner[0].phoneNo} data-shostelname={item.owner[0].hostelName} data-sfloor={item.owner[0].floorNo} data-sroom={item.owner[0].roomNo}>
+                        <div className="product-image">
+                          <img src={item.itemImage} alt={item.itemName} />
+                        </div>
+                        <p>{item.itemName}</p>
+                        <p>{item.itemPrice} Rs.</p>
+                        <div className='outer-details-btn'>
+                          <button className='detail-btn'>Details</button>
+                          {
+                            dataOfCurrentUser.rollNo == item.owner[0].rollNo && (
+                              <button className='delete-item-btn'>
+                                <img src="icons/delete.svg" alt="delete" />
+                              </button>
+                            )
+                          }
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>
           </div>
         </main >
       </div >
