@@ -262,7 +262,7 @@
     color: rgb(207, 205, 205);
 }
 
-#outer-add-item form select:focus{
+#outer-add-item form select:focus {
     outline: none;
 }
 
@@ -278,12 +278,24 @@
     justify-content: start;
     align-items: start;
     gap: 20px;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+#item-outer-box::-webkit-scrollbar {
+    width: 7px;
+}
+
+#item-outer-box::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+    width: 5px;
 }
 
 .outer-foodItems {
     /* border: 1px solid; */
-    width: 200px;
-    height: 320px;
+    width: 196px;
+    height: 310px;
     background-color: black;
     border-radius: 10px;
     display: flex;
@@ -351,4 +363,112 @@
 
 .delete-item-btn:hover {
     background-color: #d01717;
+}
+
+#outer-details-of-item {
+    position: absolute;
+    top: 0;
+    width: 100dvw;
+    height: 100dvh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+#inner-details-of-item {
+    box-shadow: 0 0 19px #8a92a3;
+    border-radius: 15px;
+    width: 47%;
+    height: 55%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+#detail-cross-btn {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+#detail-cross-btn button {
+    background-color: transparent;
+    border-top-right-radius: 15px;
+    border: none;
+    height: 100%;
+    width: 42px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#detail-cross-btn button:hover {
+    background-color: red;
+}
+
+#most-inner-details-of-item {
+    /* border: 1px solid; */
+    height: 84%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#inner-details-of-item1 {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#inner-details-of-item1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#inner-details-of-item2 {
+    width: 60%;
+    height: 87%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail-box2-ele {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#detail-box2-ele2 p,
+.detail-box2-ele h2 {
+    color: rgb(192, 192, 192);
+}
+
+.detail-box2-ele h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.detail-box2-ele p {
+    margin: 0 0 0 10px;
+    font-size: 1.05rem;
+}
+
+#no-items-found{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

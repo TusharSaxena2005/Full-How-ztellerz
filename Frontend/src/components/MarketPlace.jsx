@@ -6,7 +6,11 @@ import Navbar from './Navbar'
 const MarketPlace = () => {
 
   const [dataOfFetchItem, setDataOfFetchItem] = useState([]);
+  const [detailOfFetchedItem, setDetailOfFetchedItem] = useState([]);
+  const [detailOfOwnerOfFetchedItem, setdetailOfOwnerOfFetchedItem] = useState([]);
   const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+
+
 
   const fetchCurrentUser = async () => {
     try {
@@ -19,7 +23,32 @@ const MarketPlace = () => {
         setdataOfCurrentUser(data.data);
       }
     } catch (error) { }
-  };
+  }
+
+  const deleteItem = async (itemId) => {
+    const response = await fetch(`http://localhost:8000/api/v1/marketplace/delete-item/${itemId}`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+
+    if (response.ok) {
+      fetchItems();
+    }
+  }
+
+  const detailOfItem = async (itemId) => {
+    const response = await fetch(`http://localhost:8000/api/v1/marketplace/item-by-id/${itemId}`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+
+    if (response.ok) {
+      const data = await response.json();
+      setDetailOfFetchedItem(data.data[0]);
+      setdetailOfOwnerOfFetchedItem(data.data[0].owner[0]);
+      document.getElementById('outer-details-of-item').style.display = 'flex';
+    }
+  }
 
   const handleAddItem = async (e) => {
     e.preventDefault();
@@ -37,6 +66,18 @@ const MarketPlace = () => {
     } catch (error) { }
   }
 
+  const fetchItemsByCategory = async (category) => {
+    const response = await fetch(`http://localhost:8000/api/v1/marketplace/filtered-item/${category}`,
+      {
+        method: 'GET',
+        credentials: 'include'
+      });
+    if (response.ok) {
+      const data = await response.json();
+      setDataOfFetchItem(data.data);
+    }
+  }
+
   const fetchItems = async () => {
     const response = await fetch('http://localhost:8000/api/v1/marketplace/get-all-item',
       {
@@ -46,6 +87,8 @@ const MarketPlace = () => {
     if (response.ok) {
       const data = await response.json();
       setDataOfFetchItem(data.data);
+      document.getElementsByClassName('aside1-ele1-options')[0].style.border = '2px solid white'
+      document.getElementsByClassName('aside1-ele1-options')[0].style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
     }
   }
 
@@ -65,6 +108,7 @@ const MarketPlace = () => {
             <div id="aside1-ele1-outer-options">
               <button id="aside1-ele1-option1" className='aside1-ele1-options' onClick={(e) => {
                 let options = document.getElementsByClassName('aside1-ele1-options')
+                fetchItems();
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                 for (let i = 0; i < options.length; i++) {
                   options[i].style.border = 'none'
@@ -74,6 +118,7 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Home</button>
               <button id="aside1-ele1-option2" className='aside1-ele1-options' onClick={(e) => {
+                fetchItemsByCategory('chips');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                 for (let i = 0; i < options.length; i++) {
@@ -84,6 +129,7 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Chips</button>
               <button id="aside1-ele1-option3" className='aside1-ele1-options' onClick={(e) => {
+                fetchItemsByCategory('drinks');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                 for (let i = 0; i < options.length; i++) {
@@ -94,6 +140,7 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Drinks</button>
               <button id="aside1-ele1-option4" className='aside1-ele1-options' onClick={(e) => {
+                fetchItemsByCategory('chocolates');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                 for (let i = 0; i < options.length; i++) {
@@ -104,6 +151,7 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Chocolates</button>
               <button id="aside1-ele1-option5" className='aside1-ele1-options' onClick={(e) => {
+                fetchItemsByCategory('other');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                 for (let i = 0; i < options.length; i++) {
@@ -173,27 +221,33 @@ const MarketPlace = () => {
             <div id="inner-aside2-ele2" className="inner-aside2-ele">
               <div id="item-outer-box">
                 {
-                  dataOfFetchItem.map((item) => {
-                    return (
-                      <div key={item._id} className="outer-foodItems" data-name={item.itemName} data-price={item.itemPrice} data-category={item.itemCategory} data-image={item.itemImage} data-sname={item.owner[0].name} data-sphoneno={item.owner[0].phoneNo} data-shostelname={item.owner[0].hostelName} data-sfloor={item.owner[0].floorNo} data-sroom={item.owner[0].roomNo}>
-                        <div className="product-image">
-                          <img src={item.itemImage} alt={item.itemName} />
+                  dataOfFetchItem.length > 0 ? (
+                    dataOfFetchItem.map((item) => {
+                      return (
+                        <div key={item._id} className="outer-foodItems">
+                          <div className="product-image">
+                            <img src={item.itemImage} alt={item.itemName} />
+                          </div>
+                          <p>{item.itemName}</p>
+                          <p>{item.itemPrice} Rs.</p>
+                          <div className='outer-details-btn'>
+                            <button className='detail-btn' onClick={() => { detailOfItem(item._id) }}>Details</button>
+                            {
+                              dataOfCurrentUser.rollNo == item.owner[0].rollNo && (
+                                <button className='delete-item-btn'>
+                                  <img src="icons/delete.svg" alt="delete" onClick={() => { deleteItem(item._id) }} />
+                                </button>
+                              )
+                            }
+                          </div>
                         </div>
-                        <p>{item.itemName}</p>
-                        <p>{item.itemPrice} Rs.</p>
-                        <div className='outer-details-btn'>
-                          <button className='detail-btn'>Details</button>
-                          {
-                            dataOfCurrentUser.rollNo == item.owner[0].rollNo && (
-                              <button className='delete-item-btn'>
-                                <img src="icons/delete.svg" alt="delete" />
-                              </button>
-                            )
-                          }
-                        </div>
-                      </div>
-                    )
-                  })
+                      )
+                    })
+                  ) : (
+                    <div id='no-items-found'>
+                      <h1>No items found</h1>
+                    </div>
+                  )
                 }
               </div>
             </div>
@@ -225,6 +279,35 @@ const MarketPlace = () => {
             </div>
             <button type='submit'>Add Item</button>
           </form>
+        </div>
+      </main>
+      <main id='outer-details-of-item'>
+        <div id='inner-details-of-item'>
+          <div id="detail-cross-btn">
+            <button onClick={() => { document.getElementById('outer-details-of-item').style.display = 'none' }}>
+              <img src="icons/cross.svg" alt="" />
+            </button>
+          </div>
+          <div id="most-inner-details-of-item">
+            <div id="inner-details-of-item1">
+              <img src={detailOfFetchedItem.itemImage} alt="" />
+            </div>
+            <ul id="inner-details-of-item2">
+              <li id="detail-box2-ele1" className="detail-box2-ele">
+                <h2>Product details :-</h2>
+                <p id="productName">{detailOfFetchedItem.itemName}</p>
+                <p>{detailOfFetchedItem.itemPrice} Rs.</p>
+              </li>
+              <li id="detail-box2-ele2" className="detail-box2-ele">
+                <h2>Seller details :-</h2>
+                <p>Name : <span>{detailOfOwnerOfFetchedItem.name}</span> </p>
+                <p>Contact no. : <span>{detailOfOwnerOfFetchedItem.phoneNo}</span> </p>
+                <p>Hostel Name : <span>{detailOfOwnerOfFetchedItem.hostelName}</span></p>
+                <p>Floor : <span>{detailOfOwnerOfFetchedItem.floorNo}</span> </p>
+                <p>Room no. : <span>{detailOfOwnerOfFetchedItem.roomNo}</span> </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </main>
 
