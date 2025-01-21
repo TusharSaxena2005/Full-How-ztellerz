@@ -94,6 +94,17 @@ const getItemByCategory = asyncHandler(async (req, res) => {
         )
 })
 
+const getItemById = asyncHandler(async (req, res) => {
+    const { itemId } = req.params
+    const allItem = await Marketplace.find({ _id: itemId }).populate("owner", "-password -refreshToken")
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, allItem, `${itemId} item successfully fetched`)
+        )
+})
+
 const getItemByHostelName = asyncHandler(async (req, res) => {
     const { hostelName, floorNo } = req.body
 
@@ -143,7 +154,7 @@ const getItemByHostelName = asyncHandler(async (req, res) => {
 
 const getItemByUserId = asyncHandler(async (req, res) => {
     const { userId } = req.params
-    
+
     if (!isValidObjectId(userId)) {
         throw new apiError(400, "Invalid user Id")
     }
@@ -162,6 +173,7 @@ export {
     deleteItem,
     getAllItem,
     getItemByCategory,
+    getItemById,
     getItemByHostelName,
     getItemByUserId
 }
