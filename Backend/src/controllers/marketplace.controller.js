@@ -106,21 +106,22 @@ const getItemById = asyncHandler(async (req, res) => {
 })
 
 const getItemByHostelName = asyncHandler(async (req, res) => {
-    const { hostelName, floorNo } = req.body
+    const { hostelName, floorNo } = req.query
 
     if (!hostelName && !floorNo) {
         throw new apiError(400, "Please provide hostel name and floor number")
     }
 
+    
     let matchCondition = {};
     if (hostelName && floorNo) {
-        matchCondition = { 'owner.hostelName': hostelName, 'owner.floorNo': floorNo };
+        matchCondition = { 'owner.hostelName': hostelName, 'owner.floorNo':  parseInt(floorNo) };
     } else if (hostelName) {
         matchCondition = { 'owner.hostelName': hostelName };
     } else if (floorNo) {
-        matchCondition = { 'owner.floorNo': floorNo };
+        matchCondition = { 'owner.floorNo':  parseInt(floorNo) };
     }
-
+    
     let allItem = await Marketplace.aggregate([
         {
             $lookup: {
@@ -129,9 +130,6 @@ const getItemByHostelName = asyncHandler(async (req, res) => {
                 foreignField: '_id',
                 as: 'owner'
             }
-        },
-        {
-            $unwind: '$owner'
         },
         {
             $match: matchCondition
