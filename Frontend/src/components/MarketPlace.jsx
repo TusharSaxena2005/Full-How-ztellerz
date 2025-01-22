@@ -9,6 +9,7 @@ const MarketPlace = () => {
   const [detailOfFetchedItem, setDetailOfFetchedItem] = useState([]);
   const [detailOfOwnerOfFetchedItem, setdetailOfOwnerOfFetchedItem] = useState([]);
   const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+  console.log(dataOfCurrentUser);
 
 
 
@@ -78,6 +79,23 @@ const MarketPlace = () => {
     }
   }
 
+  const fetchItemsByHostel = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    let allData = Object.fromEntries(formData.entries());
+
+    const response = await fetch(`http://localhost:8000/api/v1/marketplace/filtered-byHostelName-item?hostelName=${allData.hostelName}&floorNo=${allData.floorNo}`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+    if (response.ok) {
+      const data = await response.json();
+      setDataOfFetchItem(data.data);
+      document.getElementById('filterHostelName').value = '';
+      document.getElementById('filterFloorNum').value = '';
+    }
+  }
+
   const fetchItems = async () => {
     const response = await fetch('http://localhost:8000/api/v1/marketplace/get-all-item',
       {
@@ -87,12 +105,12 @@ const MarketPlace = () => {
     if (response.ok) {
       const data = await response.json();
       setDataOfFetchItem(data.data);
-      document.getElementsByClassName('aside1-ele1-options')[0].style.border = '2px solid white'
-      document.getElementsByClassName('aside1-ele1-options')[0].style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
     }
   }
 
   useEffect(() => {
+    document.getElementsByClassName('aside1-ele1-options')[0].style.border = '2px solid white'
+    document.getElementsByClassName('aside1-ele1-options')[0].style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
     fetchItems();
     fetchCurrentUser();
   }, [])
@@ -107,6 +125,8 @@ const MarketPlace = () => {
           <aside id='aside1' className='aside'>
             <div id="aside1-ele1-outer-options">
               <button id="aside1-ele1-option1" className='aside1-ele1-options' onClick={(e) => {
+                document.getElementById('profile-page').style.display = 'none'
+                document.getElementById('item-outer-box').style.display = 'flex'
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 fetchItems();
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
@@ -118,6 +138,8 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Home</button>
               <button id="aside1-ele1-option2" className='aside1-ele1-options' onClick={(e) => {
+                document.getElementById('profile-page').style.display = 'none'
+                document.getElementById('item-outer-box').style.display = 'flex'
                 fetchItemsByCategory('chips');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
@@ -129,6 +151,8 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Chips</button>
               <button id="aside1-ele1-option3" className='aside1-ele1-options' onClick={(e) => {
+                document.getElementById('profile-page').style.display = 'none'
+                document.getElementById('item-outer-box').style.display = 'flex'
                 fetchItemsByCategory('drinks');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
@@ -140,6 +164,8 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Drinks</button>
               <button id="aside1-ele1-option4" className='aside1-ele1-options' onClick={(e) => {
+                document.getElementById('item-outer-box').style.display = 'flex'
+                document.getElementById('profile-page').style.display = 'none'
                 fetchItemsByCategory('chocolates');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
@@ -151,6 +177,8 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Chocolates</button>
               <button id="aside1-ele1-option5" className='aside1-ele1-options' onClick={(e) => {
+                document.getElementById('item-outer-box').style.display = 'flex'
+                document.getElementById('profile-page').style.display = 'none'
                 fetchItemsByCategory('other');
                 let options = document.getElementsByClassName('aside1-ele1-options')
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
@@ -162,7 +190,9 @@ const MarketPlace = () => {
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
               }}>Other</button>
               <button id="aside1-ele1-option6" className='aside1-ele1-options' onClick={(e) => {
+                e.preventDefault();
                 let options = document.getElementsByClassName('aside1-ele1-options')
+                fetchItems();
                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                 for (let i = 0; i < options.length; i++) {
                   options[i].style.border = 'none'
@@ -170,6 +200,8 @@ const MarketPlace = () => {
                 }
                 e.target.style.border = '2px solid white'
                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                document.getElementById('item-outer-box').style.display = 'none'
+                document.getElementById('profile-page').style.display = 'flex'
               }}>Profile</button>
               <button id="aside1-ele1-option7" onClick={() => {
                 document.getElementById('most-outer-add-item').style.display = 'flex'
@@ -185,8 +217,8 @@ const MarketPlace = () => {
           <div id='aside2' className='aside'>
             <div id="inner-aside2-ele1" className="inner-aside2-ele">
               <div id="inner-aside2-ele1-filter">
-                <form>
-                  <select name="hostel" id="filterHostelName">
+                <form onSubmit={fetchItemsByHostel} encType='multipart/form-data'>
+                  <select name="hostelName" id="filterHostelName">
                     <option value="">Choose hostel</option>
                     <option value="Archimedes A">Archimedes A</option>
                     <option value="Archimedes B">Archimedes B</option>
@@ -202,7 +234,7 @@ const MarketPlace = () => {
                     <option value="Pie">Pie</option>
                     <option value="Vasco">Vasco</option>
                   </select>
-                  <select name="floor" id="filterFloorNum">
+                  <select name="floorNo" id="filterFloorNum">
                     <option value="">Choose floor</option>
                     <option value="1">Floor 1</option>
                     <option value="2">Floor 2</option>
@@ -250,15 +282,73 @@ const MarketPlace = () => {
                   )
                 }
               </div>
+              <div id='profile-page'>
+                <ul id="profile-sideBar2" className="inner-sideBar2">
+                  <div id="inner-profile-sideBar2-ele1" className="inner-profile-sideBar2-ele">
+                    <li id="inner-profile-pic" className="inner-profile">
+                      <img src={dataOfCurrentUser.profilePic} alt="profileIcon" />
+                    </li>
+                    <li id="inner-profile-username" className="inner-profile">
+                      <h2>@{dataOfCurrentUser.name}</h2>
+                      <p>
+                        <span>{dataOfCurrentUser.rollNo}</span> <span>{dataOfCurrentUser.hostelName}</span>
+                      </p>
+                    </li>
+                  </div>
+                  <div id="inner-profile-sideBar2-ele2" className="inner-profile-sideBar2-ele">
+                    <li id="posts-head">
+                      <h2>Posts</h2>
+                    </li>
+                    <li id="posts">
+                      <ul id="inner-posts">
+                        <div id="item-outer-box">
+                          {
+                            dataOfFetchItem.length > 0 ? (
+                              dataOfFetchItem.map((item) => {
+                                return (
+                                  <div key={item._id}>
+                                    {
+                                      dataOfCurrentUser.rollNo == item.owner[0].rollNo && (<div className="outer-foodItems">
+                                        <div className="product-image">
+                                          <img src={item.itemImage} alt={item.itemName} />
+                                        </div>
+                                        <p>{item.itemName}</p>
+                                        <p>{item.itemPrice} Rs.</p>
+                                        <div className='outer-details-btn'>
+                                          <button className='detail-btn' onClick={() => { detailOfItem(item._id) }}>Details</button>
+                                          <button className='delete-item-btn'>
+                                            <img src="icons/delete.svg" alt="delete" onClick={() => { deleteItem(item._id) }} />
+                                          </button>
+                                        </div>
+                                      </div>)
+                                    }
+                                  </div>
+                                )
+                              })
+
+                            ) : (
+                              <div id='no-items-found'>
+                                <h1>No items found</h1>
+                              </div>
+                            )
+                          }
+                        </div>
+                      </ul>
+                    </li>
+                  </div>
+                </ul>
+              </div>
             </div>
           </div>
         </main >
       </div >
+      
       <main id='most-outer-add-item'>
         <div id='outer-add-item'>
           <div id="add-item-cross-btn">
             <button onClick={() => {
               document.getElementById('most-outer-add-item').style.display = 'none'
+
             }}>
               <img src="icons/cross.svg" alt="" />
             </button>
