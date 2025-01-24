@@ -5,10 +5,10 @@ import { apiResponse } from "../utils/apiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 
 const publishBroadcast = asyncHandler(async (req, res) => {
-    const { title, date, time, destination, category } = req.body
+    const { title, date, time, destination, category, description } = req.body
 
     if (
-        [title, date, time, destination, category].some((field) => {
+        [title, date, time, destination, category, description].some((field) => {
             field?.trim() === ""
         })
     ) {
@@ -20,6 +20,7 @@ const publishBroadcast = asyncHandler(async (req, res) => {
         date,
         time,
         destination,
+        description,
         category,
         owner: [req.user]
     })
@@ -56,7 +57,7 @@ const deleteBroadcast = asyncHandler(async (req, res) => {
 })
 
 const getAllBroadcasts = asyncHandler(async (req, res) => {
-    const allBroadcast = await Broadcast.find().populate("owner","-password -refreshToken")
+    const allBroadcast = await Broadcast.find().populate("owner", "-password -refreshToken")
     return res
         .status(200)
         .json(
@@ -66,7 +67,7 @@ const getAllBroadcasts = asyncHandler(async (req, res) => {
 
 const getBroadcastsByCategory = asyncHandler(async (req, res) => {
     const { category } = req.params
-    const allBroadcast = await Broadcast.find({ category: category }).populate("owner","-password -refreshToken")
+    const allBroadcast = await Broadcast.find({ category: category }).populate("owner", "-password -refreshToken")
     return res
         .status(200)
         .json(
@@ -79,8 +80,8 @@ const getBroadcastsByUserId = asyncHandler(async (req, res) => {
     if (!userId) {
         throw new apiError(400, "User id not exist")
     }
-    
-    const allBroadcast = await Broadcast.find({ owner: userId }).populate("owner","-password -refreshToken")
+
+    const allBroadcast = await Broadcast.find({ owner: userId }).populate("owner", "-password -refreshToken")
 
     if (!allBroadcast) {
         throw new apiError(404, "User not found")

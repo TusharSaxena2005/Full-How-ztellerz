@@ -13,12 +13,18 @@ const broadcastSchema = new Schema(
             required: true,
             trim: true,
         },
+        description: {
+            type: String,
+            trim: true,
+        },
         date: {
             type: String,
+            required: true,
             trim: true,
         },
         time: {
             type: String,
+            required: true,
             trim: true,
         },
         category: {
