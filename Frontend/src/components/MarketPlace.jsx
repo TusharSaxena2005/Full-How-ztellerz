@@ -9,7 +9,6 @@ const MarketPlace = () => {
   const [detailOfFetchedItem, setDetailOfFetchedItem] = useState([]);
   const [detailOfOwnerOfFetchedItem, setdetailOfOwnerOfFetchedItem] = useState([]);
   const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
-  console.log(dataOfCurrentUser);
 
 
 
@@ -301,20 +300,20 @@ const MarketPlace = () => {
                     </li>
                     <li id="posts">
                       <ul id="inner-posts">
-                        <div id="item-outer-box">
+                        <div id="profile-item-outer-box">
                           {
                             dataOfFetchItem.length > 0 ? (
                               dataOfFetchItem.map((item) => {
                                 return (
                                   <div key={item._id}>
                                     {
-                                      dataOfCurrentUser.rollNo == item.owner[0].rollNo && (<div className="outer-foodItems">
+                                      dataOfCurrentUser.rollNo == item.owner[0].rollNo && (<div className="profile-outer-foodItems">
                                         <div className="product-image">
                                           <img src={item.itemImage} alt={item.itemName} />
                                         </div>
                                         <p>{item.itemName}</p>
                                         <p>{item.itemPrice} Rs.</p>
-                                        <div className='outer-details-btn'>
+                                        <div className='profile-outer-details-btn'>
                                           <button className='detail-btn' onClick={() => { detailOfItem(item._id) }}>Details</button>
                                           <button className='delete-item-btn'>
                                             <img src="icons/delete.svg" alt="delete" onClick={() => { deleteItem(item._id) }} />
