@@ -212,7 +212,7 @@
     font-size: 0.9rem;
 }
 
-#outer-add-broadcast{
+#outer-add-broadcast {
     width: 100dvw;
     height: 100dvh;
     display: none;
@@ -223,7 +223,7 @@
     backdrop-filter: blur(4px);
 }
 
-#inner-add-broadcast{
+#inner-add-broadcast {
     box-shadow: 0 0 22px gray;
     width: 42%;
     border-radius: 18px;
@@ -234,4 +234,126 @@
     align-items: center;
     background-color: black;
     gap: 5px;
+}
+
+#inner-add-broadcast-ele1 {
+    /* border: 1px solid; */
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+#add-broadcast-cross-btn {
+    border-top-right-radius: 18px;
+    border: none;
+    background-color: transparent;
+    height: 80%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#add-broadcast-cross-btn:hover {
+    background-color: rgba(195, 0, 0, 0.918);
+}
+
+#inner-add-broadcast-ele2 {
+    /* border: 1px solid; */
+    width: 90%;
+    height: 85%;
+}
+
+#inner-add-broadcast-ele2 form {
+    /* border: 1px solid; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#add-date-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 83%;
+    height: 10%;
+}
+
+.add-broadcast-form-inp,
+#add-date-time input {
+    width: 80%;
+    height: 10%;
+    border-radius: 15px;
+    border: 3px solid rgb(193 193 193);
+    padding-left: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 1.05rem;
+    background-color: rgba(255, 255, 255, 0.204);
+    font-weight: 400;
+    font-family: 'Josefin Sans';
+}
+
+#add-date-time input {
+    width: 40%;
+    height: 95%;
+}
+
+.add-broadcast-form-inp textarea {
+    color: rgb(255, 255, 255);
+    font-size: 1.05rem;
+    font-weight: 400;
+    font-family: 'Josefin Sans';
+    height: 80%;
+    width: 97%;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    padding-right: 2px;
+}
+
+.add-broadcast-form-inp textarea:focus{
+    outline: none;
+}
+
+#textarea {
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner-add-broadcast-ele2 form input:focus {
+    outline: none;
+    border: 3px solid #ffffff;
+}
+
+#inner-add-broadcast-ele2 form textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+#inner-add-broadcast-ele2 form textarea::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.549);
+    border-radius: 10px;
+}
+
+#add-broadcast-btn{
+    background-color: #ffffff0f;
+    border: 2px solid;
+    width: 150px;
+    height: 10%;
+    cursor: pointer;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+}
+
+#add-broadcast-btn:hover{
+    background-color: #ffffff1f;
+    transition: all 0.4s ease-in-out;
 }

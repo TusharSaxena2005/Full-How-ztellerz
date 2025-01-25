@@ -1,9 +1,64 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './BroadCast.css'
 import Navbar from './Navbar'
 
 
 const BroadCast = () => {
+
+    const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+    const [DataOfFetchItem, setDataOfFetchItem] = useState([]);
+    console.log(DataOfFetchItem);
+
+    const fetchCurrentUser = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/api/v1/user/current-user', {
+                method: 'GET',
+                credentials: 'include'
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setdataOfCurrentUser(data.data);
+            }
+        } catch (error) { }
+    }
+
+    const handleAddItem = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const allData = Object.fromEntries(formData.entries());
+        try {
+            const response = await fetch('http://localhost:8000/api/v1/broadcast/publish-broadcast', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(allData),
+                credentials: 'include'
+            });
+            if (response.ok) {
+                document.getElementById('outer-add-broadcast').style.display = 'none';
+                // fetchItems();
+                console.log(await response.json());
+            }
+        } catch (error) { }
+    }
+
+    const handleInterested = async (broadcastId, e) => {
+        e.preventDefault();
+        const response = await fetch(`http://localhost:8000/api/v1/interested/toggle/${broadcastId}`, {
+            method: 'POST',
+            credentials: 'include'
+        })
+        if (response.ok) {
+            if (e.target.textContent == 'Interested') {
+                e.target.textContent = 'Not interested'
+            }
+            else {
+                e.target.textContent = 'Interested'
+            }
+        }
+    }
 
     const onClickBorder = (e) => {
         // document.getElementById('profile-page').style.display = 'none'
@@ -15,6 +70,24 @@ const BroadCast = () => {
             options[i].style.backgroundColor = 'transparent'
         }
     }
+
+    const fetchItems = async () => {
+        const response = await fetch('http://localhost:8000/api/v1/broadcast/all-broadcasts',
+            {
+                method: 'GET',
+                credentials: 'include'
+            });
+        if (response.ok) {
+            const data = await response.json();
+            setDataOfFetchItem(data.data);
+        }
+    }
+
+    useEffect(() => {
+        fetchCurrentUser();
+        fetchItems();
+    }, [])
+
     return (
         <>
             <Navbar />
@@ -66,43 +139,73 @@ const BroadCast = () => {
                                 document.getElementById('profile-page').style.display = 'flex'
                             }}>
                                 <img src="icons/profileIcon.svg" alt="" /> Profile</button>
-                            <button id="aside1-ele1-option7">
+                            <button id="aside1-ele1-option7" onClick={() => {
+                                document.getElementById('outer-add-broadcast').style.display = 'flex'
+                            }}>
                                 <img src="icons/plusIcon.svg" alt="" />
                                 Add Item</button>
                         </div>
                     </aside>
                     <div id='aside2-broadcast' className='aside'>
                         <div id="broadcast-aside2-ele1" className="broadcast-aside2-ele">
-                            <ul className="broadcast-aside2-inner-ele1">
-                                <li className="sidebar2-ele">
-                                    <div className="writer">
-                                        <img src="icons/profileIcon.svg" alt="" />
-                                        <p>Username</p>
-                                    </div>
-                                    <div className="title">
-                                        <p>Title</p>
-                                    </div>
-                                    <div className="date">
-                                        <p>DD / MM / YYYY</p>
-                                    </div>
-                                    <div className="all-details-btn">
-                                        <button className='details-btn'>Get all details</button>
-                                        <div>
-                                            <button className="interested">Interested</button>
-                                            <button className="delete-broadcast">
-                                                <img src="icons/delete.svg" alt="" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                            {
+                                DataOfFetchItem.map((item) => {
+                                    return (
+                                        <ul key={item._id} className="broadcast-aside2-inner-ele1">
+                                            <li className="sidebar2-ele">
+                                                <div className="writer">
+                                                    <img src="icons/profileIcon.svg" alt="" />
+                                                    <p>{item.owner[0].name}</p>
+                                                </div>
+                                                <div className="title">
+                                                    <p>{item.title}</p>
+                                                </div>
+                                                <div className="date">
+                                                    <p>{item.date}</p>
+                                                </div>
+                                                <div className="all-details-btn">
+                                                    <button className='details-btn'>Get all details</button>
+                                                    <div>
+                                                        <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Interested</button>
+                                                        <button className="delete-broadcast">
+                                                            <img src="icons/delete.svg" alt="" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    )
+                                })}
                         </div>
                         <div id="broadcast-aside2-ele2" className="broadcast-aside2-ele"></div>
                     </div>
                 </main>
             </div>
             <main id="outer-add-broadcast">
-                <div id="inner-add-broadcast"></div>
+                <div id="inner-add-broadcast">
+                    <div id="inner-add-broadcast-ele1">
+                        <button id='add-broadcast-cross-btn' onClick={() => {
+                            document.getElementById('outer-add-broadcast').style.display = 'none'
+                        }}>
+                            <img src="icons/cross.svg" alt="" />
+                        </button>
+                    </div>
+                    <div id="inner-add-broadcast-ele2">
+                        <form onSubmit={handleAddItem} encType='multipart/form-data'>
+                            <input name='title' className='add-broadcast-form-inp' type="text" placeholder="Title" />
+                            <div id='add-date-time'>
+                                <input name='date' type="text" placeholder="dd/mm/yyyy" />
+                                <input name='time' type="text" placeholder="Time (Ex. : 01:00 PM)" />
+                            </div>
+                            <input name='destination' className='add-broadcast-form-inp' type="text" placeholder="Destination" />
+                            <input name='category' className='add-broadcast-form-inp' type="text" placeholder="category" />
+                            <div id='textarea' className='add-broadcast-form-inp'>
+                                <textarea name='description' placeholder="Description"></textarea>
+                            </div>
+                            <button id='add-broadcast-btn' type='submit'>Post</button>
+                        </form>
+                    </div>
+                </div>
             </main>
         </>
     )
