@@ -6,7 +6,6 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 
 const publishBroadcast = asyncHandler(async (req, res) => {
     const { title, date, time, destination, category, description } = req.body
-
     if (
         [title, date, time, destination, category, description].some((field) => {
             field?.trim() === ""
