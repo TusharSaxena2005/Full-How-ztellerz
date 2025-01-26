@@ -1,5 +1,6 @@
 import mongoose, { isValidObjectId } from "mongoose"
 import { Broadcast } from "../models/broadCast.models.js"
+import { Interested } from "../models/interested.model.js"
 import { apiError } from "../utils/apiError.js"
 import { apiResponse } from "../utils/apiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
@@ -43,6 +44,7 @@ const deleteBroadcast = asyncHandler(async (req, res) => {
     }
 
     try {
+        await Interested.deleteMany({ broadCast: broadcastId })
         await Broadcast.findByIdAndDelete(broadcastId)
     } catch (error) {
         throw new apiError(500, "Broadcast not deleted")
@@ -56,7 +58,30 @@ const deleteBroadcast = asyncHandler(async (req, res) => {
 })
 
 const getAllBroadcasts = asyncHandler(async (req, res) => {
-    const allBroadcast = await Broadcast.find().populate("owner", "-password -refreshToken")
+    const allBroadcast = await Broadcast.aggregate([
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'owner',
+                foreignField: '_id',
+                as: 'owner'
+            }
+        },
+        {
+            $lookup: {
+                from: 'interesteds',
+                localField: '_id',
+                foreignField: 'broadCast',
+                as: 'interestedUsers'
+            }
+        },
+        {
+            $project: {
+                'owner.password': 0,
+                'owner.refreshToken': 0
+            }
+        }
+    ]);
     return res
         .status(200)
         .json(
