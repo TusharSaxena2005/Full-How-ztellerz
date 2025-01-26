@@ -6,8 +6,21 @@ import Navbar from './Navbar'
 const BroadCast = () => {
 
     const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+    const [listOfBroadcastsUserInterestedIn, setlistOfBroadcastsUserInterestedIn] = useState([]);
+    const [listOfUsersInterestedInBroadcasts, setlistOfUsersInterestedInBroadcasts] = useState([]);
     const [DataOfFetchItem, setDataOfFetchItem] = useState([]);
-    console.log(DataOfFetchItem);
+    console.log(listOfUsersInterestedInBroadcasts)
+
+    const checkPersonInterestedOrNot = (itemId) => {
+        let flag = false;
+        listOfBroadcastsUserInterestedIn.map((interestedItem) => {
+            if (interestedItem.broadCast._id == itemId) {
+                flag = true;
+            }
+        })
+
+        return flag
+    }
 
     const fetchCurrentUser = async () => {
         try {
@@ -18,8 +31,45 @@ const BroadCast = () => {
             if (response.ok) {
                 const data = await response.json();
                 setdataOfCurrentUser(data.data);
+                broadcastsUserInterestedIn(data.data._id);
             }
         } catch (error) { }
+    }
+
+    const broadcastsUserInterestedIn = async (userId) => {
+        const response = await fetch(`http://localhost:8000/api/v1/interested/interestedBroadcastsByUser/${userId}`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+        if (response.ok) {
+            const data = await response.json();
+            setlistOfBroadcastsUserInterestedIn(data.data);
+        }
+    }
+
+    const usersInterestedInBroadcast = async (broadcastId, e) => {
+        e.preventDefault();
+        const response = await fetch(`http://localhost:8000/api/v1/interested/interestedPeople/${broadcastId}`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+
+        if (response.ok) {
+            const data = await response.json();
+            setlistOfUsersInterestedInBroadcasts(data.data);
+            document.getElementById('outer-listOf-interested-pears').style.display = 'flex'
+        }
+    }
+
+    const handleDeleteItem = async (broadcastId, e) => {
+        e.preventDefault();
+        const response = await fetch(`http://localhost:8000/api/v1/broadcast/delete-broadcast/${broadcastId}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        if (response.ok) {
+            fetchItems();
+        }
     }
 
     const handleAddItem = async (e) => {
@@ -38,8 +88,7 @@ const BroadCast = () => {
             });
             if (response.ok) {
                 document.getElementById('outer-add-broadcast').style.display = 'none';
-                // fetchItems();
-                console.log(await response.json());
+                fetchItems();
             }
         } catch (error) { }
     }
@@ -51,11 +100,11 @@ const BroadCast = () => {
             credentials: 'include'
         })
         if (response.ok) {
-            if (e.target.textContent == 'Interested') {
-                e.target.textContent = 'Not interested'
+            if (e.target.textContent == 'Interested ?') {
+                e.target.textContent = 'Not interested '
             }
             else {
-                e.target.textContent = 'Interested'
+                e.target.textContent = 'Interested ?'
             }
         }
     }
@@ -154,7 +203,7 @@ const BroadCast = () => {
                                         <ul key={item._id} className="broadcast-aside2-inner-ele1">
                                             <li className="sidebar2-ele">
                                                 <div className="writer">
-                                                    <img src="icons/profileIcon.svg" alt="" />
+                                                    <img src={item.owner[0].profilePic} alt="" />
                                                     <p>{item.owner[0].name}</p>
                                                 </div>
                                                 <div className="title">
@@ -165,12 +214,26 @@ const BroadCast = () => {
                                                 </div>
                                                 <div className="all-details-btn">
                                                     <button className='details-btn'>Get all details</button>
-                                                    <div>
-                                                        <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Interested</button>
-                                                        <button className="delete-broadcast">
-                                                            <img src="icons/delete.svg" alt="" />
-                                                        </button>
-                                                    </div>
+                                                    {
+                                                        item.owner[0]._id != dataOfCurrentUser._id ? (
+                                                            <div>
+                                                                {
+                                                                    checkPersonInterestedOrNot(item._id) ? (
+                                                                        <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Not Interested</button>
+                                                                    ) : (
+                                                                        <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Interested ?</button>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                        ) : (
+                                                            <div>
+                                                                <button className="interested" onClick={(e) => { usersInterestedInBroadcast(item._id, e) }}>Interested list</button>
+                                                                <button className="delete-broadcast" onClick={(e) => { handleDeleteItem(item._id, e) }}>
+                                                                    <img src="icons/delete.svg" alt="" />
+                                                                </button>
+                                                            </div>
+                                                        )
+                                                    }
                                                 </div>
                                             </li>
                                         </ul>
@@ -205,6 +268,31 @@ const BroadCast = () => {
                             <button id='add-broadcast-btn' type='submit'>Post</button>
                         </form>
                     </div>
+                </div>
+            </main>
+            <main id='outer-listOf-interested-pears'>
+                <div id='inner-listOf-interested-pears'>
+                    <ul id="cross-listOf-interested-pears">
+                        <button id='close-list' onClick={() => {
+                            document.getElementById('outer-listOf-interested-pears').style.display = 'none'
+                        }}>
+                            <img src="icons/cross.svg" alt="close" />
+                        </button>
+                    </ul>
+                    <ul id="listOf-interested-pears">
+                        {
+                            listOfUsersInterestedInBroadcasts.map((user) => {
+                                return (
+                                    <li key={user.interestedBy._id} className='people-whoAre-interested'>
+                                        <button>
+                                            <img src={user.interestedBy.profilePic} alt="" />
+                                            <p>{user.interestedBy.name}</p>
+                                        </button>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
                 </div>
             </main>
         </>
