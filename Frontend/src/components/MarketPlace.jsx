@@ -355,7 +355,7 @@ const MarketPlace = () => {
           <form onSubmit={handleAddItem} encType='multipart/form-data' id='add-item-form'>
             <input type="text" id="itemName" name="itemName" placeholder="Enter product name" />
             <input type="number" id="itemPrice" name="itemPrice" placeholder="Enter product price" />
-            <select name="itemCategory">
+            <select name="itemCategory" id="itemCategory">
               <option value="">Product category</option>
               <option value="chips">Chips</option>
               <option value="drinks">Drinks</option>

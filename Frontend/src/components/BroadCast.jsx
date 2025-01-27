@@ -9,7 +9,7 @@ const BroadCast = () => {
     const [listOfBroadcastsUserInterestedIn, setlistOfBroadcastsUserInterestedIn] = useState([]);
     const [listOfUsersInterestedInBroadcasts, setlistOfUsersInterestedInBroadcasts] = useState([]);
     const [DataOfFetchItem, setDataOfFetchItem] = useState([]);
-    console.log(listOfUsersInterestedInBroadcasts)
+    const [DataOfClickedItem, setDataOfClickedItem] = useState([]);
 
     const checkPersonInterestedOrNot = (itemId) => {
         let flag = false;
@@ -109,9 +109,20 @@ const BroadCast = () => {
         }
     }
 
+    const fetchItemByCategory = async (category) => {
+        const response = await fetch(`http://localhost:8000/api/v1/broadcast/filtered-broadcasts/${category}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        if (response.ok) {
+            const data = await response.json();
+            setDataOfFetchItem(data.data);
+        }
+    }
+
     const onClickBorder = (e) => {
-        // document.getElementById('profile-page').style.display = 'none'
-        // document.getElementById('item-outer-box').style.display = 'flex'
+        document.getElementById('broadcast-aside2-ele1').style.display = 'flex'
+        document.getElementById('profile-page').style.display = 'none'
         let options = document.getElementsByClassName('aside1-ele1-options-broadcast')
         document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
         for (let i = 0; i < options.length; i++) {
@@ -135,6 +146,8 @@ const BroadCast = () => {
     useEffect(() => {
         fetchCurrentUser();
         fetchItems();
+        document.getElementById('aside1-ele1-option1').style.border = '2px solid white'
+        document.getElementById('aside1-ele1-option1').style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
     }, [])
 
     return (
@@ -146,30 +159,35 @@ const BroadCast = () => {
                         <div id="aside1-ele1-outer-options">
                             <button id="aside1-ele1-option1" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 onClickBorder();
+                                fetchItems();
                                 e.target.style.border = '2px solid white'
                                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
                             }}>
                                 <img src="icons/home.svg" alt="" /> Home</button>
                             <button id="aside1-ele1-option2" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 onClickBorder();
+                                fetchItemByCategory('Sports');
                                 e.target.style.border = '2px solid white'
                                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
                             }}>
                                 <img src="icons/sports.svg" alt="" /> Sports</button>
                             <button id="aside1-ele1-option3" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 onClickBorder();
+                                fetchItemByCategory('Club');
                                 e.target.style.border = '2px solid white'
                                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
                             }}>
                                 <img src="icons/club.svg" alt="" /> Club</button>
                             <button id="aside1-ele1-option4" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 onClickBorder();
+                                fetchItemByCategory('Library');
                                 e.target.style.border = '2px solid white'
                                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
                             }}>
                                 <img src="icons/library.svg" alt="" /> Library</button>
                             <button id="aside1-ele1-option5" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 onClickBorder();
+                                fetchItemByCategory('Gaming');
                                 e.target.style.border = '2px solid white'
                                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
                             }}>
@@ -184,7 +202,7 @@ const BroadCast = () => {
                                 }
                                 e.target.style.border = '2px solid white'
                                 e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
-                                document.getElementById('item-outer-box').style.display = 'none'
+                                document.getElementById('broadcast-aside2-ele1').style.display = 'none'
                                 document.getElementById('profile-page').style.display = 'flex'
                             }}>
                                 <img src="icons/profileIcon.svg" alt="" /> Profile</button>
@@ -213,7 +231,11 @@ const BroadCast = () => {
                                                     <p>{item.date}</p>
                                                 </div>
                                                 <div className="all-details-btn">
-                                                    <button className='details-btn'>Get all details</button>
+                                                    <button className='details-btn' onClick={() => {
+                                                        setDataOfClickedItem(item);
+                                                        document.getElementById('outer-get-all-details').style.display = 'flex'
+                                                    }
+                                                    }>Get all details</button>
                                                     {
                                                         item.owner[0]._id != dataOfCurrentUser._id ? (
                                                             <div>
@@ -240,7 +262,7 @@ const BroadCast = () => {
                                     )
                                 })}
                         </div>
-                        <div id="broadcast-aside2-ele2" className="broadcast-aside2-ele"></div>
+                        <div id="profile-page" className="broadcast-aside2-ele"></div>
                     </div>
                 </main>
             </div>
@@ -261,7 +283,14 @@ const BroadCast = () => {
                                 <input name='time' type="text" placeholder="Time (Ex. : 01:00 PM)" />
                             </div>
                             <input name='destination' className='add-broadcast-form-inp' type="text" placeholder="Destination" />
-                            <input name='category' className='add-broadcast-form-inp' type="text" placeholder="category" />
+                            <select className='add-broadcast-form-inp' name="category" required>
+                                <option name="category" value="">Category</option>
+                                <option name="category" value="Sports">Sports</option>
+                                <option name="category" value="Library">Library</option>
+                                <option name="category" value="Club">Club</option>
+                                <option name="category" value="Gaming">Gaming</option>
+                                <option name="category" value="Other">Other</option>
+                            </select>
                             <div id='textarea' className='add-broadcast-form-inp'>
                                 <textarea name='description' placeholder="Description"></textarea>
                             </div>
@@ -292,6 +321,23 @@ const BroadCast = () => {
                                 )
                             })
                         }
+                    </ul>
+                </div>
+            </main>
+            <main id='outer-get-all-details'>
+                <div id='inner-get-all-details'>
+                    <ul id="get-all-details-cross" onClick={() => { document.getElementById('outer-get-all-details').style.display = 'none' }}>
+                        <button>
+                            <img src="icons/cross.svg" alt="close" />
+                        </button>
+                    </ul>
+                    <ul id="get-all-details">
+                        <li id="get-all-details-title">{DataOfClickedItem.title}</li>
+                        <li id="get-all-details-description">{DataOfClickedItem.description}</li>
+                        <li id="get-all-details-destination">Destination : <span> {DataOfClickedItem.destination}</span></li>
+                        <li id="get-all-details-category">Category : <span> {DataOfClickedItem.category}</span></li>
+                        <li id="get-all-details-date">Date : <span> {DataOfClickedItem.date}</span></li>
+                        <li id="get-all-details-time">Time : <span> {DataOfClickedItem.time}</span></li>
                     </ul>
                 </div>
             </main>
