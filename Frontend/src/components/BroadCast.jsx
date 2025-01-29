@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 const BroadCast = () => {
 
     const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+    const [dataOfClickedUser, setdataOfClickedUser] = useState([]);
     const [listOfBroadcastsUserInterestedIn, setlistOfBroadcastsUserInterestedIn] = useState([]);
     const [listOfUsersInterestedInBroadcasts, setlistOfUsersInterestedInBroadcasts] = useState([]);
     const [DataOfFetchItem, setDataOfFetchItem] = useState([]);
@@ -194,6 +195,7 @@ const BroadCast = () => {
                                 <img src="icons/gaming.svg" alt="" /> Gaming</button>
                             <button id="aside1-ele1-option6" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 e.preventDefault();
+                                fetchItems();
                                 let options = document.getElementsByClassName('aside1-ele1-options-broadcast')
                                 document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
                                 for (let i = 0; i < options.length; i++) {
@@ -222,7 +224,10 @@ const BroadCast = () => {
                                             <li className="sidebar2-ele">
                                                 <div className="writer">
                                                     <img src={item.owner[0].profilePic} alt="" />
-                                                    <p>{item.owner[0].name}</p>
+                                                    <p onClick={() => {
+                                                        setdataOfClickedUser(item.owner[0])
+                                                        document.getElementById('outer-profile-broadcast').style.display = 'flex'
+                                                    }}>{item.owner[0].name}</p>
                                                 </div>
                                                 <div className="title">
                                                     <p>{item.title}</p>
@@ -262,7 +267,61 @@ const BroadCast = () => {
                                     )
                                 })}
                         </div>
-                        <div id="profile-page" className="broadcast-aside2-ele"></div>
+                        <div id="profile-page" className="broadcast-aside2-ele">
+                            <ul id="profile-sideBar2" className="inner-sideBar2">
+                                <div id="inner-profile-sideBar2-ele1" className="inner-profile-sideBar2-ele">
+                                    <li id="inner-profile-pic" className="inner-profile">
+                                        <img src={dataOfCurrentUser.profilePic} alt="profileIcon" />
+                                    </li>
+                                    <li id="inner-profile-username" className="inner-profile">
+                                        <h2>@{dataOfCurrentUser.name}</h2>
+                                        <p>
+                                            <span>{dataOfCurrentUser.rollNo}</span> <span>{dataOfCurrentUser.hostelName}</span>
+                                        </p>
+                                    </li>
+                                </div>
+                                <div id="inner-profile-sideBar2-ele2" className="inner-profile-sideBar2-ele">
+                                    <li id="posts-head">
+                                        <h2>Posts</h2>
+                                    </li>
+                                    <li id="posts">
+                                        <ul id="inner-posts">
+                                            <div id="profile-item-outer-box">
+                                                {
+                                                    DataOfFetchItem.map((item) => {
+                                                        return (
+                                                            item.owner[0]._id == dataOfCurrentUser._id && (
+                                                                <ul key={item._id} className="broadcast-aside2-inner-ele1">
+                                                                    <li className="sidebar2-ele">
+                                                                        <div className="title">
+                                                                            <p>{item.title}</p>
+                                                                        </div>
+                                                                        <div className="date">
+                                                                            <p>{item.date}</p>
+                                                                        </div>
+                                                                        <div className="all-details-btn">
+                                                                            <button className='details-btn' onClick={() => {
+                                                                                setDataOfClickedItem(item);
+                                                                                document.getElementById('outer-get-all-details').style.display = 'flex'
+                                                                            }
+                                                                            }>Get all details</button>
+                                                                            <div>
+                                                                                <button className="interested" onClick={(e) => { usersInterestedInBroadcast(item._id, e) }}>Interested list</button>
+                                                                                <button className="delete-broadcast" onClick={(e) => { handleDeleteItem(item._id, e) }}>
+                                                                                    <img src="icons/delete.svg" alt="" />
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            ))
+                                                    })}
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                 </main>
             </div>
@@ -338,6 +397,26 @@ const BroadCast = () => {
                         <li id="get-all-details-category">Category : <span> {DataOfClickedItem.category}</span></li>
                         <li id="get-all-details-date">Date : <span> {DataOfClickedItem.date}</span></li>
                         <li id="get-all-details-time">Time : <span> {DataOfClickedItem.time}</span></li>
+                    </ul>
+                </div>
+            </main>
+            <main id='outer-profile-broadcast'>
+                <div id="others-profile">
+                    <div id="others-profile1">
+                        <button id='close-profile-broadcast' onClick={() => { document.getElementById('outer-profile-broadcast').style.display = 'none' }}>
+                            <img src="icons/cross.svg" alt="" />
+                        </button>
+                    </div>
+                    <ul id="others-profile2">
+                        <li id="others-profile-pic">
+                            <img src={dataOfClickedUser.profilePic} alt="profilePic" />
+                        </li>
+                        <li id="others-profile-username">
+                            <h2>Name : {dataOfClickedUser.name}</h2>
+                            <p>Gender : {dataOfClickedUser.gender}</p>
+                            <p>Roll no. : {dataOfClickedUser.rollNo}</p>
+                            <p>Phone no. : {dataOfClickedUser.phoneNo}</p>
+                        </li>
                     </ul>
                 </div>
             </main>

@@ -127,6 +127,11 @@
     font-family: 'Josefin Sans';
     color: rgb(208, 208, 208);
     font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.writer p:hover {
+    color: rgb(255, 255, 255);
 }
 
 .title {
@@ -289,16 +294,16 @@
     align-items: center;
 }
 
-#inner-add-broadcast-ele2 form select{
+#inner-add-broadcast-ele2 form select {
     width: 82.55%;
     color: gray;
 }
 
-#inner-add-broadcast-ele2 form select:focus{
+#inner-add-broadcast-ele2 form select:focus {
     outline: none;
 }
 
-#inner-add-broadcast-ele2 form select option{
+#inner-add-broadcast-ele2 form select option {
     background-color: black;
 }
 
@@ -571,6 +576,96 @@
     font-size: 1.25rem;
 }
 
-#get-all-details span{
+#get-all-details span {
     color: rgb(201, 201, 201);
+}
+
+#outer-profile-broadcast {
+    width: 100dvw;
+    height: 100dvh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    backdrop-filter: blur(4px);
+}
+
+#others-profile {
+    box-shadow: 0 0 22px gray;
+    width: 44%;
+    border-radius: 18px;
+    height: 47%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: black;
+    gap: 5px;
+}
+
+#others-profile1 {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+#close-profile-broadcast {
+    border-top-right-radius: 18px;
+    border: none;
+    background-color: transparent;
+    height: 80%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#close-profile-broadcast:hover {
+    background-color: rgba(195, 0, 0, 0.918);
+}
+
+#others-profile2 {
+    width: 87%;
+    height: 64%;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+#others-profile-pic {
+    width: 36%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid white; */
+}
+
+#others-profile-pic img {
+    width: 80%;
+    height: 87%;
+    border-radius: 100px;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+#others-profile-username {
+    width: 52%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+}
+
+#others-profile-username h2 {
+    font-size: 1.6rem;
+}
+#others-profile-username p {
+    font-size: 1.2rem;
 }
