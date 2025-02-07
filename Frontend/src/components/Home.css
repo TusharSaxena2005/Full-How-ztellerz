@@ -1,11 +1,19 @@
 #home-page1 {
-    width: 100vw;
-    height: 87vh;
+    width: 98vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    /* gap: 20px; */
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.549);
+    border-radius: 10px;
 }
 
 #web-name {
@@ -56,6 +64,8 @@
     }
 }
 
-#home-page2{
-    height: 100dvh;
+#outer-guide-box {
+    border: 1px solid white;
+    width: 95%;
+    height: 100vh;
 }
