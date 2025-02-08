@@ -1,2 +1,11 @@
-﻿# Full-How-ztellerz
-How'ztellerz is a platform for people to buy, sell, and exchange items. It also allows users to post announcements or promotions. The website is designed to be user-friendly and easy to navigate. Users can easily add items to the marketplace and view items posted by others. The website also has a broadcast feature that allows users to post messages for others to see. The website is designed to be simple and intuitive, making it easy for users to find what they are looking for.
+How'ztellerz
+
+How'ztellerz is a platform for buying, selling, and exchanging items. It also allows users to post announcements and promotions. Designed to be user-friendly and easy to navigate, How'ztellerz ensures a seamless experience for users looking to trade or share information.
+
+Features
+
+Marketplace: Easily add and browse items for sale or exchange.
+
+Broadcast: Post messages and promotions for others to see. Share updates and messages with the community.
+
+Intuitive Design: Simple and easy-to-use interface for a smooth user experience.
