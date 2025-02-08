@@ -604,7 +604,6 @@
     display: flex;
     justify-content: start;
     align-items: start;
-    gap: 20px;
     flex-wrap: wrap;
     overflow-y: scroll;
 }
@@ -629,6 +628,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-right: 10px;
+    margin-left: 5px;
 }
 
 .profile-outer-foodItems p {

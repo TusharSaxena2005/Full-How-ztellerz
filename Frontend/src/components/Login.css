@@ -5,7 +5,7 @@
     font-family: 'Josefin Sans';
 }
 
-body {
+#most-outer-login-box {
     display: flex;
     justify-content: center;
     align-items: center;

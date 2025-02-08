@@ -74,7 +74,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div id='outer-signup-box'>
+      <div id='most-outer-signup-box'>
         <div id='signup-box'>
           <div id='signup-box-logo'>
             <img src="logo/logo.jpg" alt="" />

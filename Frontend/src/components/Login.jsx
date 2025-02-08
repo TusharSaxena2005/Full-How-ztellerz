@@ -49,6 +49,7 @@ const Login = () => {
 
   return (
     <>
+      <div id='most-outer-login-box'>
       <div id='outer-login-box'>
         <div id='login-box'>
           <div id='login-box-logo'>
@@ -61,6 +62,7 @@ const Login = () => {
           </form>
         </div>
         <Link to='/signup' id='freshie-login-btn'>Freshie</Link>
+      </div>
       </div>
     </>
   )

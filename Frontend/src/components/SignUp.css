@@ -5,7 +5,7 @@
     font-family: 'Josefin Sans';
 }
 
-body {
+#most-outer-signup-box {
     display: flex;
     justify-content: center;
     align-items: center;

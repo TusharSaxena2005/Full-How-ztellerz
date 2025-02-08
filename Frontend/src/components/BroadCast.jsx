@@ -372,7 +372,10 @@ const BroadCast = () => {
                             listOfUsersInterestedInBroadcasts.map((user) => {
                                 return (
                                     <li key={user.interestedBy._id} className='people-whoAre-interested'>
-                                        <button>
+                                        <button onClick={() => {
+                                            // setdataOfClickedUser(item.owner[0]);  To be fixed
+                                            document.getElementById('outer-profile-broadcast').style.display = 'flex';
+                                        }}>
                                             <img src={user.interestedBy.profilePic} alt="" />
                                             <p>{user.interestedBy.name}</p>
                                         </button>
@@ -382,7 +385,7 @@ const BroadCast = () => {
                         }
                     </ul>
                 </div>
-            </main>
+            </main >
             <main id='outer-get-all-details'>
                 <div id='inner-get-all-details'>
                     <ul id="get-all-details-cross" onClick={() => { document.getElementById('outer-get-all-details').style.display = 'none' }}>
