@@ -1,5 +1,3 @@
-#How'ztellerz
-
 How'ztellerz is a platform for buying, selling, and exchanging items. It also allows users to post announcements and promotions. Designed to be user-friendly and easy to navigate, How'ztellerz ensures a seamless experience for users looking to trade or share information.
 
 Features
