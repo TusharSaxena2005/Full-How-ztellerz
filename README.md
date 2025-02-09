@@ -10,11 +10,11 @@ Broadcast: Post messages and promotions for others to see. Share updates and mes
 Intuitive Design: Simple and easy-to-use interface for a smooth user experience.
 
 Tech used:-
-React Js
-Express Js
-Node Js
-MongoDb
-Css
-Multer
+React Js,
+Express Js,
+Node Js,
+MongoDb,
+Css,
+Multer,
 Cloudnary
 </p>
