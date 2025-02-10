@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose, { isValidObjectId } from "mongoose"
 import jwt from "jsonwebtoken"
 import { User } from "../models/user.models.js"
 import { cloudnaryUpload, cloudnaryDelete } from "../utils/cloudnary.js"
@@ -55,7 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
         profilePic = await cloudnaryUpload(profilePicPath);
     }
 
-    
+
     const user = await User.create({
         name,
         phoneNo,
@@ -70,7 +70,7 @@ const registerUser = asyncHandler(async (req, res) => {
     })
 
     const { refreshToken, accessToken } = await generateAccessAndRefreshToken(user._id)
-    
+
     const userCreated = await User.findById(user._id).select(
         "-password -refreshToken"
     )
@@ -226,6 +226,25 @@ const getCurrentUser = asyncHandler(async (req, res) => {
         )
 })
 
+const getUserById = asyncHandler(async (req, res) => {
+    const { userId } = req.params
+    if (!isValidObjectId(userId)) {
+        throw new apiError(400, "Invalid user id")
+    }
+
+    const fetchUser = await User.findById(userId).select("-password -refreshToken")
+
+    if (!fetchUser) {
+        throw new apiError(404, "User not found")
+    }
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, fetchUser, "User details fetched successfully")
+        )
+})
+
 const changeDetails = asyncHandler(async (req, res) => {
     const { mailId, phoneNo, floorNo, hostelName, roomNo } = req.body
     if (!mailId && !phoneNo && !floorNo && !hostelName && !roomNo) {
@@ -322,5 +341,6 @@ export {
     changeDetails,
     getCurrentUser,
     refreshAccessToken,
-    changeProfilePic
+    changeProfilePic,
+    getUserById
 }
