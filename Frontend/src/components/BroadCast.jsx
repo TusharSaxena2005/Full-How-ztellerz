@@ -48,6 +48,17 @@ const BroadCast = () => {
         }
     }
 
+    const getUserDetails = async (userId) => {
+        const response = await fetch(`http://localhost:8000/api/v1/user/user-data/${userId}`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+        if (response.ok) {
+            const data = await response.json();
+            setdataOfClickedUser(data.data);
+        }
+    }
+
     const usersInterestedInBroadcast = async (broadcastId, e) => {
         e.preventDefault();
         const response = await fetch(`http://localhost:8000/api/v1/interested/interestedPeople/${broadcastId}`, {
@@ -373,7 +384,7 @@ const BroadCast = () => {
                                 return (
                                     <li key={user.interestedBy._id} className='people-whoAre-interested'>
                                         <button onClick={() => {
-                                            // setdataOfClickedUser(item.owner[0]);  To be fixed
+                                            getUserDetails(user.interestedBy._id);
                                             document.getElementById('outer-profile-broadcast').style.display = 'flex';
                                         }}>
                                             <img src={user.interestedBy.profilePic} alt="" />
@@ -423,7 +434,6 @@ const BroadCast = () => {
                     </ul>
                 </div>
             </main>
-            <main id='s1'></main>
         </>
     )
 }
