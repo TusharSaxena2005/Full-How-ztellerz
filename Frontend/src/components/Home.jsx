@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -91,6 +92,55 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            <footer>
+                <div id="outer-footer">
+                    <div id="inner-footer1" className="inner-footer">
+                        <div id="footer">
+                            <div id="footer-logo">
+                                <img src='/logo/logo.jpg' alt="Logo" id="logo" />
+                                <h2>ow'zellerz</h2>
+                            </div>
+                            <ul id="bar" className="nav">
+                                <li id="footer-ele1" className="footer-ele"><a href="#outer-guide-box">Guide</a></li>
+                                <li id="footer-ele2" className="footer-ele"><a href="#outer-about-this-website">About Us</a></li>
+                                <li id="footer-ele2" className="footer-ele"><a href="#mostouter-getInTouch">Contact Us</a></li>
+                                <li id="footer-ele3" className="footer-ele"><Link to="/explore">Explore Us</Link></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr />
+                    <div id="inner-footer2" className="inner-footer">
+                        <ul id="footer2-ele1" className="footer2-ele">
+                            <li>
+                                <Link to="https://www.instagram.com/" id="footer2-link1" className="footer2-links">
+                                    <img src='/icons/instagram.svg' alt="Instagram" />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="https://www.facebook.com/" id="footer2-link2" className="footer2-links">
+                                    <img src='/icons/facebook.svg' alt="Facebook" />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="https://www.linkdin.com/" id="footer2-link3" className="footer2-links">
+                                    <img src='/icons/linkdin.svg' alt="LinkedIn" />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="https://www.x.com/" id="footer2-link4" className="footer2-links">
+                                    <img src='/icons/x-twitter.svg' alt="Twitter" />
+                                </Link>
+                            </li>
+                        </ul>
+                        <ul id="footer2-ele2" className="footer2-ele">
+                            <li>
+                                <h4>&copy; copyright reserved 2025</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
         </>
     )
 }

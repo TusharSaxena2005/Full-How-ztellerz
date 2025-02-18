@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Moon+Dance&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 #home-page1 {
-    width: 98vw;
+    width: 100%;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -20,11 +24,68 @@ body::-webkit-scrollbar-thumb {
 
 #web-name {
     font-family: "Josefin Sans";
-    font-size: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16vw;
     background: linear-gradient(to right, rgb(255, 94, 0), rgb(255, 94, 0), #FF0000, #FF0000);
     background-clip: padding-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: wordIncreaser linear both;
+    animation-timeline: view();
+    animation-range: entry 100% cover 120%;
+}
+
+@keyframes wordIncreaser {
+    0% {
+        font-size: 16vw;
+        opacity: 1;
+    }
+
+    25% {
+        font-size: 16vw;
+        opacity: 1;
+    }
+
+    60% {
+        font-size: 17vw;
+        opacity: 0;
+    }
+
+    100% {
+        font-size: 17.3vw;
+        opacity: 0;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
 }
 
 #outer-webname-dot {
@@ -47,31 +108,14 @@ body::-webkit-scrollbar-thumb {
     animation-iteration-count: infinite;
 }
 
-@keyframes bounce {
-
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        transform: translateY(0);
-    }
-
-    40% {
-        transform: translateY(-30px);
-    }
-
-    60% {
-        transform: translateY(-15px);
-    }
-}
 
 #outer-about-this-website {
     width: 100%;
-    height: 100dvh;
+    height: 90dvh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 5dvh;
 }
 
 #about-this-website {
@@ -84,8 +128,19 @@ body::-webkit-scrollbar-thumb {
     gap: 100px;
 }
 
+#about-this-website h1,
+#about-this-website p,
+#guide-box-heading h1,
+.inner-guide-box,
+#getInTouch-head,
+#review-form input {
+    animation: fade linear both;
+    animation-timeline: view();
+    animation-range: entry 50% cover 40%;
+}
+
 #about-this-website h1 {
-    font-size: 4rem;
+    font-size: 4.5vw;
     background: linear-gradient(77deg, rgb(255 255 255), rgb(180 180 180), #616161, #6f6f6f);
     background-clip: padding-box;
     -webkit-background-clip: text;
@@ -103,26 +158,24 @@ body::-webkit-scrollbar-thumb {
 }
 
 #outer-guide-box {
-    /* border: 1px solid white; */
-    /* height: 100dvh; */
     width: 100%;
     gap: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 10dvh;
 }
 
 #guide-box-heading {
     width: 80%;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     height: 20dvh;
 }
 
 #guide-box-heading h1 {
-    font-size: 4rem;
+    font-size: 4.5vw;
     background: linear-gradient(77deg, rgb(255 255 255), rgb(180 180 180), #616161, #6f6f6f);
     background-clip: padding-box;
     -webkit-background-clip: text;
@@ -130,29 +183,26 @@ body::-webkit-scrollbar-thumb {
 }
 
 .inner-guide-box {
-    /* border: 1px solid white; */
-    width: 80%;
+    width: 85%;
     height: 50dvh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 50px;
 }
 
 .guide-box-img {
-    /* border: 1px solid white; */
     width: 618px;
     height: 80%;
     box-shadow: 0 0 15px rgb(180 180 180 / 50%);
 }
 
 .guide-box-img img {
-    /* border: 1px solid white; */
     width: 100%;
     height: 100%;
 }
 
 .guide-box-para {
-    /* border: 1px solid white; */
     width: 563px;
     height: 80%;
     font-size: 1.2rem;
@@ -163,7 +213,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #mostouter-getInTouch {
-    /* border: 1px solid white; */
     height: 99dvh;
     width: 100%;
     display: flex;
@@ -173,7 +222,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #outer-getInTouch {
-    /* border: 1px solid white; */
     height: 85%;
     width: 70%;
     display: flex;
@@ -185,7 +233,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #getInTouch-head {
-    font-size: 4rem;
+    font-size: 4.5vw;
     background: linear-gradient(77deg, rgb(255 255 255), rgb(180 180 180), #616161, #6f6f6f);
     background-clip: padding-box;
     -webkit-background-clip: text;
@@ -193,7 +241,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #GIT-outer-form {
-    /* border: 1px solid white; */
     width: 85%;
     height: 80%;
     display: flex;
@@ -202,7 +249,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #review-form {
-    /* border: 1px solid white ; */
     width: 88%;
     height: 90%;
     display: flex;
@@ -269,4 +315,82 @@ textarea:focus {
     cursor: pointer;
     background-color: rgb(255, 94, 0);
     transition: all 0.6s ease-in-out;
+}
+
+#outer-footer {
+    border-top: 1px solid rgb(54, 54, 54);
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-footer {
+    height: 50%;
+    width: 80%;
+}
+
+hr {
+    width: 80%;
+}
+
+#footer {
+    width: 97%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#footer-logo {
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    gap: 5px;
+}
+
+#footer-logo img {
+    width: 51px;
+    height: 71px;
+}
+
+#inner-footer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer2-ele1 {
+    width: 25%;
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-ele:hover {
+    font-size: 1.45rem;
+}
+
+#footer2-ele1 a img {
+    width: 35px;
+    border-radius: 10px;
+}
+
+#footer2-ele1 a img:hover {
+    background-color: rgb(51, 51, 51);
+    transition: all 0.6s ease-in-out;
+}
+
+#bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    font-size: 1.3rem;
 }

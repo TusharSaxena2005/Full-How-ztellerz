@@ -320,11 +320,12 @@
     width: 80%;
     height: 10%;
     border-radius: 15px;
-    border: 3px solid rgb(193 193 193);
+    /* border: 3px solid rgb(193 193 193); */
     padding-left: 10px;
     color: rgb(255, 255, 255);
     font-size: 1.05rem;
-    background-color: rgba(255, 255, 255, 0.204);
+    border: 3px solid gray;
+    background: rgba(46, 46, 46, 0.833);
     font-weight: 400;
     font-family: 'Josefin Sans';
 }
@@ -474,6 +475,7 @@
     padding: 0 0 0 1px;
     gap: 20px;
     border: none;
+    cursor: pointer;
 }
 
 .people-whoAre-interested button img {
@@ -666,6 +668,7 @@
 #others-profile-username h2 {
     font-size: 1.6rem;
 }
+
 #others-profile-username p {
     font-size: 1.2rem;
 }

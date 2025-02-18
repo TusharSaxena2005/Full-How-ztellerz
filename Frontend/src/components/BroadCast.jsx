@@ -229,54 +229,61 @@ const BroadCast = () => {
                     <div id='aside2-broadcast' className='aside'>
                         <div id="broadcast-aside2-ele1" className="broadcast-aside2-ele">
                             {
-                                DataOfFetchItem.map((item) => {
-                                    return (
-                                        <ul key={item._id} className="broadcast-aside2-inner-ele1">
-                                            <li className="sidebar2-ele">
-                                                <div className="writer">
-                                                    <img src={item.owner[0].profilePic} alt="" />
-                                                    <p onClick={() => {
-                                                        setdataOfClickedUser(item.owner[0])
-                                                        document.getElementById('outer-profile-broadcast').style.display = 'flex'
-                                                    }}>{item.owner[0].name}</p>
-                                                </div>
-                                                <div className="title">
-                                                    <p>{item.title}</p>
-                                                </div>
-                                                <div className="date">
-                                                    <p>{item.date}</p>
-                                                </div>
-                                                <div className="all-details-btn">
-                                                    <button className='details-btn' onClick={() => {
-                                                        setDataOfClickedItem(item);
-                                                        document.getElementById('outer-get-all-details').style.display = 'flex'
-                                                    }
-                                                    }>Get all details</button>
-                                                    {
-                                                        item.owner[0]._id != dataOfCurrentUser._id ? (
-                                                            <div>
-                                                                {
-                                                                    checkPersonInterestedOrNot(item._id) ? (
-                                                                        <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Not Interested</button>
-                                                                    ) : (
-                                                                        <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Interested ?</button>
-                                                                    )
-                                                                }
-                                                            </div>
-                                                        ) : (
-                                                            <div>
-                                                                <button className="interested" onClick={(e) => { usersInterestedInBroadcast(item._id, e) }}>Interested list</button>
-                                                                <button className="delete-broadcast" onClick={(e) => { handleDeleteItem(item._id, e) }}>
-                                                                    <img src="icons/delete.svg" alt="" />
-                                                                </button>
-                                                            </div>
-                                                        )
-                                                    }
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    )
-                                })}
+                                DataOfFetchItem.length > 0 ? (
+                                    DataOfFetchItem.map((item) => {
+                                        return (
+                                            <ul key={item._id} className="broadcast-aside2-inner-ele1">
+                                                <li className="sidebar2-ele">
+                                                    <div className="writer">
+                                                        <img src={item.owner[0].profilePic} alt="" />
+                                                        <p onClick={() => {
+                                                            setdataOfClickedUser(item.owner[0])
+                                                            document.getElementById('outer-profile-broadcast').style.display = 'flex'
+                                                        }}>{item.owner[0].name}</p>
+                                                    </div>
+                                                    <div className="title">
+                                                        <p>{item.title}</p>
+                                                    </div>
+                                                    <div className="date">
+                                                        <p>{item.date}</p>
+                                                    </div>
+                                                    <div className="all-details-btn">
+                                                        <button className='details-btn' onClick={() => {
+                                                            setDataOfClickedItem(item);
+                                                            document.getElementById('outer-get-all-details').style.display = 'flex'
+                                                        }
+                                                        }>Get all details</button>
+                                                        {
+                                                            item.owner[0]._id != dataOfCurrentUser._id ? (
+                                                                <div>
+                                                                    {
+                                                                        checkPersonInterestedOrNot(item._id) ? (
+                                                                            <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Not Interested</button>
+                                                                        ) : (
+                                                                            <button className="interested" onClick={(e) => { handleInterested(item._id, e) }}>Interested ?</button>
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                            ) : (
+                                                                <div>
+                                                                    <button className="interested" onClick={(e) => { usersInterestedInBroadcast(item._id, e) }}>Interested list</button>
+                                                                    <button className="delete-broadcast" onClick={(e) => { handleDeleteItem(item._id, e) }}>
+                                                                        <img src="icons/delete.svg" alt="" />
+                                                                    </button>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        )
+                                    })
+                                ) : (
+                                    <div id='no-items-found'>
+                                        <h1>No broadcast found</h1>
+                                    </div>
+                                )
+                            }
                         </div>
                         <div id="profile-page" className="broadcast-aside2-ele">
                             <ul id="profile-sideBar2" className="inner-sideBar2">
@@ -362,7 +369,7 @@ const BroadCast = () => {
                                 <option name="category" value="Other">Other</option>
                             </select>
                             <div id='textarea' className='add-broadcast-form-inp'>
-                                <textarea name='description' placeholder="Description"></textarea>
+                                <textarea name='description' placeholder="Description of your broadcast..."></textarea>
                             </div>
                             <button id='add-broadcast-btn' type='submit'>Post</button>
                         </form>
