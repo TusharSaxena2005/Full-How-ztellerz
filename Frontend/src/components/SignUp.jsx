@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 
 const SignUp = () => {
 
+  const [verified, setVerified] = useState(false);
+  const [otp, setOTP] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let flag = true;
@@ -48,27 +51,60 @@ const SignUp = () => {
     }
 
     if (flag) {
-      try {
-        const response = await fetch('http://localhost:8000/api/v1/user/register', {
+      if (verified == false) {
+        document.getElementById('outer-verification').style.display = 'flex';
+        const response = await fetch('http://localhost:8000/api/v1/mailer/otpMail', {
           method: 'POST',
-          body: formData,
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(allData),
           credentials: 'include'
         });
-
-        if (!response.ok) {
-          flag = false;
-          if (response.status == 409) {
-            alert('User already exists');
-          }
-          if (response.status == 400) {
-            alert('Bad Request');
-          }
+        if (response.ok) {
+          alert('OTP sent to your mail');
+          const otp = await response.json();
+          setOTP(otp.data);
         }
+      }
+      else {
+        createAccount(formData);
+      }
+    }
+  }
 
-        if (flag) {
-          window.location.href = '/home';
-        }
-      } catch (error) { }
+  const createAccount = async (data) => {
+    let flag = true;
+    const response = await fetch('http://localhost:8000/api/v1/user/register', {
+      method: 'POST',
+      body: data,
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      flag = false;
+      if (response.status == 409) {
+        alert('User already exists');
+      }
+      if (response.status == 400) {
+        alert('Bad Request');
+      }
+    }
+    if (flag) {
+      window.location.href = '/home';
+    }
+  }
+
+  const verifyOTP = async (e) => {
+    e.preventDefault();
+    const otpInput = document.getElementById('otpInput').value;
+    if (otpInput == otp) {
+      setVerified(true);
+      document.getElementById('outer-verification').style.display = 'none';
+    }
+    else {
+      alert('Invalid OTP');
     }
   }
 
@@ -126,6 +162,24 @@ const SignUp = () => {
           </form>
         </div>
         <Link to='/' id='checkIn-btn'>Check in</Link>
+        <div id="outer-verification">
+          <ul id="inner-verification">
+            <li id="verify-ele1">
+              <button id='add-broadcast-cross-btn' onClick={() => {
+                document.getElementById("outer-verification").style.display = 'none'
+              }}>
+                <img src="icons/cross.svg" alt="" />
+              </button>
+            </li>
+            <li id="verify-ele2">Verify your email first</li>
+            <li id="verify-ele3">
+              <form onSubmit={verifyOTP}>
+                <input id='otpInput' type="text" placeholder='Enter OTP' />
+                <button id='otpSubmitBtn' type='submit'>Verify</button>
+              </form>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   )

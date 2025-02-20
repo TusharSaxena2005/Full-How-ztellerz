@@ -86,7 +86,7 @@ const Home = () => {
                         <p>1. Locate the broadcast message on the page.</p>
                         <p>2. Find the name of the person who posted it (e.g., "Swapnil").</p>
                         <p>3. Click on the name.</p>
-                        <p>4. This will show more details about them the person.</p>
+                        <p>4. This will show more details about them.</p>
                     </li>
                     <li id="guide-box1" className="guide-box-img">
                         <img src="./guide/step4.png" alt="" />

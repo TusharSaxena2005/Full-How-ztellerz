@@ -3,7 +3,7 @@ import { apiResponse } from '../utils/apiResponse.js';
 import { apiError } from '../utils/apiError.js';
 
 const sendOtpMail = async (req, res) => {
-    const { email } = req.body;
+    const { mailId } = req.body;
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -17,7 +17,7 @@ const sendOtpMail = async (req, res) => {
 
     const mailer = {
         from: "tushar.dec6@gmail.com",
-        to: email,
+        to: mailId,
         subject: "Welcome to How'zellerz",
         text: `Your verification code to create account is\n ${otp}`
     }
