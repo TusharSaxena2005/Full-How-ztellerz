@@ -36,7 +36,7 @@ const sendOtpMail = async (req, res) => {
 }
 
 const contactUsMail = async (req, res) => {
-    const { firstname, lastname, message, email, phone } = req.body;
+    const { firstName, lastName, message, email, phone } = req.body;
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -50,7 +50,7 @@ const contactUsMail = async (req, res) => {
         from: "tushar.dec6@gmail.com",
         to: "dutushar2005@gmail.com",
         subject: "Contact Us mail from How'zellerz",
-        text: `Name: ${firstname} ${lastname}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
+        text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
     }
 
     transporter.sendMail(mailer, (err) => {

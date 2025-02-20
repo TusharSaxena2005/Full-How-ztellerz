@@ -6,6 +6,25 @@ import { Link } from 'react-router-dom'
 
 
 const Home = () => {
+    const sendContectUs =async (e) => {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        let allData = Object.fromEntries(form.entries());
+        const response =await fetch('http://localhost:8000/api/v1/mailer/contactUsMail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(allData),
+        })
+
+        if(response.ok){
+            alert('Your message has been sent successfully.');
+            document.getElementById('review-form').reset();
+        }
+    }
+
     return (
         <>
             <Navbar />
@@ -79,9 +98,9 @@ const Home = () => {
                 <div id="outer-getInTouch">
                     <h2 id="getInTouch-head">Contact us</h2>
                     <div id="GIT-outer-form">
-                        <form id='review-form'>
+                        <form id='review-form' onSubmit={sendContectUs}>
                             <div id="inner-form">
-                                <input type="text" name="firstname" placeholder="First Name" required />
+                                <input type="text" name="firstName" placeholder="First Name" required />
                                 <input type="text" name="lastName" placeholder="Last name" required />
                                 <input type="email" name="email" placeholder="Email Address" required />
                                 <input type="text" name="phone" placeholder="Phone Number" required />
