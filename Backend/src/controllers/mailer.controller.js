@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import { apiResponse } from '../utils/apiResponse.js';
 import { apiError } from '../utils/apiError.js';
 
-export const sendMail = async (req, res) => {
+const sendOtpMail = async (req, res) => {
     const { email } = req.body;
 
     const transporter = nodemailer.createTransport({
@@ -19,7 +19,7 @@ export const sendMail = async (req, res) => {
         from: "tushar.dec6@gmail.com",
         to: email,
         subject: "Welcome to How'zellerz",
-        text: `Your verification code to create account is ${otp}`
+        text: `Your verification code to create account is\n ${otp}`
     }
 
     transporter.sendMail(mailer, (err) => {
@@ -31,6 +31,39 @@ export const sendMail = async (req, res) => {
     return res
         .status(200)
         .json(
-            new apiResponse(200, otp, "Mail sent successfully")
+            new apiResponse(200, otp, "Otp sent successfully")
         )
 }
+
+const contactUsMail = async (req, res) => {
+    const { firstname, lastname, message, email, phone } = req.body;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: "tushar.dec6@gmail.com",
+            pass: "gbvmxwzozasswtjx"
+        }
+    })
+
+    const mailer = {
+        from: "tushar.dec6@gmail.com",
+        to: "dutushar2005@gmail.com",
+        subject: "Contact Us mail from How'zellerz",
+        text: `Name: ${firstname} ${lastname}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
+    }
+
+    transporter.sendMail(mailer, (err) => {
+        if (err) {
+            new apiError(500, "Error sending mail")
+        }
+    })
+
+    return res
+        .status(200)
+        .json(
+            new apiResponse(200, "Mail sent successfully")
+        )
+}
+
+export { sendOtpMail, contactUsMail }

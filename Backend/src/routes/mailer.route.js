@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { sendMail } from "../controllers/mailer.controller.js";
+import { sendOtpMail, contactUsMail } from "../controllers/mailer.controller.js";
 
 const mailerRouter = Router();
 
-mailerRouter.post("/sendmail", sendMail);
+mailerRouter.post("/otpMail", sendOtpMail);
+mailerRouter.post("/contactUsMail", contactUsMail);
 
 export { mailerRouter };

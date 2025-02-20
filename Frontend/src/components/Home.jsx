@@ -81,7 +81,7 @@ const Home = () => {
                     <div id="GIT-outer-form">
                         <form id='review-form'>
                             <div id="inner-form">
-                                <input type="text" name="name" placeholder="Name" required />
+                                <input type="text" name="firstname" placeholder="First Name" required />
                                 <input type="text" name="lastName" placeholder="Last name" required />
                                 <input type="email" name="email" placeholder="Email Address" required />
                                 <input type="text" name="phone" placeholder="Phone Number" required />
