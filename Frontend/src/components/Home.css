@@ -33,9 +33,10 @@ body::-webkit-scrollbar-thumb {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: wordIncreaser linear both;
-    animation-timeline: view();
     animation-range: entry 100% cover 120%;
+    animation-timeline: view()
 }
+
 
 @keyframes wordIncreaser {
     0% {
