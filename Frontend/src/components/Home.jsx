@@ -1,11 +1,55 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './Navbar'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import './Home.css'
 import { Link } from 'react-router-dom'
 
+gsap.registerPlugin(ScrollTrigger)
 
 const Home = () => {
+    useEffect(() => {
+        // Web name animation
+        gsap.fromTo('#web-name', {
+            fontSize: '16vw',
+            opacity: 1
+        }, {
+            fontSize: '17.3vw',
+            opacity: 0,
+            scrollTrigger: {
+                trigger: '#web-name',
+                start: 'top 30%',
+                end: 'bottom 30%',
+                scrub: true
+            }
+        });
+
+        // Fade in animations for multiple elements
+        const fadeElements = [
+            '#about-this-website h1',
+            '#about-this-website p',
+            '#guide-box-heading h1',
+            '.inner-guide-box',
+            '#getInTouch-head',
+            '#review-form input'
+        ];
+
+        fadeElements.forEach(selector => {
+            gsap.fromTo(selector, {
+                opacity: 0
+            }, {
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: selector,
+                    start: 'top 80%',
+                    end: 'top 40%',
+                    scrub: true
+                }
+            });
+        });
+    }, []);
+
     const sendContectUs =async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);

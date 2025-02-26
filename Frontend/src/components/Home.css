@@ -32,45 +32,9 @@ body::-webkit-scrollbar-thumb {
     background-clip: padding-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: wordIncreaser linear both;
-    animation-timeline: view();
-    animation-range: entry 100% cover 120%;
-}
-
-@keyframes wordIncreaser {
-    0% {
-        font-size: 16vw;
-        opacity: 1;
-    }
-
-    25% {
-        font-size: 16vw;
-        opacity: 1;
-    }
-
-    60% {
-        font-size: 17vw;
-        opacity: 0;
-    }
-
-    100% {
-        font-size: 17.3vw;
-        opacity: 0;
-    }
-}
-
-@keyframes fade {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 @keyframes bounce {
-
     0%,
     20%,
     50%,
@@ -134,9 +98,7 @@ body::-webkit-scrollbar-thumb {
 .inner-guide-box,
 #getInTouch-head,
 #review-form input {
-    animation: fade linear both;
-    animation-timeline: view();
-    animation-range: entry 50% cover 40%;
+    opacity: 0;
 }
 
 #about-this-website h1 {
