@@ -30,6 +30,7 @@ import { interestedRouter } from "./routes/interested.route.js";
 import { mailerRouter } from "./routes/mailer.route.js";
 
 
+
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/broadcast", broadcastRouter)
 app.use("/api/v1/marketplace", marketPlace)
