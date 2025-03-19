@@ -24,7 +24,7 @@ app.use(cookieParser())
 
 
 import { userRouter } from "./routes/user.route.js";
-import { broadcastRouter } from "./routes/broadCast.route.js";
+import { broadcastRouter } from "./routes/broadcast.route.js";
 import { marketPlace } from "./routes/marketplace.route.js";
 import { interestedRouter } from "./routes/interested.route.js";
 import { mailerRouter } from "./routes/mailer.route.js";
