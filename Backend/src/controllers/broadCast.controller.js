@@ -1,5 +1,5 @@
 import mongoose, { isValidObjectId } from "mongoose"
-import { Broadcast } from "../models/broadCast.models.js"
+import { Broadcast } from "../models/broadcast.models.js"
 import { Interested } from "../models/interested.model.js"
 import { apiError } from "../utils/apiError.js"
 import { apiResponse } from "../utils/apiResponse.js"
