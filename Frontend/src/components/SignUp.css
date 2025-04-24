@@ -152,7 +152,7 @@
     transition: all 0.4s ease-in-out;
 }
 
-#outer-verification{
+#outer-verification {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -163,7 +163,7 @@
 
 }
 
-#inner-verification{
+#inner-verification {
     border: 1px solid white;
     border-radius: 18px;
     height: 47%;
@@ -175,7 +175,7 @@
     align-items: center;
 }
 
-#verify-ele1{
+#verify-ele1 {
     height: 15%;
     width: 100%;
     display: flex;
@@ -183,7 +183,7 @@
     align-items: start;
 }
 
-#verify-ele2{
+#verify-ele2 {
     height: 30%;
     width: 100%;
     display: flex;
@@ -193,7 +193,7 @@
     padding-top: 10px;
 }
 
-#verify-ele3{
+#verify-ele3 {
     height: 30%;
     width: 100%;
     display: flex;
@@ -201,7 +201,7 @@
     align-items: center;
 }
 
-#verify-ele3 form{
+#verify-ele3 form {
     height: 100%;
     width: 100%;
     display: flex;
@@ -210,7 +210,7 @@
     align-items: center;
 }
 
-#otpInput{
+#otpInput {
     width: 40%;
     height: 35px;
     border: 1px solid gray;
@@ -220,7 +220,7 @@
     font-size: 1rem;
 }
 
-#otpSubmitBtn{
+#otpSubmitBtn {
     color: gray;
     background-color: rgba(254, 254, 254, 0.104);
     border: none;
@@ -231,9 +231,21 @@
     border: 2px solid gray;
 }
 
-#otpSubmitBtn:hover{
+#otpSubmitBtn:hover {
     border: none;
     background-color: rgba(200, 40, 0, 0.858);
     color: white;
     transition: all 1s ease-in-out;
+}
+
+@media (max-width: 890px) {
+
+    #signup-box {
+        width: 85%;
+    }
+
+    #profilePic {
+        width: 32%;
+        height: 35%;
+    }
 }

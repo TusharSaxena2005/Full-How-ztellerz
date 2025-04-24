@@ -35,6 +35,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 @keyframes bounce {
+
     0%,
     20%,
     50%,
@@ -328,7 +329,7 @@ hr {
 }
 
 #footer2-ele1 {
-    width: 25%;
+    width: 225px;
     height: 50%;
     display: flex;
     justify-content: space-around;
@@ -355,4 +356,55 @@ hr {
     align-items: center;
     width: 40%;
     font-size: 1.3rem;
+}
+
+@media (max-width: 1200px) {
+    #about-this-website h1 {
+        font-size: 5.5vw;
+    }
+
+    #guide-box-heading h1 {
+        font-size: 5.5vw;
+    }
+
+    #guide-box-heading {
+        height: 10dvh;
+    }
+
+    .guide-box {
+        flex-direction: column;
+    }
+
+    .opposite-guide-box {
+        flex-direction: column-reverse;
+    }
+
+    .guide-box-para {
+        justify-content: start;
+    }
+
+    .inner-guide-box {
+        gap: 28px;
+    }
+
+    #mostouter-getInTouch {
+        height: 75dvh;
+        margin-top: 0;
+    }
+
+    #review-form input {
+        width: 100%;
+    }
+
+    #outer-footer {
+        height: 37vh;
+    }
+
+    #footer {
+        justify-content: center;
+    }
+
+    #bar {
+        display: none;
+    }
 }

@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const API_BASE_URL = 'http://localhost:8000';
+
 const Home = () => {
     useEffect(() => {
         // Web name animation
@@ -50,22 +52,29 @@ const Home = () => {
         });
     }, []);
 
-    const sendContectUs =async (e) => {
+    const sendContectUs = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
         let allData = Object.fromEntries(form.entries());
-        const response =await fetch('http://localhost:8000/api/v1/mailer/contactUsMail', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(allData),
-        })
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/v1/mailer/contactUsMail`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(allData),
+            });
 
-        if(response.ok){
-            alert('Your message has been sent successfully.');
-            document.getElementById('review-form').reset();
+            if(response.ok){
+                alert('Your message has been sent successfully.');
+                document.getElementById('review-form').reset();
+            } else {
+                alert('Failed to send message. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert('Failed to send message. Please try again.');
         }
     }
 
@@ -91,7 +100,7 @@ const Home = () => {
                 <ul id='guide-box-heading'>
                     <h1>Guide to use this website</h1>
                 </ul>
-                <ul className="inner-guide-box">
+                <ul className="inner-guide-box guide-box">
                     <li id="guide-box1" className="guide-box-img">
                         <img src="./guide/step1.png" alt="" />
                     </li>
@@ -101,7 +110,7 @@ const Home = () => {
                         <p>3. Click on "Explore Us" to open the page.</p>
                     </li>
                 </ul>
-                <ul className="inner-guide-box">
+                <ul className="inner-guide-box opposite-guide-box">
                     <li id="guide-box2" className="guide-box-para">
                         <p>1. You are now on the "Explore Us" page.</p>
                         <p>2. There are two options: <br />
@@ -114,7 +123,7 @@ const Home = () => {
                         <img src="./guide/step2.png" alt="" />
                     </li>
                 </ul>
-                <ul className="inner-guide-box">
+                <ul className="inner-guide-box guide-box">
                     <li id="guide-box1" className="guide-box-img">
                         <img src="./guide/step3.png" alt="" />
                     </li>
@@ -125,7 +134,7 @@ const Home = () => {
                         <p>4. Fill in the required information and submit.</p>
                     </li>
                 </ul>
-                <ul className="inner-guide-box">
+                <ul className="inner-guide-box opposite-guide-box">
                     <li id="guide-box2" className="guide-box-para">
                         <p>1. Locate the broadcast message on the page.</p>
                         <p>2. Find the name of the person who posted it (e.g., "Swapnil").</p>

@@ -11,7 +11,7 @@
 }
 
 #inner-marketplace {
-    width: 80%;
+    width: 90%;
     height: 92%;
     display: flex;
     justify-content: center;
@@ -168,7 +168,7 @@
 #outer-add-item {
     /* border: 1px solid white; */
     box-shadow: 0 0 22px gray;
-    width: 28%;
+    width: 411px;
     border-radius: 18px;
     height: 74%;
     display: flex;
@@ -537,7 +537,6 @@
 }
 
 #inner-profile-username h2,
-#inner-profile-username h2,
 #inner-profile-username p span {
     font-size: 2rem;
     color: rgb(222, 222, 222);
@@ -644,4 +643,94 @@
     justify-content: center;
     align-items: center;
     gap: 13px;
+}
+
+@media (max-width: 890px) {
+    #inner-aside2-ele1-filter form select {
+        width: 37%;
+    }
+
+    #inner-aside2-ele1-filter form select option {
+        font-size: 0.8rem;
+    }
+
+    #filterApply {
+        width: 16%;
+        height: 62%;
+    }
+
+    .aside1-ele1-options {
+        width: 80%;
+    }
+
+    #aside1-ele1-option7 {
+        width: 80%;
+    }
+
+    #inner-profile-pic {
+        width: 21%;
+        margin-left: 0px;
+    }
+
+    .inner-profile-sideBar2-ele {
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 0px;
+    }
+
+    #inner-profile-username h2 {
+        font-size: 2.3rem;
+    }
+
+    #inner-profile-username p span {
+        font-size: 1.2rem;
+    }
+
+    #profile-item-outer-box {
+        height: 98%;
+    }
+
+    .profile-outer-foodItems {
+        height: 250px;
+    }
+
+    #detail-cross-btn {
+        height: 8%;
+    }
+
+    #inner-details-of-item {
+        width: 412px;
+    }
+
+    #most-inner-details-of-item {
+        height: 81%;
+        width: 90%;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    #inner-details-of-item2 {
+        width: 80%;
+    }
+
+    #add-item-cross-btn {
+        height: 5%;
+    }
+
+    #outer-add-item {
+        width: 600px;
+        height: 70%;
+    }
+
+    #outer-add-item form {
+        height: 91%;
+    }
+
+    #add-item-image {
+        gap: 43%;
+    }
+
+    #outer-add-item form #itemImage {
+        width: 23%;
+    }
 }

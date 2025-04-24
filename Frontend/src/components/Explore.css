@@ -61,3 +61,13 @@
 .explore-btn h2 {
     font-size: 1.7rem;
 }
+
+@media (max-width: 890px) {
+    #inner-explore {
+        width: 80%;
+    }
+
+    .explore-btn {
+        width: 46%;
+    }
+}

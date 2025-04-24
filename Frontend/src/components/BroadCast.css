@@ -11,7 +11,7 @@
 }
 
 #inner-broadcast {
-    width: 80%;
+    width: 90%;
     height: 92%;
     display: flex;
     justify-content: center;
@@ -242,7 +242,7 @@
 
 #inner-add-broadcast {
     box-shadow: 0 0 22px gray;
-    width: 42%;
+    width: 600px;
     border-radius: 18px;
     height: 74%;
     display: flex;
