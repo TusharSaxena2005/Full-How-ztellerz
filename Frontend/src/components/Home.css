@@ -408,3 +408,91 @@ hr {
         display: none;
     }
 }
+
+@media (max-width:440px) {
+
+
+
+    #about-this-website {
+        width: 90%;
+        gap: 50px;
+    }
+
+    #about-this-website h1 {
+        font-size: 8.5vw;
+    }
+
+    #about-this-website p {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        line-height: 34px;
+        font-weight: lighter;
+        word-spacing: 2px;
+        font-family: "Moon Dance";
+        color: #a3a1a1;
+    }
+
+    #outer-guide-box {
+        gap: 30px;
+    }
+
+    #guide-box-heading h1 {
+        font-size: 6.5vw;
+    }
+
+    .guide-box-img {
+        width: 98%;
+    }
+
+    .guide-box-para {
+        width: 95%;
+        height: 80%;
+        font-size: 0.8rem;
+        line-height: 24px;
+    }
+
+    #outer-getInTouch {
+        height: 100%;
+        width: 100%;
+        gap: 15px;
+    }
+
+    #getInTouch-head {
+        font-size: 7.5vw;
+    }
+
+    #GIT-outer-form {
+        width: 90%;
+    }
+
+    #review-form {
+        width: 90%;
+        height: 90%;
+        gap: 15px;
+    }
+
+    #form-btn {
+        color: white;
+        margin: 20px 0 0 0;
+        height: 40px;
+        width: 130px;
+        font-size: 0.9rem;
+    }
+
+    #outer-footer {
+        height: 34vh;
+    }
+
+    #footer-logo h2 {
+        font-size: 1.5rem;
+    }
+
+    #footer-logo img {
+        width: 33px;
+        height: 54px;
+    }
+
+    #footer2-ele1 a img {
+        width: 29px;
+    }
+}

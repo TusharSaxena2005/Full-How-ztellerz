@@ -6,8 +6,8 @@ import Navbar from './Navbar'
 const Explore = () => {
   return (
     <>
-      <div id='outer-explore'>
         <Navbar />
+      <div id='outer-explore'>
         <div id='inner-explore'>
           <h1>Explore Us</h1>
           <div id='explore-option-btn'>

@@ -71,3 +71,36 @@
         width: 46%;
     }
 }
+
+@media (max-width: 440px) {
+
+    #outer-explore {
+        height: 85dvh;
+    }
+
+    #inner-explore h1 {
+        font-size: 3rem;
+    }
+
+    #inner-explore {
+        height: 92%;
+    }
+
+    .explore-btn {
+        width: 70%;
+    }
+
+    #explore-option-btn {
+        flex-direction: column;
+        height: 66%;
+        gap: 23px;
+    }
+
+    .explore-btn h2 {
+        font-size: 1.4rem;
+    }
+
+    .explore-btn img {
+        width: 25%;
+    }
+}

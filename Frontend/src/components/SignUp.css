@@ -249,3 +249,49 @@
         height: 35%;
     }
 }
+
+@media (max-width: 440px) {
+
+    #most-outer-signup-box {
+        height: 131dvh;
+    }
+
+    #signup-box {
+        height: 89%;
+    }
+
+    #signup-box-logo {
+        height: 12%;
+        width: 23%;
+    }
+
+    #signup-form {
+        height: 87%;
+        gap: 14px;
+    }
+
+    .signup-form-inputs {
+        width: 95%;
+        height: 43%;
+        flex-direction: column;
+    }
+
+    .signup-form-inputs input {
+        width: 90%;
+        height: 41%;
+    }
+    
+    #profilePic-outer-box {
+        height: 41%;
+        width: 87.5%;
+    }
+
+    .signup-form-inputs select {
+        height: 43%;
+        width: 94%;
+    }
+
+    #signup-btn {
+        height: 13vh;
+    }
+}
