@@ -36,7 +36,7 @@
 
 #signup-box-logo {
     height: 22%;
-    width: 15%;
+    width: 18%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -241,7 +241,7 @@
 @media (max-width: 890px) {
 
     #signup-box {
-        width: 85%;
+        width: 95%;
     }
 
     #profilePic {

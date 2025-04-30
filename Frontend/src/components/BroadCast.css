@@ -115,7 +115,7 @@
 
 .writer img {
     border: 2px solid #ffffff;
-    width: 4.5%;
+    width: 30px;
     height: 100%;
     border-radius: 23px;
     object-fit: cover;
@@ -671,4 +671,69 @@
 
 #others-profile-username p {
     font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .aside1-ele1-options-broadcast {
+        width: 87%;
+    }
+
+    #inner-broadcast {
+        width: 95%;
+    }
+
+    #get-all-details-cross {
+        height: 5dvh;
+    }
+
+    #inner-get-all-details {
+        width: 61%;
+    }
+
+    #cross-listOf-interested-pears {
+        height: 5%;
+    }
+
+    #inner-listOf-interested-pears {
+        width: 60%;
+    }
+
+    #inner-add-broadcast-ele2 form select {
+        width: 92.55%;
+    }
+
+    .add-broadcast-form-inp {
+        width: 90%;
+    }
+
+    #add-date-time {
+        width: 93%;
+    }
+
+    #inner-add-broadcast-ele1 {
+        height: 7%;
+    }
+
+    #others-profile {
+        width: 80%;
+        height: 28%;
+    }
+
+    .broadcast-aside2-inner-ele1,
+    .sidebar2-ele {
+        min-height: 200px;
+    }
+
+    .details-btn {
+        border-radius: 26px
+    }
+
+    .all-details-btn {
+        height: 37px;
+    }
+
+    .all-details-btn div {
+        height: 100%;
+    }
+
 }
