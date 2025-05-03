@@ -248,6 +248,7 @@ const MarketPlace = () => {
                   <button type="submit" id="filterApply">Apply</button>
                 </form>
               </div>
+              <button id='filter-open-btn' onClick={() => { document.getElementById('filter-outer-section').style.display = 'flex' }}>Filter</button>
             </div>
             <div id="inner-aside2-ele2" className="inner-aside2-ele">
               <div id="item-outer-box">
@@ -341,7 +342,7 @@ const MarketPlace = () => {
           </div>
         </main >
       </div >
-      
+
       <main id='most-outer-add-item'>
         <div id='outer-add-item'>
           <div id="add-item-cross-btn">
@@ -367,6 +368,49 @@ const MarketPlace = () => {
               <input type="file" id="itemImage" name="itemImage" />
             </div>
             <button type='submit'>Add Item</button>
+          </form>
+        </div>
+      </main>
+      <main id='filter-outer-section'>
+        <div id='outer-add-item'>
+          <div id="add-item-cross-btn">
+            <button onClick={() => { document.getElementById('filter-outer-section').style.display = 'none' }}>
+              <img src="icons/cross.svg" alt="" />
+            </button>
+          </div>
+          <form onSubmit={fetchItemsByHostel} encType='multipart/form-data'>
+            <h1>Filter</h1>
+            <select name="hostelName" id="filterHostelName">
+              <option value="">Choose hostel</option>
+              <option value="Archimedes A">Archimedes A</option>
+              <option value="Archimedes B">Archimedes B</option>
+              <option value="Armstrong">Armstrong</option>
+              <option value="Aristotle">Aristotle</option>
+              <option value="Columbus">Columbus</option>
+              <option value="Franklin A">Franklin A</option>
+              <option value="Franklin B">Franklin B</option>
+              <option value="IBN">IBN</option>
+              <option value="Marcopolo">Marcopolo</option>
+              <option value="Megalan">Megalan</option>
+              <option value="Nightingale">Nightingale</option>
+              <option value="Pie">Pie</option>
+              <option value="Vasco">Vasco</option>
+            </select>
+            <select name="floorNo" id="filterFloorNum">
+              <option value="">Choose floor</option>
+              <option value="1">Floor 1</option>
+              <option value="2">Floor 2</option>
+              <option value="3">Floor 3</option>
+              <option value="4">Floor 4</option>
+              <option value="5">Floor 5</option>
+              <option value="6">Floor 6</option>
+              <option value="7">Floor 7</option>
+              <option value="8">Floor 8</option>
+              <option value="9">Floor 9</option>
+            </select>
+            <button type="submit" id="filterApply" onClick={() => { 
+              document.getElementById('filter-outer-section').style.display = 'none' 
+              }}>Apply</button>
           </form>
         </div>
       </main>

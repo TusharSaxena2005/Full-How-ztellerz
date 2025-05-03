@@ -129,6 +129,7 @@ const BroadCast = () => {
         if (response.ok) {
             const data = await response.json();
             setDataOfFetchItem(data.data);
+            document.getElementById('mobile-aside1-open').style.display = 'none';
         }
     }
 
@@ -167,7 +168,16 @@ const BroadCast = () => {
             <Navbar />
             <div id='outer-broadcast'>
                 <main id='inner-broadcast'>
-                    <aside id='aside1' className='aside'>
+                    <div id='mobile-aside1'>
+                        <button id='open-menu' onClick={() => { document.getElementById('mobile-aside1-open').style.display = 'flex' }}>Category</button>
+                        <button id="mobile-aside1-ele1-option7" onClick={() => {
+                            document.getElementById('outer-add-broadcast').style.display = 'flex'
+                        }}>
+                            <img src="icons/plusIcon.svg" alt="" />
+                            Add Item
+                        </button>
+                    </div>
+                    <aside id='new-aside1' className='aside'>
                         <div id="aside1-ele1-outer-options">
                             <button id="aside1-ele1-option1" className='aside1-ele1-options-broadcast' onClick={(e) => {
                                 onClickBorder();
@@ -288,7 +298,7 @@ const BroadCast = () => {
                         <div id="profile-page" className="broadcast-aside2-ele">
                             <ul id="profile-sideBar2" className="inner-sideBar2">
                                 <div id="inner-profile-sideBar2-ele1" className="inner-profile-sideBar2-ele">
-                                    <li id="inner-profile-pic" className="inner-profile">
+                                    <li id="mobile-inner-profile-pic" className="inner-profile">
                                         <img src={dataOfCurrentUser.profilePic} alt="profileIcon" />
                                     </li>
                                     <li id="inner-profile-username" className="inner-profile">
@@ -343,6 +353,69 @@ const BroadCast = () => {
                     </div>
                 </main>
             </div>
+            <main id='mobile-aside1-open'>
+                <div id="mobile-aside1-ele1-outer-options">
+                    <div id="inner-add-broadcast-ele1">
+                        <button id='add-broadcast-cross-btn' onClick={() => {
+                            document.getElementById('mobile-aside1-open').style.display = 'none'
+                        }}>
+                            <img src="icons/cross.svg" alt="" />
+                        </button>
+                    </div>
+                    <button id="aside1-ele1-option1" className='aside1-ele1-options-broadcast' onClick={(e) => {
+                        onClickBorder();
+                        fetchItems();
+                        e.target.style.border = '2px solid white'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                        document.getElementById('mobile-aside1-open').style.display = 'none'
+                    }}>
+                        <img src="icons/home.svg" alt="" /> Home</button>
+                    <button id="aside1-ele1-option2" className='aside1-ele1-options-broadcast' onClick={(e) => {
+                        onClickBorder();
+                        fetchItemByCategory('Sports');
+                        e.target.style.border = '2px solid white'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                    }}>
+                        <img src="icons/sports.svg" alt="" /> Sports</button>
+                    <button id="aside1-ele1-option3" className='aside1-ele1-options-broadcast' onClick={(e) => {
+                        onClickBorder();
+                        fetchItemByCategory('Club');
+                        e.target.style.border = '2px solid white'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                    }}>
+                        <img src="icons/club.svg" alt="" /> Club</button>
+                    <button id="aside1-ele1-option4" className='aside1-ele1-options-broadcast' onClick={(e) => {
+                        onClickBorder();
+                        fetchItemByCategory('Library');
+                        e.target.style.border = '2px solid white'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                    }}>
+                        <img src="icons/library.svg" alt="" /> Library</button>
+                    <button id="aside1-ele1-option5" className='aside1-ele1-options-broadcast' onClick={(e) => {
+                        onClickBorder();
+                        fetchItemByCategory('Gaming');
+                        e.target.style.border = '2px solid white'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                    }}>
+                        <img src="icons/gaming.svg" alt="" /> Gaming</button>
+                    <button id="aside1-ele1-option6" className='aside1-ele1-options-broadcast' onClick={(e) => {
+                        e.preventDefault();
+                        fetchItems();
+                        let options = document.getElementsByClassName('aside1-ele1-options-broadcast')
+                        document.getElementById('aside1-ele1-option7').style.backgroundColor = 'aliceblue'
+                        for (let i = 0; i < options.length; i++) {
+                            options[i].style.border = 'none'
+                            options[i].style.backgroundColor = 'transparent'
+                        }
+                        e.target.style.border = '2px solid white'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.07)'
+                        document.getElementById('broadcast-aside2-ele1').style.display = 'none'
+                        document.getElementById('profile-page').style.display = 'flex'
+                        document.getElementById('mobile-aside1-open').style.display = 'none'
+                    }}>
+                        <img src="icons/profileIcon.svg" alt="" /> Profile</button>
+                </div>
+            </main>
             <main id="outer-add-broadcast">
                 <div id="inner-add-broadcast">
                     <div id="inner-add-broadcast-ele1">
