@@ -16,23 +16,23 @@ const App = () => {
             element: <><Login /></>
         },
         {
-            path: "https://full-how-ztellerz-7doj.vercel.app/home",
+            path: "/home",
             element: <><Home /></>
         },
         {
-            path: "https://full-how-ztellerz-7doj.vercel.app/signUp",
+            path: "/signUp",
             element: <><SignUp /></>
         },
         {
-            path: "https://full-how-ztellerz-7doj.vercel.app/explore",
+            path: "/explore",
             element: <><Explore /></>
         },
         {
-            path: "https://full-how-ztellerz-7doj.vercel.app/broadcast",
+            path: "/broadcast",
             element: <><Broadcast /></>
         },
         {
-            path: "https://full-how-ztellerz-7doj.vercel.app/marketPlace",
+            path: "/marketPlace",
             element: <><MarketPlace /></>
         }
     ])
