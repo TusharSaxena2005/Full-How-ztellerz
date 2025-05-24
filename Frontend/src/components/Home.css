@@ -411,8 +411,6 @@ hr {
 
 @media (max-width:440px) {
 
-
-
     #about-this-website {
         width: 90%;
         gap: 50px;
@@ -463,11 +461,12 @@ hr {
 
     #GIT-outer-form {
         width: 90%;
+        height: 83%;
     }
 
     #review-form {
         width: 90%;
-        height: 90%;
+        height: 100%;
         gap: 15px;
     }
 
