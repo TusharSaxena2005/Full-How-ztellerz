@@ -11,7 +11,7 @@ const Login = () => {
 
   const fetchCurrentUser = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/user/current-user', {
+      const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
         method: 'GET',
         credentials: 'include'
       });
@@ -32,7 +32,7 @@ const Login = () => {
       flag = false;
     }
     if (flag) {
-      const response = await fetch('http://localhost:8000/api/v1/user/login', {
+      const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

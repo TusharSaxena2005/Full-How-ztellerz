@@ -14,7 +14,7 @@ const MarketPlace = () => {
 
   const fetchCurrentUser = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/user/current-user', {
+      const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
         method: 'GET',
         credentials: 'include'
       });
@@ -26,7 +26,7 @@ const MarketPlace = () => {
   }
 
   const deleteItem = async (itemId) => {
-    const response = await fetch(`http://localhost:8000/api/v1/marketplace/delete-item/${itemId}`, {
+    const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/delete-item/${itemId}`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -37,7 +37,7 @@ const MarketPlace = () => {
   }
 
   const detailOfItem = async (itemId) => {
-    const response = await fetch(`http://localhost:8000/api/v1/marketplace/item-by-id/${itemId}`, {
+    const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/item-by-id/${itemId}`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -54,7 +54,7 @@ const MarketPlace = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
-      const response = await fetch('http://localhost:8000/api/v1/marketplace/add-item', {
+      const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/marketplace/add-item', {
         method: 'POST',
         body: formData,
         credentials: 'include'
@@ -67,7 +67,7 @@ const MarketPlace = () => {
   }
 
   const fetchItemsByCategory = async (category) => {
-    const response = await fetch(`http://localhost:8000/api/v1/marketplace/filtered-item/${category}`,
+    const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/filtered-item/${category}`,
       {
         method: 'GET',
         credentials: 'include'
@@ -83,7 +83,7 @@ const MarketPlace = () => {
     const formData = new FormData(e.target);
     let allData = Object.fromEntries(formData.entries());
 
-    const response = await fetch(`http://localhost:8000/api/v1/marketplace/filtered-byHostelName-item?hostelName=${allData.hostelName}&floorNo=${allData.floorNo}`, {
+    const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/filtered-byHostelName-item?hostelName=${allData.hostelName}&floorNo=${allData.floorNo}`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -96,7 +96,7 @@ const MarketPlace = () => {
   }
 
   const fetchItems = async () => {
-    const response = await fetch('http://localhost:8000/api/v1/marketplace/get-all-item',
+    const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/marketplace/get-all-item',
       {
         method: 'GET',
         credentials: 'include'

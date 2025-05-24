@@ -6,7 +6,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Explore from './components/Explore'
-import Broadcast from './components/Broadcast'
+import Broadcast from './components/BroadCast'
 import MarketPlace from './components/MarketPlace'
 
 const App = () => {

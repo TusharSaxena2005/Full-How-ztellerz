@@ -11,7 +11,7 @@ const Navbar = () => {
 
     const fetchCurrentUser = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/user/current-user', {
+            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -26,7 +26,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/user/logout', {
+            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/logout', {
                 method: 'POST',
                 credentials: 'include'
             });

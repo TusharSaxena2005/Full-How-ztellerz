@@ -53,7 +53,7 @@ const SignUp = () => {
     if (flag) {
       if (verified == false) {
         document.getElementById('outer-verification').style.display = 'flex';
-        const response = await fetch('http://localhost:8000/api/v1/mailer/otpMail', {
+        const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/mailer/otpMail', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const SignUp = () => {
 
   const createAccount = async (data) => {
     let flag = true;
-    const response = await fetch('http://localhost:8000/api/v1/user/register', {
+    const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/register', {
       method: 'POST',
       body: data,
       credentials: 'include'
