@@ -1,6 +1,6 @@
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}    
+}
 
 #outer-marketplace {
     width: 100dvw;
@@ -743,6 +743,10 @@
 }
 
 @media (max-width: 440px) {
+    .profile-outer-foodItems {
+        width: 175px;
+    }
+
     #inner-marketplace {
         width: 94%;
         gap: 13px;

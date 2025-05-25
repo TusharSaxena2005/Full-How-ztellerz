@@ -320,7 +320,7 @@ const MarketPlace = () => {
                     </li>
                     <li id="posts">
                       <ul id="inner-posts">
-                        <div id="profile-item-outer-box">
+                        <li id="profile-item-outer-box">
                           {
                             dataOfFetchItem.length > 0 ? (
                               dataOfFetchItem.map((item) => {
@@ -351,7 +351,7 @@ const MarketPlace = () => {
                               </div>
                             )
                           }
-                        </div>
+                        </li>
                       </ul>
                     </li>
                   </div>
