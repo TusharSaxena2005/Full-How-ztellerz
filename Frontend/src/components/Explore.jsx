@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Explore.css'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
@@ -6,7 +6,7 @@ import Navbar from './Navbar'
 const Explore = () => {
   return (
     <>
-        <Navbar />
+      <Navbar />
       <div id='outer-explore'>
         <div id='inner-explore'>
           <h1>Explore Us</h1>

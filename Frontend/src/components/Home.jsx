@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -66,7 +66,7 @@ const Home = () => {
                 body: JSON.stringify(allData),
             });
 
-            if(response.ok){
+            if (response.ok) {
                 alert('Your message has been sent successfully.');
                 document.getElementById('review-form').reset();
             } else {
