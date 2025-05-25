@@ -388,7 +388,7 @@ hr {
     }
 
     #mostouter-getInTouch {
-        height: 75dvh;
+        height: 96dvh;
         margin-top: 0;
     }
 
@@ -452,7 +452,7 @@ hr {
     #outer-getInTouch {
         height: 100%;
         width: 100%;
-        gap: 15px;
+        gap: 24px;
     }
 
     #getInTouch-head {
@@ -465,9 +465,9 @@ hr {
     }
 
     #review-form {
-        width: 90%;
+        width: 96%;
         height: 100%;
-        gap: 15px;
+        gap: 11px;
     }
 
     #form-btn {
