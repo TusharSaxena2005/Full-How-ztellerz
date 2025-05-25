@@ -1,18 +1,6 @@
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-/* Add to your MarketPlace.css */
-.loader {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255,255,255,0.7);
-  font-size: 2rem;
-  z-index: 9999;
-}
+}    
 
 #outer-marketplace {
     width: 100dvw;

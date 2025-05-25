@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
+import Loader from './Loader'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [clientName, setClientName] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetchCurrentUser();
@@ -11,6 +13,7 @@ const Navbar = () => {
 
     const fetchCurrentUser = async () => {
         try {
+            setLoading(true);
             const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
                 method: 'GET',
                 credentials: 'include'
@@ -19,6 +22,7 @@ const Navbar = () => {
                 const data = await response.json();
                 setClientName(data.data.name);
             }
+            setLoading(false);
         } catch (error) {
             console.error('Error fetching current user:', error);
         }
@@ -26,6 +30,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
+            setLoading(true);
             const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/logout', {
                 method: 'POST',
                 credentials: 'include'
@@ -34,12 +39,16 @@ const Navbar = () => {
                 setClientName('');
                 window.location.href = '/';
             }
+            setLoading(false);
         } catch (error) { }
     };
 
 
     return (
         <>
+            {loading && (
+                <Loader />
+            )}
             <nav>
                 <div id="navbar">
                     <div id='logo'>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './MarketPlace.css'
 import Navbar from './Navbar'
+import Loader from './Loader'
 
 
 const MarketPlace = () => {
@@ -15,6 +16,7 @@ const MarketPlace = () => {
 
   const fetchCurrentUser = async () => {
     try {
+      setLoading(true);
       const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
         method: 'GET',
         credentials: 'include'
@@ -23,10 +25,12 @@ const MarketPlace = () => {
         const data = await response.json();
         setdataOfCurrentUser(data.data);
       }
+      setLoading(false);
     } catch (error) { }
   }
 
   const deleteItem = async (itemId) => {
+    setLoading(true);
     const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/delete-item/${itemId}`, {
       method: 'GET',
       credentials: 'include'
@@ -35,9 +39,11 @@ const MarketPlace = () => {
     if (response.ok) {
       fetchItems();
     }
+    setLoading(false);
   }
 
   const detailOfItem = async (itemId) => {
+    setLoading(true);
     const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/item-by-id/${itemId}`, {
       method: 'GET',
       credentials: 'include'
@@ -49,12 +55,14 @@ const MarketPlace = () => {
       setdetailOfOwnerOfFetchedItem(data.data[0].owner[0]);
       document.getElementById('outer-details-of-item').style.display = 'flex';
     }
+    setLoading(false);
   }
 
   const handleAddItem = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
+      setLoading(true);
       const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/marketplace/add-item', {
         method: 'POST',
         body: formData,
@@ -64,10 +72,12 @@ const MarketPlace = () => {
         document.getElementById('most-outer-add-item').style.display = 'none';
         fetchItems();
       }
+      setLoading(false);
     } catch (error) { }
   }
 
   const fetchItemsByCategory = async (category) => {
+    setLoading(true);
     const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/marketplace/filtered-item/${category}`,
       {
         method: 'GET',
@@ -77,10 +87,12 @@ const MarketPlace = () => {
       const data = await response.json();
       setDataOfFetchItem(data.data);
     }
+    setLoading(false);
   }
 
   const fetchItemsByHostel = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData(e.target);
     let allData = Object.fromEntries(formData.entries());
 
@@ -94,6 +106,7 @@ const MarketPlace = () => {
       document.getElementById('filterHostelName').value = '';
       document.getElementById('filterFloorNum').value = '';
     }
+    setLoading(false);
   }
 
   const fetchItems = async () => {
@@ -122,6 +135,9 @@ const MarketPlace = () => {
   return (
     <>
       <Navbar />
+      {loading && (
+        <Loader />
+      )}
       <div id='outer-marketplace'>
         <main id='inner-marketplace'>
           <aside id='aside1' className='aside'>
@@ -446,11 +462,7 @@ const MarketPlace = () => {
           </div>
         </div>
       </main>
-      {loading && (
-        <div className="loader">
-          Loading...
-        </div>
-      )}
+
     </>
   )
 }

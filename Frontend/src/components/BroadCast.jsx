@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './BroadCast.css'
 import Navbar from './Navbar'
+import Loader from './Loader'
 
 
 const BroadCast = () => {
@@ -25,6 +26,7 @@ const BroadCast = () => {
 
     const fetchCurrentUser = async () => {
         try {
+            setLoading(true);
             const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
                 method: 'GET',
                 credentials: 'include'
@@ -34,10 +36,12 @@ const BroadCast = () => {
                 setdataOfCurrentUser(data.data);
                 broadcastsUserInterestedIn(data.data._id);
             }
+            setLoading(false);
         } catch (error) { }
     }
 
     const broadcastsUserInterestedIn = async (userId) => {
+        setLoading(true);
         const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/interested/interestedBroadcastsByUser/${userId}`, {
             method: 'GET',
             credentials: 'include'
@@ -46,9 +50,11 @@ const BroadCast = () => {
             const data = await response.json();
             setlistOfBroadcastsUserInterestedIn(data.data);
         }
+        setLoading(false);
     }
 
     const getUserDetails = async (userId) => {
+        setLoading(true);
         const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/user/user-data/${userId}`, {
             method: 'GET',
             credentials: 'include'
@@ -57,10 +63,12 @@ const BroadCast = () => {
             const data = await response.json();
             setdataOfClickedUser(data.data);
         }
+        setLoading(false);
     }
 
     const usersInterestedInBroadcast = async (broadcastId, e) => {
         e.preventDefault();
+        setLoading(true);
         const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/interested/interestedPeople/${broadcastId}`, {
             method: 'GET',
             credentials: 'include'
@@ -71,10 +79,12 @@ const BroadCast = () => {
             setlistOfUsersInterestedInBroadcasts(data.data);
             document.getElementById('outer-listOf-interested-pears').style.display = 'flex'
         }
+        setLoading(false);
     }
 
     const handleDeleteItem = async (broadcastId, e) => {
         e.preventDefault();
+        setLoading(true);
         const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/broadcast/delete-broadcast/${broadcastId}`, {
             method: 'GET',
             credentials: 'include'
@@ -82,10 +92,12 @@ const BroadCast = () => {
         if (response.ok) {
             fetchItems();
         }
+        setLoading(false);
     }
 
     const handleAddItem = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const formData = new FormData(e.target);
         const allData = Object.fromEntries(formData.entries());
         try {
@@ -102,11 +114,13 @@ const BroadCast = () => {
                 document.getElementById('outer-add-broadcast').style.display = 'none';
                 fetchItems();
             }
+            setLoading(false);
         } catch (error) { }
     }
 
     const handleInterested = async (broadcastId, e) => {
         e.preventDefault();
+        setLoading(true);
         const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/interested/toggle/${broadcastId}`, {
             method: 'POST',
             credentials: 'include'
@@ -119,9 +133,11 @@ const BroadCast = () => {
                 e.target.textContent = 'Interested ?'
             }
         }
+        setLoading(false);
     }
 
     const fetchItemByCategory = async (category) => {
+        setLoading(true);
         const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/broadcast/filtered-broadcasts/${category}`, {
             method: 'GET',
             credentials: 'include'
@@ -131,6 +147,7 @@ const BroadCast = () => {
             setDataOfFetchItem(data.data);
             document.getElementById('mobile-aside1-open').style.display = 'none';
         }
+        setLoading(false);
     }
 
     const onClickBorder = (e) => {
@@ -145,6 +162,7 @@ const BroadCast = () => {
     }
 
     const fetchItems = async () => {
+        setLoading(true);
         const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/broadcast/all-broadcasts',
             {
                 method: 'GET',
@@ -154,6 +172,7 @@ const BroadCast = () => {
             const data = await response.json();
             setDataOfFetchItem(data.data);
         }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -166,6 +185,9 @@ const BroadCast = () => {
     return (
         <>
             <Navbar />
+            {loading && (
+                <Loader />
+            )}
             <div id='outer-broadcast'>
                 <main id='inner-broadcast'>
                     <div id='mobile-aside1'>

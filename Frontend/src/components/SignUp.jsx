@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import './SignUp.css'
+import Loader from './Loader'
 import { Link } from 'react-router-dom'
 
 const SignUp = () => {
 
   const [verified, setVerified] = useState(false);
   const [otp, setOTP] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,6 +55,7 @@ const SignUp = () => {
     if (flag) {
       if (verified == false) {
         document.getElementById('outer-verification').style.display = 'flex';
+        setLoading(true);
         const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/mailer/otpMail', {
           method: 'POST',
           headers: {
@@ -65,8 +68,10 @@ const SignUp = () => {
         if (response.ok) {
           alert('OTP sent to your mail');
           const otp = await response.json();
+          setLoading(false);
           setOTP(otp.data);
         }
+        setLoading(false);
       }
       else {
         createAccount(formData);
@@ -76,6 +81,7 @@ const SignUp = () => {
 
   const createAccount = async (data) => {
     let flag = true;
+    setLoading(true);
     const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/register', {
       method: 'POST',
       body: data,
@@ -94,6 +100,7 @@ const SignUp = () => {
     if (flag) {
       window.location.href = '/home';
     }
+    setLoading(false);
   }
 
   const verifyOTP = async (e) => {
@@ -110,6 +117,9 @@ const SignUp = () => {
 
   return (
     <>
+      {loading && (
+        <Loader />
+      )}
       <div id='most-outer-signup-box'>
         <div id='signup-box'>
           <div id='signup-box-logo'>
