@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const API_BASE_URL = 'http://localhost:8000';
-
 const Home = () => {
     useEffect(() => {
         // Web name animation
@@ -57,7 +55,7 @@ const Home = () => {
         const form = new FormData(e.target);
         let allData = Object.fromEntries(form.entries());
         try {
-            const response = await fetch(`${API_BASE_URL}/api/v1/mailer/contactUsMail`, {
+            const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/mailer/contactUsMail`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

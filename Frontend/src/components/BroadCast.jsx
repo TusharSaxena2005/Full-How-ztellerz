@@ -12,6 +12,7 @@ const BroadCast = () => {
     const [listOfUsersInterestedInBroadcasts, setlistOfUsersInterestedInBroadcasts] = useState([]);
     const [DataOfFetchItem, setDataOfFetchItem] = useState([]);
     const [DataOfClickedItem, setDataOfClickedItem] = useState([]);
+      const [loading, setLoading] = useState(false);
 
     const checkPersonInterestedOrNot = (itemId) => {
         let flag = false;
