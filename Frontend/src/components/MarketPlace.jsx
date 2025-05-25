@@ -9,6 +9,7 @@ const MarketPlace = () => {
   const [detailOfFetchedItem, setDetailOfFetchedItem] = useState([]);
   const [detailOfOwnerOfFetchedItem, setdetailOfOwnerOfFetchedItem] = useState([]);
   const [dataOfCurrentUser, setdataOfCurrentUser] = useState([]);
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -96,6 +97,7 @@ const MarketPlace = () => {
   }
 
   const fetchItems = async () => {
+    setLoading(true);
     const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/marketplace/get-all-item',
       {
         method: 'GET',
@@ -105,6 +107,7 @@ const MarketPlace = () => {
       const data = await response.json();
       setDataOfFetchItem(data.data);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -408,9 +411,9 @@ const MarketPlace = () => {
               <option value="8">Floor 8</option>
               <option value="9">Floor 9</option>
             </select>
-            <button type="submit" id="filterApply" onClick={() => { 
-              document.getElementById('filter-outer-section').style.display = 'none' 
-              }}>Apply</button>
+            <button type="submit" id="filterApply" onClick={() => {
+              document.getElementById('filter-outer-section').style.display = 'none'
+            }}>Apply</button>
           </form>
         </div>
       </main>
@@ -443,7 +446,11 @@ const MarketPlace = () => {
           </div>
         </div>
       </main>
-
+      {loading && (
+        <div className="loader">
+          Loading...
+        </div>
+      )}
     </>
   )
 }
