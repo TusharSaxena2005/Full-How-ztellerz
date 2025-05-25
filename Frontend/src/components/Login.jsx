@@ -19,7 +19,7 @@ const Login = () => {
         credentials: 'include'
       });
       if (response.ok) {
-        window.location.href = '/home';
+        window.location.href = '/home'; 
       }
       setLoading(false);
     } catch (error) { }
@@ -48,6 +48,9 @@ const Login = () => {
       });
       if (response.ok) {
         window.location.href = '/home';
+      }
+      else if(response.status == 401) {
+        alert('Invalid Roll Number or Password');
       }
       setLoading(false);
     }
