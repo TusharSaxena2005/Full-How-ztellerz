@@ -87,8 +87,13 @@ const registerUser = asyncHandler(async (req, res) => {
 
     return res
         .status(201)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
+        // .cookie("accessToken", accessToken, options)
+        // .cookie("refreshToken", refreshToken, options)
+        // Example in your login controller (user.controller.js)
+        .setHeader('Set-Cookie', [
+            `accessToken=${accessToken}; Path=/; Secure; HttpOnly; SameSite=None; Partitioned`,
+            `refreshToken=${refreshToken}; Path=/; Secure; HttpOnly; SameSite=None; Partitioned`
+        ])
         .json(
             new apiResponse(200, userCreated, "Account created successfully !!!")
         )
@@ -124,8 +129,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
     return res
         .status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
+        .setHeader('Set-Cookie', [
+            `accessToken=${accessToken}; Path=/; Secure; HttpOnly; SameSite=None; Partitioned`,
+            `refreshToken=${refreshToken}; Path=/; Secure; HttpOnly; SameSite=None; Partitioned`
+        ])
+        // .cookie("accessToken", accessToken, options)
+        // .cookie("refreshToken", refreshToken, options)
         .json(
             new apiResponse(
                 200,
@@ -157,8 +166,12 @@ const logoutUser = asyncHandler(async (req, res) => {
 
     return res
         .status(200)
-        .clearCookie("accessToken", options)
-        .clearCookie("refreshToken", options)
+        .setHeader('Set-Cookie', [
+            `accessToken=; Path=/; Secure; HttpOnly; SameSite=None; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT`,
+            `refreshToken=; Path=/; Secure; HttpOnly; SameSite=None; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT`
+        ])
+        // .clearCookie("accessToken", options)
+        // .clearCookie("refreshToken", options)
         .json(
             new apiResponse(200, {}, "User successfully logout")
         )
