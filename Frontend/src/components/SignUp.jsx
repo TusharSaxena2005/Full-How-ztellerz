@@ -14,7 +14,6 @@ const SignUp = () => {
     let flag = true;
     const formData = new FormData(e.target);
     let allData = Object.fromEntries(formData.entries());
-    console.log(allData);
     if (allData.name == '') {
       document.getElementById('name').style.border = '2px solid red';
       flag = false;
@@ -52,7 +51,7 @@ const SignUp = () => {
       flag = false;
     }
     if (allData.profilePic == '') {
-      document.getElementById('floorNo').style.border = '2px solid red';
+      document.getElementById('profilePic').style.border = '2px solid red';
       flag = false;
     }
 
