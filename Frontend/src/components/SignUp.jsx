@@ -50,6 +50,10 @@ const SignUp = () => {
       document.getElementById('floorNo').style.border = '2px solid red';
       flag = false;
     }
+    if (allData.profilePic == '') {
+      document.getElementById('floorNo').style.border = '2px solid red';
+      flag = false;
+    }
 
     if (flag) {
       setStoredFormData(formData);
