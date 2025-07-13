@@ -50,7 +50,7 @@ const SignUp = () => {
       document.getElementById('floorNo').style.border = '2px solid red';
       flag = false;
     }
-    if (allData.profilePic == '') {
+    if (allData.profilePic.size === 0) {
       document.getElementById('profilePic-outer-box').style.border = '2px solid red';
       flag = false;
     }
