@@ -51,7 +51,7 @@ const SignUp = () => {
       flag = false;
     }
     if (allData.profilePic == '') {
-      document.getElementById('profilePic').style.border = '2px solid red';
+      document.getElementById('profilePic-outer-box').style.border = '2px solid red';
       flag = false;
     }
 
