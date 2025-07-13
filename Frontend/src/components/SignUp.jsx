@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom'
 
 const SignUp = () => {
 
-  const [verified, setVerified] = useState(false);
   const [otp, setOTP] = useState("");
   const [loading, setLoading] = useState(false);
+  const [storedFormData, setStoredFormData] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let flag = true;
     const formData = new FormData(e.target);
-
     let allData = Object.fromEntries(formData.entries());
     if (allData.name == '') {
       document.getElementById('name').style.border = '2px solid red';
@@ -53,29 +52,25 @@ const SignUp = () => {
     }
 
     if (flag) {
-      if (verified == false) {
-        document.getElementById('outer-verification').style.display = 'flex';
-        setLoading(true);
-        const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/mailer/otpMail', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(allData),
-          credentials: 'include'
-        });
-        if (response.ok) {
-          alert('OTP sent to your mail');
-          const otp = await response.json();
-          setLoading(false);
-          setOTP(otp.data);
-        }
+      setStoredFormData(formData);
+      document.getElementById('outer-verification').style.display = 'flex';
+      setLoading(true);
+      const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/mailer/otpMail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(allData),
+        credentials: 'include'
+      });
+      if (response.ok) {
+        alert('OTP sent to your mail');
+        const otp = await response.json();
         setLoading(false);
+        setOTP(otp.data);
       }
-      else {
-        createAccount(formData);
-      }
+      setLoading(false);
     }
   }
 
@@ -107,10 +102,11 @@ const SignUp = () => {
     e.preventDefault();
     const otpInput = document.getElementById('otpInput').value;
     if (otpInput == otp) {
-      setVerified(true);
       document.getElementById('outer-verification').style.display = 'none';
-    }
-    else {
+      if (storedFormData) {
+        await createAccount(storedFormData);
+      }
+    } else {
       alert('Invalid OTP');
     }
   }

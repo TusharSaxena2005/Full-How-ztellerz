@@ -13,7 +13,6 @@ const Login = () => {
 
   const fetchCurrentUser = async () => {
     try {
-      setLoading(true);
       const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
         method: 'GET',
         credentials: 'include'
@@ -21,7 +20,6 @@ const Login = () => {
       if (response.ok) {
         window.location.href = '/home'; 
       }
-      setLoading(false);
     } catch (error) { }
   };
 
