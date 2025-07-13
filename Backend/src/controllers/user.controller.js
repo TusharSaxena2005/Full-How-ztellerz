@@ -246,8 +246,8 @@ const getUserById = asyncHandler(async (req, res) => {
 })
 
 const changeDetails = asyncHandler(async (req, res) => {
-    const { mailId, phoneNo, floorNo, hostelName, roomNo } = req.body
-    if (!mailId && !phoneNo && !floorNo && !hostelName && !roomNo) {
+    const { phoneNo, floorNo, hostelName, roomNo } = req.body
+    if (!phoneNo && !floorNo && !hostelName && !roomNo) {
         throw new apiError(400, "At least one field is required")
     }
 
@@ -255,7 +255,6 @@ const changeDetails = asyncHandler(async (req, res) => {
         req.user._id,
         {
             $set: {
-                mailId,
                 phoneNo,
                 floorNo,
                 hostelName,
@@ -329,8 +328,6 @@ const changeProfilePic = asyncHandler(async (req, res) => {
             new apiResponse(200, user, "User profile pic successfully updated")
         )
 })
-
-
 
 
 export {
