@@ -224,7 +224,6 @@ const MarketPlace = () => {
               <button id="aside1-ele1-option7" onClick={() => {
                 document.getElementById('most-outer-add-item').style.display = 'flex'
                 document.getElementById('itemName').value = '';
-                document.getElementById('itemPrice').value = '';
                 document.getElementById('itemCategory').value = '';
                 document.getElementById('itemImage').value = '';
               }}>
@@ -280,7 +279,6 @@ const MarketPlace = () => {
                             <img src={item.itemImage} alt={item.itemName} />
                           </div>
                           <p>{item.itemName}</p>
-                          <p>{item.itemPrice} Rs.</p>
                           <div className='outer-details-btn'>
                             <button className='detail-btn' onClick={() => { detailOfItem(item._id) }}>Details</button>
                             {
@@ -332,7 +330,6 @@ const MarketPlace = () => {
                                           <img src={item.itemImage} alt={item.itemName} />
                                         </div>
                                         <p>{item.itemName}</p>
-                                        <p>{item.itemPrice} Rs.</p>
                                         <div className='profile-outer-details-btn'>
                                           <button className='detail-btn' onClick={() => { detailOfItem(item._id) }}>Details</button>
                                           <button className='delete-item-btn'>
@@ -374,7 +371,6 @@ const MarketPlace = () => {
           </div>
           <form onSubmit={handleAddItem} encType='multipart/form-data' id='add-item-form'>
             <input type="text" id="itemName" name="itemName" placeholder="Enter product name" />
-            <input type="number" id="itemPrice" name="itemPrice" placeholder="Enter product price" />
             <select name="itemCategory" id="itemCategory">
               <option value="">Product category</option>
               <option value="chips">Chips</option>
@@ -448,7 +444,6 @@ const MarketPlace = () => {
               <li id="detail-box2-ele1" className="detail-box2-ele">
                 <h2>Product details :-</h2>
                 <p id="productName">{detailOfFetchedItem.itemName}</p>
-                <p>{detailOfFetchedItem.itemPrice} Rs.</p>
               </li>
               <li id="detail-box2-ele2" className="detail-box2-ele">
                 <h2>Seller details :-</h2>

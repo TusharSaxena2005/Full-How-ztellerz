@@ -8,10 +8,10 @@ const marketplaceSchema = new Schema(
             trim: true,
             index: true
         },
-        itemPrice: {
-            type: Number,
-            required: true
-        },
+        // itemPrice: {
+        //     type: Number,
+        //     required: true
+        // },
         itemImage: {
             type: String,
             required: true

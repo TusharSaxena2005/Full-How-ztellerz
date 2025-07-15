@@ -6,9 +6,11 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { cloudnaryUpload, cloudnaryDelete } from "../utils/cloudnary.js"
 
 const addItem = asyncHandler(async (req, res) => {
-    const { itemName, itemPrice, itemCategory } = req.body
+    // const { itemName, itemPrice, itemCategory } = req.body
+    const { itemName, itemCategory } = req.body
     if (
-        [itemName, itemPrice, itemCategory].some((fields) => { fields?.trim == "" })
+        // [itemName, itemPrice, itemCategory].some((fields) => { fields?.trim == "" })
+        [itemName, itemCategory].some((fields) => { fields?.trim == "" })
     ) {
         throw new apiError(400, "Please fill all fields")
     }
@@ -20,7 +22,7 @@ const addItem = asyncHandler(async (req, res) => {
 
     const item = await Marketplace.create({
         itemName,
-        itemPrice,
+        // itemPrice,
         itemCategory,
         itemImage: itemImagePath.url,
         owner: [req.user]
