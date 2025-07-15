@@ -299,15 +299,15 @@
 }
 
 .outer-foodItems {
-    /* border: 1px solid; */
     width: 196px;
-    height: 310px;
-    background-color: black;
+    height: 257px;
+    background-color: #000;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap: 11px;
 }
 
 .outer-foodItems p {
@@ -317,7 +317,7 @@
 .product-image {
     /* border: 1px solid; */
     width: 100%;
-    height: 60%;
+    height: 65%;
     display: flex;
     justify-content: center;
     align-items: center;
