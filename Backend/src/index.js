@@ -6,10 +6,12 @@ dotenv.config({
     path: '.env',
 })
 
+let server; // Declare server variable outside
+
 connectDb()
     .then(() => {
         const port = process.env.PORT || 8000;
-        const server = app.listen(port, () => {
+        server = app.listen(port, () => {
             console.log(`Server is running on port ${port}`)
         });
 
@@ -26,15 +28,18 @@ connectDb()
         console.log("Error connecting to database", err)
     })
 
-// Handle shutdown gracefully
 process.on('SIGTERM', () => {
-    server.close(() => {
-        console.log('Process terminated')
-    })
+    if (server) {
+        server.close(() => {
+            console.log('Process terminated')
+        })
+    }
 })
 
 process.on('SIGINT', () => {
-    server.close(() => {
-        console.log('Process interrupted')
-    })
+    if (server) {
+        server.close(() => {
+            console.log('Process interrupted')
+        })
+    }
 })

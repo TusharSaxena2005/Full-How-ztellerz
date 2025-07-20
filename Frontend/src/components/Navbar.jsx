@@ -29,18 +29,16 @@ const Navbar = () => {
     };
 
     const handleLogout = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/logout', {
-                method: 'POST',
-                credentials: 'include'
-            });
-            if (response.ok) {
-                setClientName('');
-                window.location.href = '/';
-            }
-            setLoading(false);
-        } catch (error) { }
+        setLoading(true);
+        const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        if (response.ok) {
+            setClientName('');
+            window.location.href = '/';
+        }
+        setLoading(false);
     };
 
 
@@ -71,7 +69,7 @@ const Navbar = () => {
                         <Link to='/home' className='nav-btn' id='home-nav-btn'>Home</Link>
                         <Link to='/explore' className='nav-btn' id='Explore-nav-btn'>Explore Us</Link>
                         <Link onClick={handleLogout} className='nav-btn' id='Logout-nav-btn'>Logout</Link>
-                        <span id='clientName'>{clientName}</span>
+                        <Link to='/profile' id='clientName'>{clientName}</Link>
                     </div>
                 </div>
             </nav>
