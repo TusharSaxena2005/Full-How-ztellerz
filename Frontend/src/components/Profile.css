@@ -20,7 +20,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 main {
     width: 100%;
-    min-height: 85dvh;
+    height: 85dvh;
     display: flex;
     justify-content: space-around;
     padding: 20px;
@@ -115,7 +115,7 @@ main {
     justify-content: center;
     align-items: center;
     gap: 25%;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 }
 
 .profile-info-item {
