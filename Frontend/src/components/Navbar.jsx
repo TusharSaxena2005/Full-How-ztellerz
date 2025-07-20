@@ -79,7 +79,7 @@ const Navbar = () => {
                 <Link to='/home' className='nav-btn' id='home-nav-btn'>Home</Link>
                 <Link to='/explore' className='nav-btn' id='Explore-nav-btn'>Explore Us</Link>
                 <Link onClick={handleLogout} className='nav-btn' id='Logout-nav-btn'>Logout</Link>
-                <span id='clientName'>{clientName}</span>
+                <Link to='/profile' id='clientName'>{clientName}</Link>
             </div>
         </>
     );
