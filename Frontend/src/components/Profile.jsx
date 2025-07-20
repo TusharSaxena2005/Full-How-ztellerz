@@ -153,7 +153,7 @@ const Profile = () => {
         <>
             {loading && <Loader />}
             <Navbar />
-            <main>
+            <main id='profile-main'>
                 <section id='outer-profile-pic' className='profile-info'>
                     <div id="profile-pic">
                         <img src={userData?.profilePic || "icons/profileIcon.svg"} alt="Profile" />
