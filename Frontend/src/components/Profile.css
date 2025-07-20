@@ -289,3 +289,7 @@ main {
   border-radius: 12px;
   background-color: #00000094;
 }
+
+#profile-info-form label{
+    height: 11%;
+}
