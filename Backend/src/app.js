@@ -8,8 +8,7 @@ app.use(cors({
     origin: [
         'https://www.howzellerz.store',
         'https://howzellerz.store',
-        'https://api.howzellerz.store',
-        'https://full-how-ztellerz-7doj.vercel.app'
+        'https://full-how-ztellerz-7doj.vercel.app' // Keep as backup during transition
     ],
     credentials: true
 }))
