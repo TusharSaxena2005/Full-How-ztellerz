@@ -14,7 +14,7 @@ const Navbar = () => {
     const fetchCurrentUser = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
+            const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -30,7 +30,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         setLoading(true);
-        const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/logout', {
+        const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
             method: 'POST',
             credentials: 'include'
         });

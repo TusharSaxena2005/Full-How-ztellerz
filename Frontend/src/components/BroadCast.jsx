@@ -28,7 +28,7 @@ const BroadCast = () => {
     const fetchCurrentUser = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
+            const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -43,7 +43,7 @@ const BroadCast = () => {
 
     const broadcastsUserInterestedIn = async (userId) => {
         setLoading(true);
-        const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/interested/interestedBroadcastsByUser/${userId}`, {
+        const response = await fetch(`https://api.howzellerz.store/api/v1/interested/interestedBroadcastsByUser/${userId}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -56,7 +56,7 @@ const BroadCast = () => {
 
     const getUserDetails = async (userId) => {
         setLoading(true);
-        const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/user/user-data/${userId}`, {
+        const response = await fetch(`https://api.howzellerz.store/api/v1/user/user-data/${userId}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -70,7 +70,7 @@ const BroadCast = () => {
     const usersInterestedInBroadcast = async (broadcastId, e) => {
         e.preventDefault();
         setLoading(true);
-        const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/interested/interestedPeople/${broadcastId}`, {
+        const response = await fetch(`https://api.howzellerz.store/api/v1/interested/interestedPeople/${broadcastId}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -86,7 +86,7 @@ const BroadCast = () => {
     const handleDeleteItem = async (broadcastId, e) => {
         e.preventDefault();
         setLoading(true);
-        const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/broadcast/delete-broadcast/${broadcastId}`, {
+        const response = await fetch(`https://api.howzellerz.store/api/v1/broadcast/delete-broadcast/${broadcastId}`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -102,7 +102,7 @@ const BroadCast = () => {
         const formData = new FormData(e.target);
         const allData = Object.fromEntries(formData.entries());
         try {
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/broadcast/publish-broadcast', {
+            const response = await fetch('https://api.howzellerz.store/api/v1/broadcast/publish-broadcast', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ const BroadCast = () => {
     const handleInterested = async (broadcastId, e) => {
         e.preventDefault();
         setLoading(true);
-        const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/interested/toggle/${broadcastId}`, {
+        const response = await fetch(`https://api.howzellerz.store/api/v1/interested/toggle/${broadcastId}`, {
             method: 'POST',
             credentials: 'include'
         })
@@ -139,7 +139,7 @@ const BroadCast = () => {
 
     const fetchItemByCategory = async (category) => {
         setLoading(true);
-        const response = await fetch(`https://full-how-ztellerz.onrender.com/api/v1/broadcast/filtered-broadcasts/${category}`, {
+        const response = await fetch(`https://api.howzellerz.store/api/v1/broadcast/filtered-broadcasts/${category}`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -164,7 +164,7 @@ const BroadCast = () => {
 
     const fetchItems = async () => {
         setLoading(true);
-        const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/broadcast/all-broadcasts',
+        const response = await fetch('https://api.howzellerz.store/api/v1/broadcast/all-broadcasts',
             {
                 method: 'GET',
                 credentials: 'include'

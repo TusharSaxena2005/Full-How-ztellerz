@@ -14,7 +14,7 @@ const Profile = () => {
     const fetchCurrentUser = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/current-user', {
+            const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -39,7 +39,7 @@ const Profile = () => {
 
             try {
                 setLoading(true);
-                const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/update-profile-pic', {
+                const response = await fetch('https://api.howzellerz.store/api/v1/user/update-profile-pic', {
                     method: 'PATCH',
                     body: formData,
                     credentials: 'include'
@@ -75,7 +75,7 @@ const Profile = () => {
 
         try {
             setLoading(true);
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/change-password', {
+            const response = await fetch('https://api.howzellerz.store/api/v1/user/change-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -120,7 +120,7 @@ const Profile = () => {
 
         try {
             setLoading(true);
-            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/update-details', {
+            const response = await fetch('https://api.howzellerz.store/api/v1/user/update-details', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
