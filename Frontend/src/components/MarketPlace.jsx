@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './MarketPlace.css'
-import Navbar from './Navbar'
 import Loader from './Loader'
 
 
@@ -134,7 +133,6 @@ const MarketPlace = () => {
 
   return (
     <>
-      <Navbar />
       {loading && (
         <Loader />
       )}

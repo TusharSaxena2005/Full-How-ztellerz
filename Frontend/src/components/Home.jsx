@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from './Navbar'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -78,9 +77,8 @@ const Home = () => {
 
     return (
         <>
-            <Navbar />
             <section id='home-page1'>
-                <h1 id='web-name'>How'ztellerz</h1>
+                <h1 id='web-name'>How'zellerz</h1>
                 <div id='outer-webname-dot'>
                     <p id='webname-dot'></p>
                     <p>Scroll down</p>
@@ -90,7 +88,7 @@ const Home = () => {
             <section id='outer-about-this-website'>
                 <ul id='about-this-website'>
                     <h1>About this website</h1>
-                    <p>How'ztellerz is a platform for people to buy, sell, and exchange items. It also allows users to post announcements or promotions. The website is designed to be user-friendly and easy to navigate. Users can easily add items to the marketplace and view items posted by others. The website also has a broadcast feature that allows users to post messages for others to see. The website is designed to be simple and intuitive, making it easy for users to find what they are looking for.</p>
+                    <p>How'zellerz is a platform for people to buy, sell, and exchange items. It also allows users to post announcements or promotions. The website is designed to be user-friendly and easy to navigate. Users can easily add items to the marketplace and view items posted by others. The website also has a broadcast feature that allows users to post messages for others to see. The website is designed to be simple and intuitive, making it easy for users to find what they are looking for.</p>
                 </ul>
             </section>
 

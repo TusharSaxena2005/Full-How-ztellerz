@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './BroadCast.css'
-import Navbar from './Navbar'
 import Loader from './Loader'
 
 
@@ -185,7 +184,6 @@ const BroadCast = () => {
 
     return (
         <>
-            <Navbar />
             {loading && (
                 <Loader />
             )}

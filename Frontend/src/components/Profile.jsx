@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from './Navbar'
 import './Profile.css'
 import Loader from './Loader'
 
@@ -152,7 +151,6 @@ const Profile = () => {
     return (
         <>
             {loading && <Loader />}
-            <Navbar />
             <main id='profile-main'>
                 <section id='outer-profile-pic' className='profile-info'>
                     <div id="profile-pic">

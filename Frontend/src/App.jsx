@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Outlet, useLocation } from 'react-router-dom'
 
 import Home from './components/Home'
 import Login from './components/Login'
@@ -9,38 +9,59 @@ import Explore from './components/Explore'
 import Broadcast from './components/BroadCast'
 import MarketPlace from './components/MarketPlace'
 import Profile from './components/Profile'
+import Navbar from './components/Navbar'
+
+const Layout = () => {
+    const location = useLocation();
+    const hideNavbarRoutes = ['/', '/signUp'];
+    const showNavbar = !hideNavbarRoutes.includes(location.pathname);
+    
+    return (
+        <>
+            {showNavbar && <Navbar />}
+            <Outlet />
+        </>
+    );
+};
 
 const App = () => {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <><Login /></>
-        },
-        {
-            path: "/home",
-            element: <><Home /></>
-        },
-        {
-            path: "/signUp",
-            element: <><SignUp /></>
-        },
-        {
-            path: "/explore",
-            element: <><Explore /></>
-        },
-        {
-            path: "/broadcast",
-            element: <><Broadcast /></>
-        },
-        {
-            path: "/marketPlace",
-            element: <><MarketPlace /></>
-        },
-        {
-            path: "/profile",
-            element: <><Profile /></>
+            element: <Layout />,
+            children: [
+                {
+                    path: "/",
+                    element: <Login />
+                },
+                {
+                    path: "/home",
+                    element: <Home />
+                },
+                {
+                    path: "/signUp",
+                    element: <SignUp />
+                },
+                {
+                    path: "/explore",
+                    element: <Explore />
+                },
+                {
+                    path: "/broadcast",
+                    element: <Broadcast />
+                },
+                {
+                    path: "/marketPlace",
+                    element: <MarketPlace />
+                },
+                {
+                    path: "/profile",
+                    element: <Profile />
+                }
+            ]
         }
     ])
+    
     return (
         <>
             <RouterProvider router={router} />
