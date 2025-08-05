@@ -18,8 +18,6 @@ const Login = () => {
         credentials: 'include'
       });
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
         window.location.href = '/home';
       }
     } catch (error) { }
