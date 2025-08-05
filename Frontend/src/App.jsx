@@ -13,7 +13,7 @@ import Navbar from './components/Navbar'
 
 const Layout = () => {
     const location = useLocation();
-    const hideNavbarRoutes = ['/', '/signUp'];
+    const hideNavbarRoutes = ['/', '/signup'];
     const showNavbar = !hideNavbarRoutes.includes(location.pathname);
     
     return (
