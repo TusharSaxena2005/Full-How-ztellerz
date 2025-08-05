@@ -41,6 +41,10 @@ const Navbar = () => {
         setLoading(false);
     };
 
+    const closeMobileNavbar = () => {
+        document.getElementById("navbar-inner-btn-img").src = "icons/humberger.svg";
+        document.getElementById("mobile-navbar").style.display = "none";
+    };
 
     return (
         <>
@@ -74,10 +78,10 @@ const Navbar = () => {
                 </div>
             </nav>
             <div id='mobile-navbar'>
-                <Link to='/home' className='nav-btn' id='home-nav-btn'>Home</Link>
-                <Link to='/explore' className='nav-btn' id='Explore-nav-btn'>Explore Us</Link>
+                <Link to='/home' className='nav-btn' id='home-nav-btn' onClick={closeMobileNavbar}>Home</Link>
+                <Link to='/explore' className='nav-btn' id='Explore-nav-btn' onClick={closeMobileNavbar}>Explore Us</Link>
                 <Link onClick={handleLogout} className='nav-btn' id='Logout-nav-btn'>Logout</Link>
-                <Link to='/profile' id='clientName'>{clientName}</Link>
+                <Link to='/profile' id='clientName' onClick={closeMobileNavbar}>{clientName}</Link>
             </div>
         </>
     );
