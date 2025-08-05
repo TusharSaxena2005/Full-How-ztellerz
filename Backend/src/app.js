@@ -32,14 +32,14 @@ import { broadcastRouter } from "./routes/broadcast.route.js";
 import { marketPlace } from "./routes/marketplace.route.js";
 import { interestedRouter } from "./routes/interested.route.js";
 import { mailerRouter } from "./routes/mailer.route.js";
-
-
+import { healthRouter } from "./routes/health.route.js";  
 
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/broadcast", broadcastRouter)
 app.use("/api/v1/marketplace", marketPlace)
 app.use("/api/v1/interested", interestedRouter)
 app.use("/api/v1/mailer", mailerRouter)
+app.use("/api/v1/health", healthRouter)
 
 
 export { app }
