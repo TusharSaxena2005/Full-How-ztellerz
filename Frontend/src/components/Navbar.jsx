@@ -29,16 +29,21 @@ const Navbar = () => {
     };
 
     const handleLogout = async () => {
-        setLoading(true);
-        const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
-            method: 'POST',
-            credentials: 'include'
-        });
-        if (response.ok) {
+        try {
+            setLoading(true);
+            const response = await fetch('https://full-how-ztellerz.onrender.com/api/v1/user/logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
             setClientName('');
             window.location.href = '/';
+            setLoading(false);
+        } catch (error) {
+            console.error('Logout error:', error);
+            setClientName('');
+            window.location.href = '/';
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     const closeMobileNavbar = () => {

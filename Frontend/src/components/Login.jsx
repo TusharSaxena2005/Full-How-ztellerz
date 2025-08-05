@@ -20,7 +20,9 @@ const Login = () => {
       if (response.ok) {
         window.location.href = '/home';
       }
-    } catch (error) { }
+    } catch (error) { 
+      console.error('Error fetching current user:', error);
+    }
   };
 
   const handleLogin = async (e) => {
