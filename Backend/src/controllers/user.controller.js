@@ -154,8 +154,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: 'None', // Still needed for subdomains
-        domain: '.howzellerz.store' // This allows cookies to work across subdomains
+        sameSite: 'None',
+        domain: '.howzellerz.store'
     }
 
     return res
