@@ -17,11 +17,7 @@ const Login = () => {
         method: 'GET',
         credentials: 'include'
       });
-      if(response.status === 401) {
-        console.error('Unauthorized access, please log in.');
-      } else if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+      if (response.ok) {
         window.location.href = '/home';
       }
     } catch (error) { 
@@ -35,26 +31,37 @@ const Login = () => {
     let flag = true;
     const formData = new FormData(e.target);
     let allData = Object.fromEntries(formData.entries());
+    
     if (allData.rollNo == '' || allData.password == '') {
       document.getElementById('login-rollno').style.borderColor = 'red';
       document.getElementById('login-password').style.borderColor = 'red';
       flag = false;
+      setLoading(false);
+      return;
     }
+    
     if (flag) {
-      const response = await fetch('https://api.howzellerz.store/api/v1/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(allData),
-        credentials: 'include'
-      });
-      if (response.ok) {
-        window.location.href = '/home';
-      }
-      else if (response.status == 401) {
-        alert('Invalid Roll Number or Password');
+      try {
+        const response = await fetch('https://api.howzellerz.store/api/v1/user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(allData),
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          window.location.href = '/home';
+        } else if (response.status == 401) {
+          alert('Invalid Roll Number or Password');
+        } else {
+          alert('Login failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('Network error. Please try again.');
       }
       setLoading(false);
     }
