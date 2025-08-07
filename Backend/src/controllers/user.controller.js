@@ -137,32 +137,34 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async (req, res) => {
-    await User.findByIdAndUpdate(
-        req.user._id,
-        {
-            $unset: {
-                refreshToken: 1
-            }
-        },
-        {
-            new: true
-        }
-    )
-
-    const options = {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None',
+    // ✅ Check if user is authenticated
+    if (!req.user || !req.user._id) {
+        return res
+            .status(401)
+            .json(new apiResponse(401, {}, "Unauthorized"));
     }
 
+    // ✅ Remove refresh token from DB
+    await User.findByIdAndUpdate(
+        req.user._id,
+        { $unset: { refreshToken: 1 } },
+        { new: true }
+    );
+
+    // ✅ Cookie options for secure logout
+    const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // HTTPS in prod
+        sameSite: 'None',
+    };
+
+    // ✅ Clear tokens from browser cookies
     return res
         .status(200)
-        .clearCookie("accessToken", options)
-        .clearCookie("refreshToken", options)
-        .json(
-            new apiResponse(200, {}, "User successfully logout")
-        )
-})
+        .clearCookie("accessToken", cookieOptions)
+        .clearCookie("refreshToken", cookieOptions)
+        .json(new apiResponse(200, {}, "User successfully logged out"));
+});
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
