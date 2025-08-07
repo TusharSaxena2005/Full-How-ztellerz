@@ -21,6 +21,9 @@ const Login = () => {
         const data = await response.json();
         console.log(data);
         //window.location.href = '/home';
+      }else{
+        const errorData = await response.json();
+        console.error('Error fetching current user:', errorData);
       }
     } catch (error) { 
       console.error('Error fetching current user:', error);
