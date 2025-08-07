@@ -17,13 +17,12 @@ const Login = () => {
         method: 'GET',
         credentials: 'include'
       });
-      if (response.ok) {
+      if(response.status === 401) {
+        console.error('Unauthorized access, please log in.');
+      } else if (response.ok) {
         const data = await response.json();
         console.log(data);
-        //window.location.href = '/home';
-      }else{
-        const errorData = await response.json();
-        console.error('Error fetching current user:', errorData);
+        window.location.href = '/home';
       }
     } catch (error) { 
       console.error('Error fetching current user:', error);
