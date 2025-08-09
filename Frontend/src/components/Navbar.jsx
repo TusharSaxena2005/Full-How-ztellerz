@@ -30,6 +30,7 @@ const Navbar = () => {
     };
 
     const handleLogout = async () => {
+        e.preventDefault();
         setLoading(true);
         //Cookies.remove('accessToken');
         //Cookies.remove('refreshToken');
