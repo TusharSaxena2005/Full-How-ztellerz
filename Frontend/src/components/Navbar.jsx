@@ -39,9 +39,8 @@ const Navbar = () => {
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
             if (response.ok) {
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 2000);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                window.location.href = '/';
             }
             setLoading(false);
         } catch (error) {
