@@ -116,16 +116,24 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const logginedUser = await User.findById(user._id).select("-password -refreshToken")
 
-    const options = {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None',
-    }
+    const optionsAccessToken = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    maxAge: 15 * 60 * 1000 // 15 minutes
+};
+
+const optionsRefreshToken = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+};
 
     return res
         .status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
+        .cookie("accessToken", accessToken, optionsAccessToken)
+        .cookie("refreshToken", refreshToken, optionsRefreshToken)
         .json(
             new apiResponse(
                 200,
