@@ -36,10 +36,6 @@ const Navbar = () => {
                 method: 'POST',
                 credentials: 'include'
             });
-            if (response.ok) {
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                window.location.href = '/';
-            }
             setLoading(false);
         } catch (error) {
             console.error('Logout error:', error);
