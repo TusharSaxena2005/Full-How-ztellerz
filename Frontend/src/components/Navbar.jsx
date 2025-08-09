@@ -40,7 +40,9 @@ const Navbar = () => {
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
             if (!response.ok) {
-                window.location.href = '/';
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
             }
             setLoading(false);
         } catch (error) {

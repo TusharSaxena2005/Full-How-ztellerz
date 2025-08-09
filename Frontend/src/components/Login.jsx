@@ -11,9 +11,6 @@ const Login = () => {
 
   useEffect(() => {
     fetchCurrentUser();
-    setTimeout(() => {
-      fetchCurrentUser();
-    }, 2000);
   }, []);
 
   const fetchCurrentUser = async () => {
