@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import Loader from './Loader'
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
     const [clientName, setClientName] = useState('');
@@ -36,6 +37,8 @@ const Navbar = () => {
                 credentials: 'include'
             });
             setClientName('');
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
             window.location.href = '/';
             setLoading(false);
         } catch (error) {

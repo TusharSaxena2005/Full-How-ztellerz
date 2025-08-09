@@ -137,30 +137,23 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async (req, res) => {
-    if (!req.user || !req.user._id) {
-        return res
-            .status(401)
-            .json(new apiResponse(401, {}, "Unauthorized"));
-    }
-
-    await User.findByIdAndUpdate(
-        req.user._id,
-        { $unset: { refreshToken: 1 } },
-        { new: true }
-    );
+    await User.findByIdAndUpdate(req.user._id, {
+        $unset: { refreshToken: 1 }
+    });
 
     const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'None',
+        secure: true,
+        sameSite: 'None'
     };
 
     return res
         .status(200)
         .clearCookie("accessToken", cookieOptions)
         .clearCookie("refreshToken", cookieOptions)
-        .json(new apiResponse(200, {}, "User successfully logged out"));
+        .json(new apiResponse(200, {}, "User logged out successfully"));
 });
+
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
@@ -174,6 +167,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
     if (!user) {
         throw new apiError(401, "Unauthorized request")
+    }
+
+    if (!user?.refreshToken) {
+        throw new apiError(401, "Refresh token no longer valid");
     }
 
     if (incomingRefreshToken !== user?.refreshToken) {

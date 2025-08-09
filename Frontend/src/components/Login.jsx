@@ -2,28 +2,17 @@ import React, { useState, useEffect } from 'react'
 import './Login.css'
 import Loader from './Loader'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 const Login = () => {
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchCurrentUser();
+    const accessToken = Cookies.get("accessToken");
+    const refreshToken = Cookies.get("refreshToken");
+    if (accessToken && refreshToken) navigate("/home");
   }, []);
-
-  const fetchCurrentUser = async () => {
-    try {
-      const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
-        method: 'GET',
-        credentials: 'include'
-      });
-      if (response.ok) {
-        window.location.href = '/home';
-      }
-    } catch (error) { 
-      console.error('Error fetching current user:', error);
-    }
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
