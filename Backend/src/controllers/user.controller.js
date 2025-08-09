@@ -169,10 +169,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         throw new apiError(401, "Unauthorized request")
     }
 
-    if (!user?.refreshToken) {
-        throw new apiError(401, "Refresh token no longer valid");
-    }
-
     if (incomingRefreshToken !== user?.refreshToken) {
         throw new apiError(401, "Refresh token is expired")
     }
