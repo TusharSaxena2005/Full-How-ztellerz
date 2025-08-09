@@ -9,10 +9,37 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
-    const refreshToken = Cookies.get("refreshToken");
-    if (accessToken && refreshToken) window.location.href = '/home';
+    fetchCurrentUser();
   }, []);
+
+  const fetchCurrentUser = async () => {
+    try {
+      const response = await fetch(
+        'https://api.howzellerz.store/api/v1/user/current-user',
+        {
+          method: 'GET',
+          credentials: 'include'
+        }
+      );
+
+      if (!response.ok) {
+        console.error('Not authenticated');
+        return;
+      }
+
+      const data = await response.json();
+
+      if (data?.success && data?.data) {
+        // ✅ User is authenticated
+        window.location.href = '/home';
+      } else {
+        console.warn('User not authenticated');
+      }
+    } catch (error) {
+      console.error('Error fetching current user:', error);
+    }
+  };
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
