@@ -3,6 +3,7 @@ import './Login.css'
 import Loader from './Loader'
 import { Link } from 'react-router-dom'
 import Cookies from 'js-cookie';
+import { Console } from 'console';
 
 const Login = () => {
 
@@ -30,8 +31,9 @@ const Login = () => {
       const data = await response.json();
 
       if (data?.success && data?.data) {
-        // ✅ User is authenticated
-        window.location.href = '/home';
+        console.log('User authenticated:', data.data);
+
+       // window.location.href = '/home';
       } else {
         console.warn('User not authenticated');
       }
