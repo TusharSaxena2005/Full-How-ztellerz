@@ -39,7 +39,9 @@ const Navbar = () => {
             setClientName('');
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
-            window.location.href = '/';
+            if (!response.ok) {
+                window.location.href = '/';
+            }
             setLoading(false);
         } catch (error) {
             console.error('Logout error:', error);
