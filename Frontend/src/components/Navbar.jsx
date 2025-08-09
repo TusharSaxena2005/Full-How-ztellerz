@@ -38,7 +38,7 @@ const Navbar = () => {
             });
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
-            if (!response.ok) {
+            if (response.ok) {
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 2000);
