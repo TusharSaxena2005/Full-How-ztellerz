@@ -137,28 +137,24 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async (req, res) => {
-    // ✅ Check if user is authenticated
     if (!req.user || !req.user._id) {
         return res
             .status(401)
             .json(new apiResponse(401, {}, "Unauthorized"));
     }
 
-    // ✅ Remove refresh token from DB
     await User.findByIdAndUpdate(
         req.user._id,
         { $unset: { refreshToken: 1 } },
         { new: true }
     );
 
-    // ✅ Cookie options for secure logout
     const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // HTTPS in prod
+        secure: process.env.NODE_ENV === 'production',
         sameSite: 'None',
     };
 
-    // ✅ Clear tokens from browser cookies
     return res
         .status(200)
         .clearCookie("accessToken", cookieOptions)
