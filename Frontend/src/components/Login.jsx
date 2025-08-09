@@ -11,7 +11,7 @@ const Login = () => {
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
     const refreshToken = Cookies.get("refreshToken");
-    if (accessToken && refreshToken) navigate("/home");
+    if (accessToken && refreshToken) window.location.href = '/home';
   }, []);
 
   const handleLogin = async (e) => {
@@ -20,7 +20,7 @@ const Login = () => {
     let flag = true;
     const formData = new FormData(e.target);
     let allData = Object.fromEntries(formData.entries());
-    
+
     if (allData.rollNo == '' || allData.password == '') {
       document.getElementById('login-rollno').style.borderColor = 'red';
       document.getElementById('login-password').style.borderColor = 'red';
@@ -28,7 +28,7 @@ const Login = () => {
       setLoading(false);
       return;
     }
-    
+
     if (flag) {
       try {
         const response = await fetch('https://api.howzellerz.store/api/v1/user/login', {
@@ -40,7 +40,7 @@ const Login = () => {
           body: JSON.stringify(allData),
           credentials: 'include'
         });
-        
+
         if (response.ok) {
           window.location.href = '/home';
         } else if (response.status == 401) {
