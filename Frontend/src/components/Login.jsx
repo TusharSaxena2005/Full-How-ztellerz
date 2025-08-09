@@ -11,6 +11,9 @@ const Login = () => {
 
   useEffect(() => {
     fetchCurrentUser();
+    setTimeout(() => {
+      fetchCurrentUser();
+    }, 3000);
   }, []);
 
   const fetchCurrentUser = async () => {
@@ -32,9 +35,6 @@ const Login = () => {
 
       if (data?.success && data?.data) {
         console.log('User authenticated:', data.data);
-        setTimeout(() => {
-          console.log('User authenticated:', data.data);
-        }, 3000);
         //window.location.href = '/home';
       } else {
         console.warn('User not authenticated');
