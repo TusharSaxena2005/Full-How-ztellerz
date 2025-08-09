@@ -32,12 +32,12 @@ const Navbar = () => {
     const handleLogout = async () => {
         try {
             setLoading(true);
-            //Cookies.remove('accessToken');
-            //Cookies.remove('refreshToken');
-            const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
-                method: 'POST',
-                credentials: 'include'
-            });
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
+            // const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
+            //     method: 'POST',
+            //     credentials: 'include'
+            // });
             setLoading(false);
         } catch (error) {
             console.error('Logout error:', error);
