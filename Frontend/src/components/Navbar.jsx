@@ -32,12 +32,16 @@ const Navbar = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         setLoading(true);
-        //Cookies.remove('accessToken');
-        //Cookies.remove('refreshToken');
-        // const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
-        //     method: 'POST',
-        //     credentials: 'include'
-        // });
+        const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        if (response.ok) {
+            setClientName('');
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
+            window.location.href = '/';
+        }
         setLoading(false);
     };
 
