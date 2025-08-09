@@ -36,8 +36,6 @@ const Navbar = () => {
                 method: 'POST',
                 credentials: 'include'
             });
-            localStorage.clear();
-            sessionStorage.clear();
             if (response.ok) {
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 window.location.href = '/';
