@@ -29,7 +29,7 @@ const Navbar = () => {
         }
     };
 
-    const handleLogout = async () => {
+    const handleLogout = async (e) => {
         e.preventDefault();
         setLoading(true);
         //Cookies.remove('accessToken');
