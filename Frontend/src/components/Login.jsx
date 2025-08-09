@@ -13,7 +13,7 @@ const Login = () => {
     fetchCurrentUser();
     setTimeout(() => {
       fetchCurrentUser();
-    }, 1000);
+    }, 2000);
   }, []);
 
   const fetchCurrentUser = async () => {
