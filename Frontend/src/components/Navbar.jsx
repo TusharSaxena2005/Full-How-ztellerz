@@ -36,7 +36,6 @@ const Navbar = () => {
                 method: 'POST',
                 credentials: 'include'
             });
-            setClientName('');
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
             if (!response.ok) {

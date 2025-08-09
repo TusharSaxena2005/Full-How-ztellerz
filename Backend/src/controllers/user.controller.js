@@ -152,7 +152,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     const cookieOptions = {
         httpOnly: true,
         secure: true,
-        sameSite: 'None'
+        sameSite: 'None',
+        path: '/'
     };
 
     return res
