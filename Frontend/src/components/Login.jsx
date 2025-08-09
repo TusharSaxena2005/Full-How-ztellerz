@@ -32,7 +32,10 @@ const Login = () => {
 
       if (data?.success && data?.data) {
         console.log('User authenticated:', data.data);
-       window.location.href = '/home';
+        setTimeout(() => {
+          console.log('User authenticated:', data.data);
+        }, 3000);
+        //window.location.href = '/home';
       } else {
         console.warn('User not authenticated');
       }
