@@ -31,8 +31,7 @@ const Login = () => {
       const data = await response.json();
 
       if (data?.success && data?.data) {
-        console.log('User authenticated:', data.data);
-        //window.location.href = '/home';
+        window.location.href = '/home';
       } else {
         console.warn('User not authenticated');
       }
