@@ -15,7 +15,7 @@ const Navbar = () => {
     const fetchCurrentUser = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/current-user`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -32,7 +32,7 @@ const Navbar = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const response = await fetch('https://api.howzellerz.store/api/v1/user/logout', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/logout`, {
             method: 'POST',
             credentials: 'include'
         });

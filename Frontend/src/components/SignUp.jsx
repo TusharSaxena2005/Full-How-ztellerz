@@ -59,7 +59,7 @@ const SignUp = () => {
       setStoredFormData(formData);
       document.getElementById('outer-verification').style.display = 'flex';
       setLoading(true);
-      const response = await fetch('https://api.howzellerz.store/api/v1/mailer/otpMail', {
+  const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/mailer/otpMail`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const SignUp = () => {
   const createAccount = async (data) => {
     let flag = true;
     setLoading(true);
-    const response = await fetch('https://api.howzellerz.store/api/v1/user/register', {
+  const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
       method: 'POST',
       body: data,
       credentials: 'include'

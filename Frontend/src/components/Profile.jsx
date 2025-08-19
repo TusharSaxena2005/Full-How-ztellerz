@@ -13,7 +13,7 @@ const Profile = () => {
     const fetchCurrentUser = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/current-user`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -38,7 +38,7 @@ const Profile = () => {
 
             try {
                 setLoading(true);
-                const response = await fetch('https://api.howzellerz.store/api/v1/user/update-profile-pic', {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/update-profile-pic`, {
                     method: 'PATCH',
                     body: formData,
                     credentials: 'include'
@@ -74,7 +74,7 @@ const Profile = () => {
 
         try {
             setLoading(true);
-            const response = await fetch('https://api.howzellerz.store/api/v1/user/change-password', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/change-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ const Profile = () => {
 
         try {
             setLoading(true);
-            const response = await fetch('https://api.howzellerz.store/api/v1/user/update-details', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/update-details`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -132,7 +132,6 @@ const Profile = () => {
                 const data = await response.json();
                 setUserData(data.data);
                 document.getElementById('outer-profile-info-form').style.display = 'none';
-                // Clear form fields
                 document.getElementById('profile-info-number').value = '';
                 document.getElementById('profile-info-hostel').value = '';
                 document.getElementById('profile-info-floorNo').value = '';

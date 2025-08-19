@@ -16,7 +16,7 @@ const Login = () => {
   const fetchCurrentUser = async () => {
     try {
       const response = await fetch(
-        'https://api.howzellerz.store/api/v1/user/current-user',
+        `${import.meta.env.VITE_API_BASE_URL}/user/current-user`,
         {
           method: 'GET',
           credentials: 'include'
@@ -40,7 +40,6 @@ const Login = () => {
     }
   };
 
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -58,7 +57,7 @@ const Login = () => {
 
     if (flag) {
       try {
-        const response = await fetch('https://api.howzellerz.store/api/v1/user/login', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

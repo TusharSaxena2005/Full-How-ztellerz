@@ -16,7 +16,7 @@ const MarketPlace = () => {
   const fetchCurrentUser = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://api.howzellerz.store/api/v1/user/current-user', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/current-user`, {
         method: 'GET',
         credentials: 'include'
       });
@@ -30,7 +30,7 @@ const MarketPlace = () => {
 
   const deleteItem = async (itemId) => {
     setLoading(true);
-    const response = await fetch(`https://api.howzellerz.store/api/v1/marketplace/delete-item/${itemId}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/marketplace/delete-item/${itemId}`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -43,7 +43,7 @@ const MarketPlace = () => {
 
   const detailOfItem = async (itemId) => {
     setLoading(true);
-    const response = await fetch(`https://api.howzellerz.store/api/v1/marketplace/item-by-id/${itemId}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/marketplace/item-by-id/${itemId}`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -62,7 +62,7 @@ const MarketPlace = () => {
     const formData = new FormData(e.target);
     try {
       setLoading(true);
-      const response = await fetch('https://api.howzellerz.store/api/v1/marketplace/add-item', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/marketplace/add-item`, {
         method: 'POST',
         body: formData,
         credentials: 'include'
@@ -77,7 +77,7 @@ const MarketPlace = () => {
 
   const fetchItemsByCategory = async (category) => {
     setLoading(true);
-    const response = await fetch(`https://api.howzellerz.store/api/v1/marketplace/filtered-item/${category}`,
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/marketplace/filtered-item/${category}`,
       {
         method: 'GET',
         credentials: 'include'
@@ -95,7 +95,7 @@ const MarketPlace = () => {
     const formData = new FormData(e.target);
     let allData = Object.fromEntries(formData.entries());
 
-    const response = await fetch(`https://api.howzellerz.store/api/v1/marketplace/filtered-byHostelName-item?hostelName=${allData.hostelName}&floorNo=${allData.floorNo}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/marketplace/filtered-byHostelName-item?hostelName=${allData.hostelName}&floorNo=${allData.floorNo}`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -110,7 +110,7 @@ const MarketPlace = () => {
 
   const fetchItems = async () => {
     setLoading(true);
-    const response = await fetch('https://api.howzellerz.store/api/v1/marketplace/get-all-item',
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/marketplace/get-all-item`,
       {
         method: 'GET',
         credentials: 'include'

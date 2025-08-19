@@ -54,7 +54,7 @@ const Home = () => {
         const form = new FormData(e.target);
         let allData = Object.fromEntries(form.entries());
         try {
-            const response = await fetch(`https://api.howzellerz.store/api/v1/mailer/contactUsMail`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/mailer/contactUsMail`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
