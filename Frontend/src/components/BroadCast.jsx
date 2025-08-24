@@ -101,7 +101,7 @@ const BroadCast = () => {
         const formData = new FormData(e.target);
         const allData = Object.fromEntries(formData.entries());
         try {
-            const response = await fetch('${import.meta.env.VITE_API_BASE_URL}/broadcast/publish-broadcast', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/broadcast/publish-broadcast`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
