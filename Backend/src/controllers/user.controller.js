@@ -117,18 +117,18 @@ const loginUser = asyncHandler(async (req, res) => {
     const logginedUser = await User.findById(user._id).select("-password -refreshToken")
 
     const optionsAccessToken = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None',
-    maxAge: 15 * 60 * 1000 // 15 minutes
-};
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        maxAge: 15 * 60 * 1000 // 15 minutes
+    };
 
-const optionsRefreshToken = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None',
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-};
+    const optionsRefreshToken = {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    };
 
     return res
         .status(200)
@@ -161,7 +161,6 @@ const logoutUser = asyncHandler(async (req, res) => {
         .clearCookie("refreshToken", cookieOptions)
         .json(new apiResponse(200, {}, "User logged out successfully"));
 });
-
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
@@ -222,7 +221,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new apiResponse(200,req.user, "Current user details fetched successfully")
+            new apiResponse(200, req.user, "Current user details fetched successfully")
         )
 })
 

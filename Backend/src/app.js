@@ -6,9 +6,9 @@ const app = express();
 
 app.use(cors({
     origin: [
-        'https://www.howzellerz.store',
-        'https://howzellerz.store',
-        'https://full-how-ztellerz-7doj.vercel.app' // Keep as backup during transition
+        'https://www.howztellerz.shop',
+        'https://howztellerz.shop',
+        'https://full-how-ztellerz-7doj.vercel.app'
     ],
     credentials: true
 }))
