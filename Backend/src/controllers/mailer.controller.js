@@ -8,8 +8,8 @@ const sendOtpMail = async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "tushar.dec6@gmail.com",
-            pass: "gbvmxwzozasswtjx"
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS
         }
     })
 
@@ -22,11 +22,11 @@ const sendOtpMail = async (req, res) => {
         text: `Your verification code to create account is\n ${otp}`
     }
 
-    transporter.sendMail(mailer, (err) => {
-        if (err) {
-            new apiError(500, "Error sending mail")
-        }
-    })
+    try {
+        await transporter.sendMail(mailer)
+    } catch (err) {
+        throw new apiError(500, "Error sending mail")
+    }
 
     return res
         .status(200)
@@ -41,8 +41,8 @@ const contactUsMail = async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "tushar.dec6@gmail.com",
-            pass: "gbvmxwzozasswtjx"
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS
         }
     })
 
@@ -53,11 +53,11 @@ const contactUsMail = async (req, res) => {
         text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
     }
 
-    transporter.sendMail(mailer, (err) => {
-        if (err) {
-            new apiError(500, "Error sending mail")
-        }
-    })
+    try {
+        await transporter.sendMail(mailer)
+    } catch (err) {
+        throw new apiError(500, "Error sending mail")
+    }
 
     return res
         .status(200)
