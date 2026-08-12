@@ -4,12 +4,20 @@ import cookieParser from "cookie-parser"
 
 const app = express();
 
+const rawCors = process.env.CORS_ORIGIN || ''
+const allowedOrigins = rawCors
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean)
+
 app.use(cors({
-    origin: [
-        'https://www.howztellerz.shop',
-        'https://howztellerz.shop',
-        'https://full-how-ztellerz-7doj.vercel.app'
-    ],
+    origin: function(origin, callback) {
+        // allow non-browser requests like curl (no origin)
+        if (!origin) return callback(null, true)
+        if (allowedOrigins.length === 0) return callback(null, true)
+        if (allowedOrigins.indexOf(origin) !== -1) return callback(null, true)
+        return callback(new Error('Not allowed by CORS'))
+    },
     credentials: true
 }))
 
