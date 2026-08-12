@@ -53,5 +53,20 @@ app.use("/api/v1/interested", interestedRouter)
 app.use("/api/v1/mailer", mailerRouter)
 app.use("/api/v1/health", healthRouter)
 
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500
+    const message = err.message || "Internal server error"
+
+    if (req.headers.origin && allowedOrigins.includes(req.headers.origin)) {
+        res.header("Access-Control-Allow-Origin", req.headers.origin)
+        res.header("Access-Control-Allow-Credentials", "true")
+    }
+
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    })
+})
 
 export { app }
