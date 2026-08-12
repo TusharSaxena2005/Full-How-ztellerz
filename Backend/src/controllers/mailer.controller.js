@@ -16,16 +16,26 @@ const sendOtpMail = async (req, res) => {
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
     const mailer = {
-        from: "tushar.dec6@gmail.com",
+        from: process.env.MAIL_USER || 'no-reply@howztellerz.shop',
         to: mailId,
         subject: "Welcome to How'zellerz",
         text: `Your verification code to create account is\n ${otp}`
     }
 
+    // verify transporter before sending for clearer errors
     try {
-        await transporter.sendMail(mailer)
+        await transporter.verify()
     } catch (err) {
-        throw new apiError(500, "Error sending mail")
+        console.error('Mailer verify failed:', err)
+        throw new apiError(500, `Mailer verify failed: ${err.message}`)
+    }
+
+    try {
+        const info = await transporter.sendMail(mailer)
+        console.log('Mail sent:', info && info.messageId)
+    } catch (err) {
+        console.error('Error sending mail:', err)
+        throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
     return res
@@ -47,16 +57,25 @@ const contactUsMail = async (req, res) => {
     })
 
     const mailer = {
-        from: "tushar.dec6@gmail.com",
+        from: process.env.MAIL_USER || 'no-reply@howztellerz.shop',
         to: "dutushar2005@gmail.com",
         subject: "Contact Us mail from How'zellerz",
         text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
     }
 
     try {
-        await transporter.sendMail(mailer)
+        await transporter.verify()
     } catch (err) {
-        throw new apiError(500, "Error sending mail")
+        console.error('Mailer verify failed:', err)
+        throw new apiError(500, `Mailer verify failed: ${err.message}`)
+    }
+
+    try {
+        const info = await transporter.sendMail(mailer)
+        console.log('Contact mail sent:', info && info.messageId)
+    } catch (err) {
+        console.error('Error sending contact mail:', err)
+        throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
     return res
