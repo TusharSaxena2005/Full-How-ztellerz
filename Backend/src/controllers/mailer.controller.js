@@ -1,54 +1,33 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import { apiResponse } from '../utils/apiResponse.js';
 import { apiError } from '../utils/apiError.js';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendOtpMail = async (req, res) => {
     const { mailId } = req.body;
 
     console.log('📧 OTP request received for:', mailId);
-    console.log('✓ MAIL_USER set?', !!process.env.MAIL_USER);
-    console.log('✓ MAIL_PASS set?', !!process.env.MAIL_PASS);
-
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS
-        },
-        connectionTimeout: 15000,
-        socketTimeout: 15000,
-        tls: {
-            rejectUnauthorized: false
-        }
-    })
+    console.log('✓ RESEND_API_KEY set?', !!process.env.RESEND_API_KEY);
 
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
-    const mailer = {
-        from: process.env.MAIL_USER,
-        to: mailId,
-        subject: "Welcome to How'zellerz",
-        text: `Your verification code to create account is\n ${otp}`
-    }
-
-    // verify transporter before sending for clearer errors
     try {
-        console.log('🔍 Verifying transporter...');
-        await transporter.verify()
-        console.log('✅ Transporter verified!');
+        console.log('📤 Sending OTP via Resend to:', mailId);
+        const data = await resend.emails.send({
+            from: 'How\'ztellerz <noreply@resend.dev>',
+            to: mailId,
+            subject: "Welcome to How'zellerz",
+            html: `<p>Your verification code to create account is <strong>${otp}</strong></p>`
+        });
+        
+        console.log('✅ OTP Mail sent:', data.id);
+        
+        if (data.error) {
+            throw new Error(data.error.message);
+        }
     } catch (err) {
-        console.error('❌ Verify failed:', err.message, 'Code:', err.code);
-        throw new apiError(500, `Mailer verify failed: ${err.message}`)
-    }
-
-    try {
-        console.log('📤 Sending mail to:', mailId);
-        const info = await transporter.sendMail(mailer)
-        console.log('✅ Mail sent:', info && info.messageId)
-    } catch (err) {
-        console.error('❌ Send failed:', err.message, 'Code:', err.code);
+        console.error('❌ Send failed:', err.message);
         throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
@@ -63,46 +42,31 @@ const contactUsMail = async (req, res) => {
     const { firstName, lastName, message, email, phone } = req.body;
 
     console.log('📧 Contact us request from:', email);
-    console.log('✓ MAIL_USER set?', !!process.env.MAIL_USER);
-    console.log('✓ MAIL_PASS set?', !!process.env.MAIL_PASS);
+    console.log('✓ RESEND_API_KEY set?', !!process.env.RESEND_API_KEY);
 
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS
-        },
-        connectionTimeout: 15000,
-        socketTimeout: 15000,
-        tls: {
-            rejectUnauthorized: false
+    try {
+        console.log('📤 Sending contact mail via Resend to admin');
+        const data = await resend.emails.send({
+            from: 'How\'ztellerz Contact Form <noreply@resend.dev>',
+            to: "dutushar2005@gmail.com",
+            subject: "Contact Us mail from How'zellerz",
+            html: `
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `
+        });
+        
+        console.log('✅ Contact mail sent:', data.id);
+        
+        if (data.error) {
+            throw new Error(data.error.message);
         }
-    })
-
-    const mailer = {
-        from: process.env.MAIL_USER || 'no-reply@howztellerz.shop',
-        to: "dutushar2005@gmail.com",
-        subject: "Contact Us mail from How'zellerz",
-        text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
-    }
-
-    try {
-        console.log('🔍 Verifying transporter...');
-        await transporter.verify()
-        console.log('✅ Transporter verified!');
     } catch (err) {
-        console.error('❌ Verify failed:', err.message, 'Code:', err.code);
-        throw new apiError(500, `Mailer verify failed: ${err.message}`)
-    }
-
-    try {
-        console.log('📤 Sending contact mail to admin');
-        const info = await transporter.sendMail(mailer)
-        console.log('✅ Contact mail sent:', info && info.messageId)
-    } catch (err) {
-        console.error('❌ Send failed:', err.message, 'Code:', err.code);
+        console.error('❌ Send failed:', err.message);
         throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 

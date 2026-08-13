@@ -26,6 +26,7 @@
     "moongose": "^1.0.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.10.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "resend": "^6.19.0"
   }
 }
