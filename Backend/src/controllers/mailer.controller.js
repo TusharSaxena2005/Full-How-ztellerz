@@ -1,82 +1,61 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { apiResponse } from '../utils/apiResponse.js';
 import { apiError } from '../utils/apiError.js';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendOtpMail = async (req, res) => {
     const { mailId } = req.body;
 
-    console.log('📧 OTP request received for:', mailId);
-    console.log('✓ RESEND_API_KEY set?', !!process.env.RESEND_API_KEY);
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS
+        }
+    })
 
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
     try {
-        console.log('📤 Sending OTP via Resend to:', mailId);
-        const data = await resend.emails.send({
-            from: 'How\'ztellerz <noreply@resend.dev>',
+        await transporter.sendMail({
+            from: process.env.MAIL_USER,
             to: mailId,
             subject: "Welcome to How'zellerz",
-            html: `<p>Your verification code to create account is <strong>${otp}</strong></p>`
-        });
-        
-        console.log('✅ Resend Response:', JSON.stringify(data));
-        console.log('✅ OTP Mail sent - Email ID:', data.id || 'N/A');
-        
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
+            text: `Your verification code: ${otp}`
+        })
+        console.log('✅ OTP sent');
     } catch (err) {
-        console.error('❌ Send failed:', err.message);
+        console.error('❌ Error:', err.message);
         throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
-    return res
-        .status(200)
-        .json(
-            new apiResponse(200, otp, "Otp sent successfully")
-        )
+    return res.status(200).json(new apiResponse(200, otp, "Otp sent successfully"))
 }
 
 const contactUsMail = async (req, res) => {
     const { firstName, lastName, message, email, phone } = req.body;
 
-    console.log('📧 Contact us request from:', email);
-    console.log('✓ RESEND_API_KEY set?', !!process.env.RESEND_API_KEY);
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS
+        }
+    })
 
     try {
-        console.log('📤 Sending contact mail via Resend to admin');
-        const data = await resend.emails.send({
-            from: 'How\'ztellerz Contact Form <noreply@resend.dev>',
+        await transporter.sendMail({
+            from: process.env.MAIL_USER,
             to: "dutushar2005@gmail.com",
             subject: "Contact Us mail from How'zellerz",
-            html: `
-                <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Phone:</strong> ${phone}</p>
-                <p><strong>Message:</strong></p>
-                <p>${message}</p>
-            `
-        });
-        
-        console.log('✅ Resend Response:', JSON.stringify(data));
-        console.log('✅ Contact mail sent - Email ID:', data.id || 'N/A');
-        
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
+            text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
+        })
+        console.log('✅ Contact mail sent');
     } catch (err) {
-        console.error('❌ Send failed:', err.message);
+        console.error('❌ Error:', err.message);
         throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
-    return res
-        .status(200)
-        .json(
-            new apiResponse(200, "Mail sent successfully")
-        )
+    return res.status(200).json(new apiResponse(200, "Mail sent successfully"))
 }
 
 export { sendOtpMail, contactUsMail }
