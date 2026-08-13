@@ -6,16 +6,17 @@ const sendOtpMail = async (req, res) => {
     const { mailId } = req.body;
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
         auth: {
             user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS.replace(/\s/g, '') // Remove spaces
+            pass: process.env.MAIL_PASS
         },
-        connectionTimeout: 5000,
-        socketTimeout: 5000,
-        pool: {
-            maxConnections: 1,
-            maxMessages: 5
+        connectionTimeout: 15000,
+        socketTimeout: 15000,
+        tls: {
+            rejectUnauthorized: false
         }
     })
 
@@ -55,16 +56,17 @@ const contactUsMail = async (req, res) => {
     const { firstName, lastName, message, email, phone } = req.body;
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
         auth: {
             user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS.replace(/\s/g, '') // Remove spaces
+            pass: process.env.MAIL_PASS
         },
-        connectionTimeout: 5000,
-        socketTimeout: 5000,
-        pool: {
-            maxConnections: 1,
-            maxMessages: 5
+        connectionTimeout: 15000,
+        socketTimeout: 15000,
+        tls: {
+            rejectUnauthorized: false
         }
     })
 
