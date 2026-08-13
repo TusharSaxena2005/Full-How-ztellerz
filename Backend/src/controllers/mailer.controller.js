@@ -5,6 +5,10 @@ import { apiError } from '../utils/apiError.js';
 const sendOtpMail = async (req, res) => {
     const { mailId } = req.body;
 
+    console.log('📧 OTP request received for:', mailId);
+    console.log('✓ MAIL_USER set?', !!process.env.MAIL_USER);
+    console.log('✓ MAIL_PASS set?', !!process.env.MAIL_PASS);
+
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
@@ -31,17 +35,20 @@ const sendOtpMail = async (req, res) => {
 
     // verify transporter before sending for clearer errors
     try {
+        console.log('🔍 Verifying transporter...');
         await transporter.verify()
+        console.log('✅ Transporter verified!');
     } catch (err) {
-        console.error('Mailer verify failed:', err)
+        console.error('❌ Verify failed:', err.message, 'Code:', err.code);
         throw new apiError(500, `Mailer verify failed: ${err.message}`)
     }
 
     try {
+        console.log('📤 Sending mail to:', mailId);
         const info = await transporter.sendMail(mailer)
-        console.log('Mail sent:', info && info.messageId)
+        console.log('✅ Mail sent:', info && info.messageId)
     } catch (err) {
-        console.error('Error sending mail:', err)
+        console.error('❌ Send failed:', err.message, 'Code:', err.code);
         throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
@@ -54,6 +61,10 @@ const sendOtpMail = async (req, res) => {
 
 const contactUsMail = async (req, res) => {
     const { firstName, lastName, message, email, phone } = req.body;
+
+    console.log('📧 Contact us request from:', email);
+    console.log('✓ MAIL_USER set?', !!process.env.MAIL_USER);
+    console.log('✓ MAIL_PASS set?', !!process.env.MAIL_PASS);
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -78,17 +89,20 @@ const contactUsMail = async (req, res) => {
     }
 
     try {
+        console.log('🔍 Verifying transporter...');
         await transporter.verify()
+        console.log('✅ Transporter verified!');
     } catch (err) {
-        console.error('Mailer verify failed:', err)
+        console.error('❌ Verify failed:', err.message, 'Code:', err.code);
         throw new apiError(500, `Mailer verify failed: ${err.message}`)
     }
 
     try {
+        console.log('📤 Sending contact mail to admin');
         const info = await transporter.sendMail(mailer)
-        console.log('Contact mail sent:', info && info.messageId)
+        console.log('✅ Contact mail sent:', info && info.messageId)
     } catch (err) {
-        console.error('Error sending contact mail:', err)
+        console.error('❌ Send failed:', err.message, 'Code:', err.code);
         throw new apiError(500, `Error sending mail: ${err.message}`)
     }
 
