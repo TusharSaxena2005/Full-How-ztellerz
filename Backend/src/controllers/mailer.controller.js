@@ -9,7 +9,13 @@ const sendOtpMail = async (req, res) => {
         service: 'gmail',
         auth: {
             user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS
+            pass: process.env.MAIL_PASS.replace(/\s/g, '') // Remove spaces
+        },
+        connectionTimeout: 5000,
+        socketTimeout: 5000,
+        pool: {
+            maxConnections: 1,
+            maxMessages: 5
         }
     })
 
@@ -52,7 +58,13 @@ const contactUsMail = async (req, res) => {
         service: 'gmail',
         auth: {
             user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS
+            pass: process.env.MAIL_PASS.replace(/\s/g, '') // Remove spaces
+        },
+        connectionTimeout: 5000,
+        socketTimeout: 5000,
+        pool: {
+            maxConnections: 1,
+            maxMessages: 5
         }
     })
 
