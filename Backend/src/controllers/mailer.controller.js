@@ -21,7 +21,8 @@ const sendOtpMail = async (req, res) => {
             html: `<p>Your verification code to create account is <strong>${otp}</strong></p>`
         });
         
-        console.log('✅ OTP Mail sent:', data.id);
+        console.log('✅ Resend Response:', JSON.stringify(data));
+        console.log('✅ OTP Mail sent - Email ID:', data.id || 'N/A');
         
         if (data.error) {
             throw new Error(data.error.message);
@@ -60,7 +61,8 @@ const contactUsMail = async (req, res) => {
             `
         });
         
-        console.log('✅ Contact mail sent:', data.id);
+        console.log('✅ Resend Response:', JSON.stringify(data));
+        console.log('✅ Contact mail sent - Email ID:', data.id || 'N/A');
         
         if (data.error) {
             throw new Error(data.error.message);
