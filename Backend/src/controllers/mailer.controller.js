@@ -22,7 +22,7 @@ const sendOtpMail = async (req, res) => {
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
     const mailer = {
-        from: process.env.MAIL_USER || 'no-reply@howztellerz.shop',
+        from: process.env.MAIL_USER,
         to: mailId,
         subject: "Welcome to How'zellerz",
         text: `Your verification code to create account is\n ${otp}`

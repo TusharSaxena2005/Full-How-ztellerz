@@ -5,6 +5,9 @@ import cookieParser from "cookie-parser"
 const app = express();
 
 const allowedOrigins = [
+    'http://localhost:5173',        // Vite dev server
+    'http://localhost:3000',        // Alternative port
+    'http://127.0.0.1:5173',
     'https://howztellerz.shop',
     'https://www.howztellerz.shop',
     'https://api.howztellerz.shop',
