@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom'
 
 const SignUp = () => {
 
-  const [otp, setOTP] = useState("");
   const [loading, setLoading] = useState(false);
-  const [storedFormData, setStoredFormData] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,25 +54,7 @@ const SignUp = () => {
     }
 
     if (flag) {
-      setStoredFormData(formData);
-      document.getElementById('outer-verification').style.display = 'flex';
-      setLoading(true);
-  const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/mailer/otpMail`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(allData),
-        credentials: 'include'
-      });
-      if (response.ok) {
-        alert('OTP sent to your mail');
-        const otp = await response.json();
-        setLoading(false);
-        setOTP(otp.data);
-      }
-      setLoading(false);
+      await createAccount(formData);
     }
   }
 
@@ -97,22 +77,10 @@ const SignUp = () => {
       }
     }
     if (flag) {
+      alert('Account created successfully!');
       window.location.href = '/home';
     }
     setLoading(false);
-  }
-
-  const verifyOTP = async (e) => {
-    e.preventDefault();
-    const otpInput = document.getElementById('otpInput').value;
-    if (otpInput == otp) {
-      document.getElementById('outer-verification').style.display = 'none';
-      if (storedFormData) {
-        await createAccount(storedFormData);
-      }
-    } else {
-      alert('Invalid OTP');
-    }
   }
 
   return (
@@ -172,24 +140,6 @@ const SignUp = () => {
           </form>
         </div>
         <Link to='/' id='checkIn-btn'>Check in</Link>
-        <div id="outer-verification">
-          <ul id="inner-verification">
-            <li id="verify-ele1">
-              <button id='add-broadcast-cross-btn' onClick={() => {
-                document.getElementById("outer-verification").style.display = 'none'
-              }}>
-                <img src="icons/cross.svg" alt="" />
-              </button>
-            </li>
-            <li id="verify-ele2">Verify your email first</li>
-            <li id="verify-ele3">
-              <form onSubmit={verifyOTP}>
-                <input id='otpInput' type="text" placeholder='Enter OTP' />
-                <button id='otpSubmitBtn' type='submit'>Verify</button>
-              </form>
-            </li>
-          </ul>
-        </div>
       </div>
     </>
   )
