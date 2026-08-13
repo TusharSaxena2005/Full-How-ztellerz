@@ -3,7 +3,6 @@ import './Login.css'
 import Loader from './Loader'
 import { Link } from 'react-router-dom'
 import Cookies from 'js-cookie';
-import { Console } from 'console';
 
 const Login = () => {
 
